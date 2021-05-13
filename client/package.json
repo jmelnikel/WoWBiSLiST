@@ -1,6 +1,7 @@
 {
   "name": "wowbislist",
   "version": "0.1.0",
+  "description": "TBD",
   "private": true,
   "engines": {
     "node": "12.16.3"

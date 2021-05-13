@@ -10,10 +10,10 @@ const App = () => {
 
   useEffect(() => {
     getClientAuthToken()
-      .then(function(clientAuthToken) {
+      .then((clientAuthToken) => {
         setClientAuthToken(clientAuthToken.data.access_token);
       })
-      .catch(function(error) {
+      .catch((error) => {
         throw new Error(error.message);
       });
   }, []);
