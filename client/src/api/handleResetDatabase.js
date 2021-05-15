@@ -35,26 +35,19 @@ export const getItemBaseData = async ({ clientAuthToken, start, results }) => {
   return results
 };
 
-export const getItemDetails = async ({ clientAuthToken, start, results }) => {
+export const getItemDetails = async ({ clientAuthToken, id }) => {
   // console.log(`Starting range ${start} to ${start + 999}.`)
   // const end = start + 999;
-  // const searchQuerybase = "https://us.api.blizzard.com/data/wow/item?namespace=static-classic-us&locale=en_US";
-  // const field = `&id=[${start},${end}]&item_class.name.en_US=Weapon||Armor`;
-  // const searchQuery = `${searchQuerybase}${field}&_pageSize=1000&orderby=id`;
-  // const getItemBaseDataAxios = axios.create({
-  //   baseURL: searchQuery,
-  //   headers: {
-  //     Authorization: `Bearer ${clientAuthToken}`,
-  //   }
-  // });
+  const searchQuery = `https://us.api.blizzard.com/data/wow/item/${id}?namespace=static-classic-us&locale=en_US`;
 
-  // const response = await getItemBaseDataAxios.get();
-  // if (response.data.results.length !== 0) {
-  //   start = start + 1000
-  //   results.push(response.data.results)
-  //   await getItemBaseData({ clientAuthToken, start, results })
-  // }
-  // return results
+  const getItemDetailsAxios = axios.create({
+    baseURL: searchQuery,
+    headers: {
+      Authorization: `Bearer ${clientAuthToken}`,
+    }
+  });
+
+  return await getItemDetailsAxios.get();
 }
 
 

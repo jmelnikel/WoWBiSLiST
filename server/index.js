@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }))
 // Clear and Initialize Database
 app.post("/NRRNOuPGB6Uk9gZKh5ycPpmPMxH2", (req, res) => {
   try {
-    pool.query("DROP TABLE items; CREATE TABLE items(item_key SERIAL PRIMARY KEY, id INT, name VARCHAR(80), item_class VARCHAR(24), item_subclass VARCHAR(24), inventory_type VARCHAR(24), href TEXT);");
+    pool.query("DROP TABLE items; CREATE TABLE items(item_key SERIAL PRIMARY KEY, id INT, name VARCHAR(80), item_class VARCHAR(24), item_subclass VARCHAR(24), inventory_type VARCHAR(24));");
   } catch (error) {
     throw new Error(error.message);
   }
@@ -28,35 +28,20 @@ app.post("/WP40IlUnz0et3XDIjZE47FhLyrk2", async (req, res) => {
     const arrayOfArrays = req.body;
     await arrayOfArrays.forEach(async (array, index) => {
       await array.forEach(async (itemObject, index) => {
-        const { key, data } = itemObject;
-        const { href } = key;
+        const { data } = itemObject;
         const { id } = data;
         const name = data.name.en_US;
         const item_class = data.item_class.name.en_US;
         const item_subclass = data.item_subclass.name.en_US;
         const inventory_type = data.inventory_type.name ? data.inventory_type.name.en_US : data.inventory_type.type;
         await pool.query(
-          "INSERT INTO items (id, name, item_class, item_subclass, inventory_type, href) VALUES($1, $2, $3, $4, $5, $6) RETURNING *;", [id, name, item_class, item_subclass, inventory_type, href]
+          "INSERT INTO items (id, name, item_class, item_subclass, inventory_type) VALUES($1, $2, $3, $4, $5) RETURNING *;", [id, name, item_class, item_subclass, inventory_type]
         );
       })
       console.log(`Array ${index + 1} of ${arrayOfArrays.length} written to database!`)
     })
 
 
-
-    // array.forEach((element, index) => {
-    //   const { key, data } = itemObject;
-    //   // const { href } = key;
-    //   const { id } = data;
-    //   const name = data.name.en_US;
-    //   const item_class = data.item_class.name.en_US;
-    //   const item_subclass = data.item_subclass.name.en_US;
-    //   const inventory_type = data.inventory_type.name ? data.inventory_type.name.en_US : data.inventory_type.type;
-    //   console.log(id, name, item_class, item_subclass, inventory_type)
-    //   await pool.query(
-    //     "INSERT INTO items (id, name, item_class, item_subclass, inventory_type) VALUES($1, $2, $3, $4, $5) RETURNING *;", [id, name, item_class, item_subclass, inventory_type]
-    //   );
-    // });
 
   } catch (error) {
     throw new Error(error.message);
