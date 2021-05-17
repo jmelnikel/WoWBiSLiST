@@ -4,6 +4,7 @@ const PORT = 5000;
 const cors = require('cors');
 const bodyParser = require('body-parser')
 const pool = require('./db')
+require('dotenv').config()
 
 
 // Middleware
@@ -14,35 +15,26 @@ app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }))
 
 // Routes
 // Clear and Initialize Database
-app.post("/NRRNOuPGB6Uk9gZKh5ycPpmPMxH2", (req, res) => {
+app.post(`/${process.env.CLEAR_DATABASE_URL}`, (req, res) => {
   try {
-    pool.query("DROP TABLE items; CREATE TABLE items(item_key SERIAL PRIMARY KEY, id INT, name VARCHAR(80), item_class VARCHAR(24), item_subclass VARCHAR(24), inventory_type VARCHAR(24));");
+    pool.query("DROP TABLE items; CREATE TABLE items(item_key SERIAL PRIMARY KEY, id INT, name VARCHAR(80), level SMALLINT, required_level SMALLINT, item_class VARCHAR(24), item_subclass VARCHAR(24), inventory_type VARCHAR(24), quality VARCHAR(24));");
+    console.log("Database Cleared and Initialized");
   } catch (error) {
     throw new Error(error.message);
   }
 })
 
 // Seed Database
-app.post("/WP40IlUnz0et3XDIjZE47FhLyrk2", async (req, res) => {
+app.post(`/${process.env.RESEED_DATABASE_URL}`, async (req, res) => {
   try {
-    const arrayOfArrays = req.body;
-    await arrayOfArrays.forEach(async (array, index) => {
-      await array.forEach(async (itemObject, index) => {
-        const { data } = itemObject;
-        const { id } = data;
-        const name = data.name.en_US;
-        const item_class = data.item_class.name.en_US;
-        const item_subclass = data.item_subclass.name.en_US;
-        const inventory_type = data.inventory_type.name ? data.inventory_type.name.en_US : data.inventory_type.type;
-        await pool.query(
-          "INSERT INTO items (id, name, item_class, item_subclass, inventory_type) VALUES($1, $2, $3, $4, $5) RETURNING *;", [id, name, item_class, item_subclass, inventory_type]
-        );
-      })
-      console.log(`Array ${index + 1} of ${arrayOfArrays.length} written to database!`)
+    const array = req.body;
+    await array.forEach(async (itemObject, index) => {
+      const { id, name, level, required_level, item_class, item_subclass, inventory_type, quality } = itemObject;
+      await pool.query(
+        "INSERT INTO items (id, name, level, required_level, item_class, item_subclass, inventory_type, quality) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;", [id, name, level, required_level, item_class, item_subclass, inventory_type, quality]
+      );
+      console.log(`Item ${index + 1} of ${array.length} written to database!`)
     })
-
-
-
   } catch (error) {
     throw new Error(error.message);
   }

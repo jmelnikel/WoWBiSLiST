@@ -36,8 +36,6 @@ export const getItemBaseData = async ({ clientAuthToken, start, results }) => {
 };
 
 export const getItemDetails = async ({ clientAuthToken, id }) => {
-  // console.log(`Starting range ${start} to ${start + 999}.`)
-  // const end = start + 999;
   const searchQuery = `https://us.api.blizzard.com/data/wow/item/${id}?namespace=static-classic-us&locale=en_US`;
 
   const getItemDetailsAxios = axios.create({
@@ -49,7 +47,6 @@ export const getItemDetails = async ({ clientAuthToken, id }) => {
 
   return await getItemDetailsAxios.get();
 }
-
 
 export const setItemResources = async (data) => {
   const url = "/WP40IlUnz0et3XDIjZE47FhLyrk2"
