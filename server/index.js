@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }))
 
 
 // Routes
-// Clear and Initialize Database
+// Clear and Initialize Table: items
 app.post(`/${process.env.CLEAR_DATABASE_URL}`, (req, res) => {
   try {
     pool.query("DROP TABLE items; CREATE TABLE items(item_key SERIAL PRIMARY KEY, id INT, name VARCHAR(80), level SMALLINT, required_level SMALLINT, item_class VARCHAR(24), item_subclass VARCHAR(24), inventory_type VARCHAR(24), quality VARCHAR(24));");
@@ -24,7 +24,7 @@ app.post(`/${process.env.CLEAR_DATABASE_URL}`, (req, res) => {
   }
 })
 
-// Seed Database
+// Seed Table: items
 app.post(`/${process.env.RESEED_DATABASE_URL}`, async (req, res) => {
   try {
     const array = req.body;
@@ -42,17 +42,9 @@ app.post(`/${process.env.RESEED_DATABASE_URL}`, async (req, res) => {
 
 // Create
 app.post("/items", async (req, res) => {
-  const { id } = req.body;
-  const name = req.body.name.en_US
-  const item_class = req.body.item_class.name.en_US;
-  const item_subclass = req.body.item_subclass.name.en_US;
-  const inventory_type = req.body.inventory_type.name.en_US;
-
   try {
-    const newItem = await pool.query(
-      "INSERT INTO items (id, name, item_class, item_subclass, inventory_type) VALUES($1, $2, $3, $4, $5) RETURNING *", [id, name, item_class, item_subclass, inventory_type]
-    );
-    res.json(newItem.rows[0]);
+
+    // res.json(newItem.rows[0]);
   } catch (error) {
     throw new Error(error.message);
   }

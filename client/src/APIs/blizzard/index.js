@@ -1,17 +1,21 @@
 /* eslint-disable space-before-function-paren */
-/* eslint-disable */
 import axios from 'axios';
 
 
-export const clearDatabase = async () => {
-  const url = "/NRRNOuPGB6Uk9gZKh5ycPpmPMxH2"
-  const setItemResourcesAxios = axios.create({
-    baseURL: "http://localhost:5000",
-    // headers: { "Content-Type": "application/json" },
-  });
-  setItemResourcesAxios.post(url)
-  console.log("Database Cleared and Initialized")
-}
+export const getClientAuthToken = async () => {
+  const URL = "https://us.battle.net/oauth/token";
+  const data = "grant_type=client_credentials";
+  const options = {
+    auth: {
+      username: process.env.REACT_APP_CLIENT_ID,
+      password: process.env.REACT_APP_CLIENT_SECRET,
+    },
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  };
+
+  const response = axios.post(URL, data, options);
+  return response;
+};
 
 export const getItemBaseData = async ({ clientAuthToken, start, results }) => {
   console.log(`Starting range ${start} to ${start + 999}.`)
@@ -35,7 +39,7 @@ export const getItemBaseData = async ({ clientAuthToken, start, results }) => {
   return results
 };
 
-export const getItemDetails = async ({ clientAuthToken, id }) => {
+export const getItemDetailsData = async ({ clientAuthToken, id }) => {
   const searchQuery = `https://us.api.blizzard.com/data/wow/item/${id}?namespace=static-classic-us&locale=en_US`;
 
   const getItemDetailsAxios = axios.create({
@@ -47,13 +51,3 @@ export const getItemDetails = async ({ clientAuthToken, id }) => {
 
   return await getItemDetailsAxios.get();
 }
-
-export const setItemResources = async (data) => {
-  const url = "/WP40IlUnz0et3XDIjZE47FhLyrk2"
-  const setItemResourcesAxios = axios.create({
-    baseURL: "http://localhost:5000",
-    headers: { "Content-Type": "application/json" },
-  });
-  await setItemResourcesAxios.post(url, data)
-}
-
