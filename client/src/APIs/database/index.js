@@ -21,3 +21,11 @@ export const setItemsTable = async (data) => {
   await setItemResourcesAxios.post(url, data)
 }
 
+export const getArmorItems = async () => {
+  const url = "/armor"
+  const setItemArmorAxios = axios.create({
+    baseURL: "http://localhost:5000",
+    // headers: { "Content-Type": "application/json" },
+  });
+  return await setItemArmorAxios.get(url)
+}

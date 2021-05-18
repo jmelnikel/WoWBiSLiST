@@ -60,6 +60,16 @@ app.get("/items", async (req, res) => {
   }
 });
 
+// Get all armor tester
+app.get("/armor", async (req, res) => {
+  try {
+    const allItems = await pool.query("SELECT * FROM items;");
+    res.json(allItems.rows);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+});
+
 // Get one
 app.get("/items/:id", async (req, res) => {
   try {

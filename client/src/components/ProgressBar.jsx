@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 const ProgressBar = (props) => {
   const { completed } = props;
@@ -26,13 +27,18 @@ const ProgressBar = (props) => {
     fontWeight: 'bold'
   }
 
+
   return (
     <div style={containerStyles}>
       <div style={fillerStyles}>
         <span style={labelStyles}>{`${completed}%`}</span>
       </div>
     </div>
-  );
-};
+  )
+}
+
+ProgressBar.propTypes = {
+  completed: PropTypes.number,
+}
 
 export default ProgressBar;
