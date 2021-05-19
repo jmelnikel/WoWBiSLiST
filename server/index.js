@@ -40,6 +40,29 @@ app.post(`/${process.env.RESEED_DATABASE_URL}`, async (req, res) => {
   }
 });
 
+// Remove Poor and Common Items
+app.delete("/removePandC", async (req, res) => {
+  try {
+    await pool.query("DELETE FROM items WHERE quality = 'Poor' OR quality = 'Common'");
+    res.json("Poor and Common items were deleted.")
+  } catch (error) {
+    throw new Error(error.message);
+  }
+});
+
+app.get("/items", async (req, res) => {
+  try {
+    const allItems = await pool.query("SELECT * FROM items");
+    res.json(allItems.rows);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+});
+
+
+
+
+
 // Create
 app.post("/items", async (req, res) => {
   try {
@@ -54,16 +77,6 @@ app.post("/items", async (req, res) => {
 app.get("/items", async (req, res) => {
   try {
     const allItems = await pool.query("SELECT * FROM items");
-    res.json(allItems.rows);
-  } catch (error) {
-    throw new Error(error.message);
-  }
-});
-
-// Get all armor tester
-app.get("/armor", async (req, res) => {
-  try {
-    const allItems = await pool.query("SELECT * FROM items;");
     res.json(allItems.rows);
   } catch (error) {
     throw new Error(error.message);

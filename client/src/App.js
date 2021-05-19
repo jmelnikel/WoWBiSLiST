@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {
   clearItemsTable,
   setItemsTable,
-  getArmorItems,
+  removePandCItems,
+  getAllItems,
 } from './APIs/database';
 import {
   getClientAuthToken,
@@ -10,21 +11,20 @@ import {
   getItemDetailsData,
 } from './APIs/blizzard'
 import reformatBaseData from './helpers'
-// import ProgressBar from './components/ProgressBar'
-import ItemsList from './components/ItemList'
-import Filters from './components/Filters'
+import ProgressBar from './components/ProgressBar'
+import WeaponSlotList from './components/WeaponSlotList'
+import ArmorSlotList from './components/ArmorSlotList'
 import './styling/App.css';
-
+import _ from "lodash";
 
 
 const App = () => {
   const [admin, setAdmin] = useState(false)
   const [clientAuthToken, setClientAuthToken] = useState("");
   const [progressBar, setProgressBar] = useState(0);
-  const [itemsData, setItemsData] = useState([])
-  let [filters, setFilters] = useState({
-    itemClass: null,
-  })
+  let [itemsData, setItemsData] = useState([])
+
+
 
   useEffect(() => {
     getClientAuthToken()
@@ -35,16 +35,6 @@ const App = () => {
         throw new Error(error.message);
       });
   }, [admin]);
-
-  useEffect(() => {
-    const newData = itemsData.filter((filters) => {
-
-    })
-  }, [filters])
-
-
-
-
 
   const handleClearItemsTable = () => {
     clearItemsTable();
@@ -83,26 +73,47 @@ const App = () => {
     console.log("Items batch sent to be written to database.")
   };
 
-  const handleGetArmorItems = async () => {
-    const response = await getArmorItems()
-    setItemsData(response.data)
+  const handleRemovePandCItems = async () => {
+    removePandCItems()
   }
+
+  const handleGetAllItems = async () => {
+    const allItems = await getAllItems()
+    setItemsData(allItems.data)
+  }
+
+
+  let itemsDataClone1 = _.cloneDeep(itemsData);
+  let itemsDataClone2 = _.cloneDeep(itemsData);
   return (
     <>
-      {/* <button onClick={handleClearItemsTable}>
+      <button onClick={handleClearItemsTable}>
         Clear Items Table
       </button>
       <button onClick={handleSetItemsTable}>
         Set Items table
       </button>
-      <ProgressBar completed={progressBar} /> */}
-
-
-      <Filters itemsData={itemsData} filters={filters} setFilters={setFilters} />
-      <button onClick={handleGetArmorItems}>
-        Get all items from database
+      <ProgressBar completed={progressBar} />
+      <button onClick={handleRemovePandCItems}>
+        Remove Poor and Common Items
       </button>
-      <ItemsList itemsData={itemsData} />
+      <button onClick={handleGetAllItems}>
+        Get all Items
+      </button>
+
+      <h1>Number of Total Items: {itemsData.length}</h1>
+      <WeaponSlotList
+        itemsData={itemsDataClone1 = itemsDataClone1.filter((item) => {
+          return item.item_class === "Weapon";
+        })}
+      />
+      <h2>Number of Weapons: {itemsDataClone2.length}</h2>
+      <ArmorSlotList
+        itemsData={itemsDataClone2 = itemsDataClone2.filter((item) => {
+          return item.item_class === "Armor";
+        })}
+      />
+      <h2>Number of Weapons: {itemsDataClone2.length}</h2>
     </>
   );
 };

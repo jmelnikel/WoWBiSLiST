@@ -9,9 +9,12 @@ const ItemList = (props) => {
   });
 
   return (
-    <>
+    <ul style={{
+      display: "flex",
+      flexDirection: "row",
+    }}>
       {itemsData}
-    </>
+    </ul>
   )
 }
 
