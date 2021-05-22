@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Slot from './Slot'
+import Slot from '../Slot'
+import '../styling/xSlotList.css';
 
 const ArmorSlotList = (props) => {
   let { itemsData } = props;
@@ -12,10 +13,16 @@ const ArmorSlotList = (props) => {
     "Chest",
     "Wrist",
     "Hands",
+    "Waist",
     "Legs",
     "Feet",
     "Finger",
     "Trinket",
+    "Off Hand",
+    "Held In Off-hand",
+    "Relic",
+    "Tabard",
+    // "Non-equippable",
   ]
 
   slots = slots.map((slot, index) => {
@@ -23,7 +30,7 @@ const ArmorSlotList = (props) => {
   })
 
   return (
-    <ul>
+    <ul className="xSlotList--ul">
       {slots}
     </ul>
   )

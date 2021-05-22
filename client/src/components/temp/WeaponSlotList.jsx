@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Slot from './Slot';
-import ItemList from './ItemList'
+import Slot from '../Slot';
+import ItemList from '../ItemList'
+import '../styling/xSlotList.css';
 
 const WeaponSlotList = (props) => {
   let { itemsData } = props;
@@ -10,6 +11,8 @@ const WeaponSlotList = (props) => {
     "One-Hand",
     "Off Hand",
     "Two-Hand",
+    // "Thrown",
+    // "Non-equippable"
   ]
   // Ranged slots are hard coded in: Ranged, RANGEDRIGHT,THROWN.
 
@@ -19,25 +22,21 @@ const WeaponSlotList = (props) => {
   })
 
   return (
-    <ul style={{
-      display: "flex",
-      flexDirection: "column",
-    }}>
+    <ul className="xSlotList--ul">
       {slots}
-
-      <li>
-        <h2>Slot: Ranged</h2>
+      <li className="slot--li">
+        <h2>Ranged</h2>
         <ItemList itemsData={itemsData = itemsData.filter((item) => {
           return (
             item.inventory_type === "Ranged" ||
             item.inventory_type === "RANGEDRIGHT" ||
-            item.inventory_type === "THROWN"
+            item.inventory_type === "Thrown"
           );
         })}
         />
-        <h2>Number of items: {itemsData.length}</h2>
+        {/* <h2>Number of items: {itemsData.length}</h2> */}
       </li>
-    </ul>
+    </ul >
   )
 }
 

@@ -38,7 +38,7 @@ const ProgressBar = (props) => {
 }
 
 ProgressBar.propTypes = {
-  completed: PropTypes.number,
+  completed: PropTypes.string,
 }
 
 export default ProgressBar;

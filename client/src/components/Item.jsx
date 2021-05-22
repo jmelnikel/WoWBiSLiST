@@ -1,26 +1,40 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
+import '../styling/item.css';
 
-const item = (props) => {
-  const { id, name, level, required_level, item_class, item_subclass, inventory_type, quality } = props.item;
+const Item = (props) => {
+  const { removeItem } = props;
+  const {
+    id,
+    name,
+    // level,
+    // required_level,
+    // item_class,
+    // item_subclass,
+    // inventory_type,
+    // quality
+    show,
+  } = props.item;
+
   return (
-    <li>
-      <a href="#" data-wowhead={`item=${id}`}>{name}</a>
-      {/* <h2>Name: {name}</h2>
-      <p>Id: {id}</p>
-      <p>Level: {level}</p>
-      <p>Required Level: {required_level}</p>
-      <p>Item Class: {item_class}</p>
-      <p>Item Subclass{item_subclass}</p>
-      <p>Inventory Type: {inventory_type}</p>
-      <p>Quality: {quality}</p> */}
-    </li>
+    <>
+      {show &&
+        <li className="item--li">
+          <a href="void" data-wowhead={`item=${id}`}>{name}</a>
+          <button
+            onClick={() => {
+              removeItem(id)
+            }}
+          >Remove Item</button>
+        </li>
+      }
+    </>
   )
 }
 
-item.propTypes = {
+Item.propTypes = {
   item: PropTypes.object
 }
 
-export default item
+export default Item
 
