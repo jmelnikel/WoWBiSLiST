@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import {
   clearItemsTable,
-  setItemsTable,
+  writeItemsTable,
+
   removePandCItems,
   getAllItems,
 } from './APIs/database';
 import {
   getClientAuthToken,
-  getItemBaseData,
-  getItemDetailsData,
+  getItemsBaseData,
+  getItemsDetailsData,
 } from './APIs/blizzard'
 import reformatBaseData from './helpers';
 import ProgressBar from './components/ProgressBar';
@@ -16,7 +17,7 @@ import Filters from './components/Filters/Filters';
 // import beanEater from './assets/images/beanEater.svg'
 import SlotList from './components/SlotList'
 import './styling/App.css';
-import _ from "lodash";
+// import _ from "lodash";
 
 
 const App = () => {
@@ -27,14 +28,14 @@ const App = () => {
   // const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    // getClientAuthToken()
-    //   .then((clientAuthToken) => {
-    //     setClientAuthToken(clientAuthToken.data.access_token);
-    //     setAdmin(true)
-    //   })
-    //   .catch((error) => {
-    //     throw new Error(error.message);
-    //   });
+    getClientAuthToken()
+      .then((clientAuthToken) => {
+        setClientAuthToken(clientAuthToken.data.access_token);
+        setAdmin(true)
+      })
+      .catch((error) => {
+        throw new Error(error.message);
+      });
   }, [admin]);
 
   const playAlert = () => {
@@ -42,10 +43,10 @@ const App = () => {
     audio.play()
   }
 
-  const handleSetItemsTable = async () => {
+  const handleWriteItemsTable = async () => {
     const start = 1
     let results = []
-    results = await getItemBaseData({ clientAuthToken, start, results }, "item")
+    results = await getItemsBaseData({ clientAuthToken, start, results })
       .then((response) => {
         return response;
       })
@@ -56,8 +57,8 @@ const App = () => {
     results = reformatBaseData(results);
 
     for (let index in results) {
-      const id = results[index].id
-      const response = await getItemDetailsData({ clientAuthToken, id }, "item")
+      const href = results[index].href
+      const response = await getItemsDetailsData({ clientAuthToken, href })
         .then((response) => {
           return response
         })
@@ -65,30 +66,26 @@ const App = () => {
           throw new Error(error.message);
         });
 
-      results[index].level = response.data.level
-      results[index].quality = response.data.quality.name
-      results[index].required_level = response.data.required_level
-
-
+      // results[index].preview_item = response.data.level
 
       setProgressBar((100 * (Number.parseInt(index, 10) + 1) / results.length).toFixed(1))
     }
-    setItemsTable(JSON.stringify(results));
+    writeItemsTable(JSON.stringify(results));
     playAlert();
     console.log("Items batch sent to be written to database.")
   };
 
   return (
     <>
-      {admin
+      {true
         ?
         <section>
           <h2>Last items table reset: May 20, 2012 (Patch 2.5.1)</h2>
           <button onClick={() => { clearItemsTable() }}>
             Clear Items Table
           </button>
-          <button onClick={handleSetItemsTable}>
-            Set Items table
+          <button onClick={handleWriteItemsTable}>
+            Write Items Table
           </button>
           <ProgressBar completed={progressBar} />
           <button onClick={() => { removePandCItems() }}>

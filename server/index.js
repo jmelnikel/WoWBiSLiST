@@ -15,9 +15,9 @@ app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }))
 
 // Routes
 // Clear and Initialize Table: items
-app.post(`/${process.env.CLEAR_DATABASE_URL}`, (req, res) => {
+app.post(`/${process.env.CLEAR_ITEMS_TABLE_URL}`, (req, res) => {
   try {
-    pool.query("DROP TABLE items; CREATE TABLE items(item_key SERIAL PRIMARY KEY, id INT, name VARCHAR(80), level SMALLINT, required_level SMALLINT, item_class VARCHAR(24), item_subclass VARCHAR(24), inventory_type VARCHAR(24), quality VARCHAR(24));");
+    pool.query("DROP TABLE items; CREATE TABLE items(item_key SERIAL PRIMARY KEY, id INT, name VARCHAR(80), quality VARCHAR(24), level SMALLINT, required_level SMALLINT, item_class VARCHAR(24), item_subclass VARCHAR(24), inventory_type VARCHAR(24), href text);");
     console.log("Database Cleared and Initialized");
   } catch (error) {
     throw new Error(error.message);
@@ -25,13 +25,13 @@ app.post(`/${process.env.CLEAR_DATABASE_URL}`, (req, res) => {
 })
 
 // Seed Table: items
-app.post(`/${process.env.RESEED_DATABASE_URL}`, async (req, res) => {
+app.post(`/${process.env.WRITE_ITEMS_TABLE_URL}`, async (req, res) => {
   try {
     const array = req.body;
     await array.forEach(async (itemObject, index) => {
-      const { id, name, level, required_level, item_class, item_subclass, inventory_type, quality } = itemObject;
+      const { id, name, quality, level, required_level, item_class, item_subclass, inventory_type, href } = itemObject;
       await pool.query(
-        "INSERT INTO items (id, name, level, required_level, item_class, item_subclass, inventory_type, quality) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;", [id, name, level, required_level, item_class, item_subclass, inventory_type, quality]
+        "INSERT INTO items (id, name, quality, level, required_level, item_class, item_subclass, inventory_type, href) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *;", [id, name, quality, level, required_level, item_class, item_subclass, inventory_type, href]
       );
       console.log(`Item ${index + 1} of ${array.length} written to database!`)
     })
@@ -58,6 +58,8 @@ app.get("/items", async (req, res) => {
     throw new Error(error.message);
   }
 });
+
+
 
 
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 
 const LevelRangeFilter = (props) => {
   const {
@@ -42,9 +42,9 @@ const LevelRangeFilter = (props) => {
   )
 }
 
-LevelRangeFilter.propTypes = {
+// LevelRangeFilter.propTypes = {
 
-}
+// }
 
 export default LevelRangeFilter;
 
