@@ -43,10 +43,10 @@ const App = () => {
     audio.play()
   }
 
-  const handleWriteItemsTable = async () => {
+  const handleGetItemsData = async () => {
     const start = 1
     let results = []
-    results = await getItemsBaseData({ clientAuthToken, start, results })
+    const itemsBaseData = await getItemsBaseData({ clientAuthToken, start, results })
       .then((response) => {
         return response;
       })
@@ -55,23 +55,24 @@ const App = () => {
       });
 
 
-    results = reformatBaseData(results);
+    console.log("This is itemsBaseData", itemsBaseData)
+    // results = reformatBaseData(itemsBaseData);
 
-    for (let index in results) {
-      const id = results[index].id
-      const response = await getItemsDetailsData({ clientAuthToken, id })
-        .then((response) => {
-          return response
-        })
-        .catch((error) => {
-          throw new Error(error.message);
-        });
 
-      results[index]["preview_item"] = response.data.preview_item
+    // for (let index in results) {
+    //   const id = results[index].id
+    //   const response = await getItemsDetailsData({ clientAuthToken, id })
+    //     .then((response) => {
+    //       return response
+    //     })
+    //     .catch((error) => {
+    //       throw new Error(error.message);
+    //     });
 
-      setProgressBar((100 * (Number.parseInt(index, 10) + 1) / results.length).toFixed(1))
-    }
-    console.log("This is results", results)
+    //   results[index]["preview_item"] = response.data.preview_item
+
+    //   setProgressBar((100 * (Number.parseInt(index, 10) + 1) / results.length).toFixed(1))
+    // }
 
     // writeItemsTable(JSON.stringify(results));
     playAlert();
@@ -87,9 +88,12 @@ const App = () => {
           <button onClick={() => { clearItemsTable() }}>
             Clear Items Table
           </button>
-          <button onClick={handleWriteItemsTable}>
-            Write Items Table
+          <button onClick={handleGetItemsData}>
+            Get Items Data
           </button>
+          {/* <button onClick={handleWriteItemsTable}>
+            Write Items Table
+          </button> */}
           <ProgressBar completed={progressBar} />
           <button onClick={() => { removePandCItems() }}>
             Remove Poor and Common Items
