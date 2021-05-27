@@ -54,20 +54,33 @@ const App = () => {
         throw new Error(error.message);
       });
 
+    const reformattedBaseData = reformatBaseData(itemsBaseData);
+    console.log("This is itemsBaseData", reformattedBaseData)
 
-    console.log("This is itemsBaseData", itemsBaseData)
-    // results = reformatBaseData(itemsBaseData);
+    // for (let array of reformattedBaseData) {
+    //   array = array.map((item) => {
+    //     const id = item.id
+    //     const response = await getItemsDetailsData({ clientAuthToken, id })
+    //       .then((response) => {
+    //         return response
+    //       })
+    //       .catch((error) => {
+    //         throw new Error(error.message);
+    //       });
 
+
+    //   })
+    // }
 
     // for (let index in results) {
     //   const id = results[index].id
-    //   const response = await getItemsDetailsData({ clientAuthToken, id })
-    //     .then((response) => {
-    //       return response
-    //     })
-    //     .catch((error) => {
-    //       throw new Error(error.message);
-    //     });
+    // const response = await getItemsDetailsData({ clientAuthToken, id })
+    //   .then((response) => {
+    //     return response
+    //   })
+    //   .catch((error) => {
+    //     throw new Error(error.message);
+    //   });
 
     //   results[index]["preview_item"] = response.data.preview_item
 

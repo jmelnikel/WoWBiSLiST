@@ -14,7 +14,7 @@ const reformatBaseData = (resultsArray) => {
     })
     reformattedBaseData.push(array)
   }
-  return reformattedBaseData.flat();
+  return reformattedBaseData;
 };
 
 export default reformatBaseData;
