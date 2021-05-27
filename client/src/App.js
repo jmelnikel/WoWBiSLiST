@@ -54,11 +54,12 @@ const App = () => {
         throw new Error(error.message);
       });
 
+
     results = reformatBaseData(results);
 
     for (let index in results) {
-      const href = results[index].href
-      const response = await getItemsDetailsData({ clientAuthToken, href })
+      const id = results[index].id
+      const response = await getItemsDetailsData({ clientAuthToken, id })
         .then((response) => {
           return response
         })
@@ -66,11 +67,13 @@ const App = () => {
           throw new Error(error.message);
         });
 
-      // results[index].preview_item = response.data.level
+      results[index]["preview_item"] = response.data.preview_item
 
       setProgressBar((100 * (Number.parseInt(index, 10) + 1) / results.length).toFixed(1))
     }
-    writeItemsTable(JSON.stringify(results));
+    console.log("This is results", results)
+
+    // writeItemsTable(JSON.stringify(results));
     playAlert();
     console.log("Items batch sent to be written to database.")
   };
