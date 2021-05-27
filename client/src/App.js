@@ -11,7 +11,7 @@ import {
   getItemsBaseData,
   getItemsDetailsData,
 } from './APIs/blizzard'
-import reformatBaseData from './helpers';
+import getItemId from './helpers';
 import ProgressBar from './components/ProgressBar';
 import Filters from './components/Filters/Filters';
 // import beanEater from './assets/images/beanEater.svg'
@@ -54,38 +54,28 @@ const App = () => {
         throw new Error(error.message);
       });
 
-    const reformattedBaseData = reformatBaseData(itemsBaseData);
-    console.log("This is itemsBaseData", reformattedBaseData)
+    const reformattedBaseData = getItemId(itemsBaseData);
 
-    // for (let array of reformattedBaseData) {
-    //   array = array.map((item) => {
-    //     const id = item.id
-    //     const response = await getItemsDetailsData({ clientAuthToken, id })
-    //       .then((response) => {
-    //         return response
-    //       })
-    //       .catch((error) => {
-    //         throw new Error(error.message);
-    //       });
+    for (let array of reformattedBaseData) {
+      for (let itemObject of array) {
+        const id = itemObject.id
+        const itemsDetailsData = await getItemsDetailsData({ clientAuthToken, id })
+          .then((response) => {
+            return response
+          })
+          .catch((error) => {
+            throw new Error(error.message);
+          });
 
+        itemObject["preview-item"] = itemsDetailsData.data.preview_item;
 
-    //   })
-    // }
+      }
+    }
 
-    // for (let index in results) {
-    //   const id = results[index].id
-    // const response = await getItemsDetailsData({ clientAuthToken, id })
-    //   .then((response) => {
-    //     return response
-    //   })
-    //   .catch((error) => {
-    //     throw new Error(error.message);
-    //   });
+    console.log("This is reformattedBaseData", reformattedBaseData)
 
-    //   results[index]["preview_item"] = response.data.preview_item
+    // setProgressBar((100 * (Number.parseInt(index, 10) + 1) / results.length).toFixed(1))
 
-    //   setProgressBar((100 * (Number.parseInt(index, 10) + 1) / results.length).toFixed(1))
-    // }
 
     // writeItemsTable(JSON.stringify(results));
     playAlert();

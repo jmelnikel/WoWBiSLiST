@@ -1,14 +1,18 @@
-const reformatBaseData = (resultsArray) => {
+const getItemId = (resultsArray) => {
   const reformattedBaseData = []
   for (let array of resultsArray) {
     array = array.map((itemObject) => {
       let reformattedArray = []
-      const { data, key } = itemObject;
+      const { data } = itemObject;
 
       reformattedArray["id"] = data.id
+      reformattedArray["name"] = data.name.en_US
+      reformattedArray["quality"] = data.quality.type
       reformattedArray["level"] = data.level
       reformattedArray["required_level"] = data.required_level
-      reformattedArray["href"] = key.href
+      reformattedArray["item_class"] = data.item_class.name.en_US
+      reformattedArray["item_subclass"] = data.item_subclass.name.en_US
+      reformattedArray["inventory_type"] = data.inventory_type.type
 
       return reformattedArray;
     })
@@ -17,4 +21,4 @@ const reformatBaseData = (resultsArray) => {
   return reformattedBaseData;
 };
 
-export default reformatBaseData;
+export default getItemId;
