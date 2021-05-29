@@ -12,13 +12,13 @@ export const clearItemsTable = async () => {
   console.log("Table: items - Cleared and Initialized")
 }
 
-export const writeItemsTable = async (data) => {
-  const url = process.env.REACT_APP_WRITE_ITEM_TABLE_URL
-  const writeItemsTableAxios = axios.create({
+export const writeBaseDataItemsTable = async (data) => {
+  const url = process.env.REACT_APP_WRITE_BASE_DATA_ITEMS_TABLE_URL
+  const writeBaseDataItemsTableAxios = axios.create({
     baseURL: "http://localhost:5000",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "text/csv" },
   });
-  await writeItemsTableAxios.post(url, data)
+  await writeBaseDataItemsTableAxios.post(url, data)
 }
 
 export const removePandCItems = async () => {

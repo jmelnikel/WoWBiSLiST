@@ -1,8 +1,8 @@
-const getItemId = (resultsArray) => {
+const reformatBaseData = (resultsArray) => {
   const reformattedBaseData = []
   for (let array of resultsArray) {
     array = array.map((itemObject) => {
-      let reformattedArray = []
+      let reformattedArray = {}
       const { data } = itemObject;
 
       reformattedArray["id"] = data.id
@@ -18,7 +18,7 @@ const getItemId = (resultsArray) => {
     })
     reformattedBaseData.push(array)
   }
-  return reformattedBaseData;
+  return reformattedBaseData.flat();
 };
 
-export default getItemId;
+export default reformatBaseData;

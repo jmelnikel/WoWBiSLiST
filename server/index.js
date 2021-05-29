@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }))
 // Clear and Initialize Table: items
 app.post(`/${process.env.CLEAR_ITEMS_TABLE_URL}`, (req, res) => {
   try {
-    pool.query("DROP TABLE IF EXISTS items; CREATE TABLE items(item_key SERIAL NOT NULL PRIMARY KEY, id INT NOT NULL, name VARCHAR(80) NOT NULL, quality VARCHAR(24), level SMALLINT, required_level SMALLINT, item_class VARCHAR(24), item_subclass VARCHAR(24), inventory_type VARCHAR(24), preview_item json);");
+    pool.query("DROP TABLE IF EXISTS items; CREATE TABLE items(id INT NOT NULL, name VARCHAR(80) NOT NULL, quality VARCHAR(24), level SMALLINT, required_level SMALLINT, item_class VARCHAR(24), item_subclass VARCHAR(24), inventory_type VARCHAR(24));");
     console.log("Database Cleared and Initialized");
   } catch (error) {
     throw new Error(error.message);
@@ -25,22 +25,31 @@ app.post(`/${process.env.CLEAR_ITEMS_TABLE_URL}`, (req, res) => {
 })
 
 // Seed Table: items
-app.post(`/${process.env.WRITE_ITEMS_TABLE_URL}`, async (req, res) => {
+app.post(`/${process.env.WRITE_BASE_DATA_ITEMS_TABLE_URL}`, async (req, res) => {
   try {
-    const arrayOfArrays = req.body;
-    for (let array of arrayOfArrays) {
-      for (let itemObject of array) {
-        const { id, name, quality, level, required_level, item_class, item_subclass, inventory_type, preview_item } = itemObject;
-
-        await pool.query(
-          "INSERT INTO items (id, name, quality, level, required_level, item_class, item_subclass, inventory_type, preview_item) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *;", [id, name, quality, level, required_level, item_class, item_subclass, inventory_type, preview_item]
-        );
-      }
-    }
-    console.log("Items written to the table.")
+    await pool.query(
+      "COPY items FROM '/Users/jm-laptop/Downloads/itemsData.csv' CSV HEADER"
+    );
   } catch (error) {
     throw new Error(error.message);
   }
+
+
+  // try {
+  //   const arrayOfArrays = req.body;
+  //   for (let array of arrayOfArrays) {
+  //     for (let itemObject of array) {
+  //       const { id, name, quality, level, required_level, item_class, item_subclass, inventory_type, preview_item } = itemObject;
+
+  // await pool.query(
+  //   "INSERT INTO items (id, name, quality, level, required_level, item_class, item_subclass, inventory_type, preview_item) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *;", [id, name, quality, level, required_level, item_class, item_subclass, inventory_type, preview_item]
+  // );
+  //     }
+  //   }
+  //   console.log("Items written to the table.")
+  // } catch (error) {
+  //   throw new Error(error.message);
+  // }
 });
 
 
