@@ -68,13 +68,14 @@ const App = () => {
           });
 
         itemObject["preview-item"] = itemsDetailsData.data.preview_item;
+        setProgressBar((100 * (id / 38506)).toFixed(1))
 
       }
     }
 
     console.log("This is reformattedBaseData", reformattedBaseData)
 
-    // setProgressBar((100 * (Number.parseInt(index, 10) + 1) / results.length).toFixed(1))
+    // setProgressBar2((100 * (Number.parseInt(index, 10) + 1) / results.length).toFixed(1))
 
 
     // writeItemsTable(JSON.stringify(results));

@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }))
 // Clear and Initialize Table: items
 app.post(`/${process.env.CLEAR_ITEMS_TABLE_URL}`, (req, res) => {
   try {
-    pool.query("DROP TABLE items; CREATE TABLE items(item_key SERIAL PRIMARY KEY, id INT, name VARCHAR(80), quality VARCHAR(24), level SMALLINT, required_level SMALLINT, item_class VARCHAR(24), item_subclass VARCHAR(24), inventory_type VARCHAR(24), href text);");
+    pool.query("DROP TABLE IF EXISTS items; CREATE TABLE items(item_key SERIAL NOT NULL PRIMARY KEY, id INT NOT NULL, name VARCHAR(80) NOT NULL, quality VARCHAR(24), level SMALLINT, required_level SMALLINT, item_class VARCHAR(24), item_subclass VARCHAR(24), inventory_type VARCHAR(24), preview_item json);");
     console.log("Database Cleared and Initialized");
   } catch (error) {
     throw new Error(error.message);
@@ -27,18 +27,26 @@ app.post(`/${process.env.CLEAR_ITEMS_TABLE_URL}`, (req, res) => {
 // Seed Table: items
 app.post(`/${process.env.WRITE_ITEMS_TABLE_URL}`, async (req, res) => {
   try {
-    const array = req.body;
-    await array.forEach(async (itemObject, index) => {
-      const { id, name, quality, level, required_level, item_class, item_subclass, inventory_type, href } = itemObject;
-      await pool.query(
-        "INSERT INTO items (id, name, quality, level, required_level, item_class, item_subclass, inventory_type, href) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *;", [id, name, quality, level, required_level, item_class, item_subclass, inventory_type, href]
-      );
-      console.log(`Item ${index + 1} of ${array.length} written to database!`)
-    })
+    const arrayOfArrays = req.body;
+    for (let array of arrayOfArrays) {
+      for (let itemObject of array) {
+        const { id, name, quality, level, required_level, item_class, item_subclass, inventory_type, preview_item } = itemObject;
+
+        await pool.query(
+          "INSERT INTO items (id, name, quality, level, required_level, item_class, item_subclass, inventory_type, preview_item) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *;", [id, name, quality, level, required_level, item_class, item_subclass, inventory_type, preview_item]
+        );
+      }
+    }
+    console.log("Items written to the table.")
   } catch (error) {
     throw new Error(error.message);
   }
 });
+
+
+
+
+
 
 // Remove Poor and Common Items
 app.delete("/removePandC", async (req, res) => {
