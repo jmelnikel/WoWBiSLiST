@@ -85,7 +85,7 @@ const App = () => {
           throw new Error(error.message);
         });
 
-      item["preview_item"] = results.data
+      item["preview_item"] = results.data.preview_item
       setProgressBar((100 * (id / 38506)).toFixed(1))
     }
 
@@ -95,7 +95,7 @@ const App = () => {
 
   return (
     <>
-      {true
+      {false
         ?
         <section>
           <h2>Last items table reset: May 30, 2012 (Patch 2.5.1)</h2>
@@ -134,10 +134,8 @@ const App = () => {
             // setLoading(true)
             const allItems = await getAllItems();
             const itemsData = allItems.data;
-            for (let item of itemsData) {
-              item.show = true;
-            }
             setItemsData(itemsData);
+            console.log(allItems)
             // setLoading(false)
           }}>
             Get all Items

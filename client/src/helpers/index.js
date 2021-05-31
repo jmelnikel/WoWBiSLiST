@@ -13,7 +13,7 @@ const reformatBaseData = (resultsArray) => {
       reformattedArray["item_class"] = data.item_class.name.en_US;
       reformattedArray["item_subclass"] = data.item_subclass.name.en_US;
       reformattedArray["inventory_type"] = data.inventory_type.type;
-      reformattedArray["show"] = false;
+      reformattedArray["show"] = true;
 
       return reformattedArray;
     })
