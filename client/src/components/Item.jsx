@@ -12,7 +12,6 @@ const Item = (props) => {
       {show &&
         <li className="item--li" style={{ width: "150px" }}>
           <h4>{preview_item.name}</h4>
-          {/* <a href="void" data-wowhead={`item=${id}`}>{name}</a> */}
           <button
             onClick={() => {
               // removeItem(id)

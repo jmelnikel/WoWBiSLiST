@@ -12,15 +12,6 @@ export const clearItemsTable = async () => {
   console.log("Table: items - Cleared and Initialized")
 }
 
-// export const writeBaseDataItemsTable = async (data) => {
-//   const url = process.env.REACT_APP_WRITE_BASE_DATA_ITEMS_TABLE_URL
-//   const writeBaseDataItemsTableAxios = axios.create({
-//     baseURL: "http://localhost:5000",
-//     headers: { "Content-Type": "application/json" },
-//   });
-//   await writeBaseDataItemsTableAxios.post(url, data)
-// }
-
 export const writeDetailDataItemsTable = async (data) => {
   const url = process.env.REACT_APP_WRITE_DETAIL_DATA_ITEMS_TABLE_URL
   const writeDetailDataItemsTableAxios = axios.create({
@@ -29,15 +20,6 @@ export const writeDetailDataItemsTable = async (data) => {
   });
   await writeDetailDataItemsTableAxios.post(url, data)
 }
-
-// export const removePandCItems = async () => {
-//   const url = "/removePandC"
-//   const removePandCAxios = axios.create({
-//     baseURL: "http://localhost:5000",
-//     // headers: { "Content-Type": "application/json" },
-//   });
-//   return await removePandCAxios.delete(url)
-// }
 
 export const getAllItems = async () => {
   const url = "/items"

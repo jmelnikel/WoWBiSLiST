@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { CSVLink } from "react-csv";
 import {
   clearItemsTable,
-  // writeBaseDataItemsTable,
   writeDetailDataItemsTable,
   getAllItems,
 } from './APIs/database';
@@ -17,7 +15,6 @@ import Filters from './components/Filters/Filters';
 // import beanEater from './assets/images/beanEater.svg'
 import SlotList from './components/SlotList'
 import './styling/App.css';
-// import _ from "lodash";
 
 
 const App = () => {
@@ -94,16 +91,6 @@ const App = () => {
             <button onClick={handleGetItemsBaseData}>
               Get Items Base Data
             </button>
-            {/* <CSVLink
-              data={itemsBaseData}
-              headers={headers}
-              filename={"itemsData.csv"}
-            >Download Items Data CSV
-            </CSVLink> */}
-
-            {/* <button onClick={() => { writeBaseDataItemsTable(JSON.stringify(itemsBaseData)) }}>
-              Write Base Data Items Table
-            </button> */}
             <button onClick={handleGetItemsDetailData}>
               Get Items Detail Data
             </button>
@@ -112,7 +99,6 @@ const App = () => {
             </button>
           </div>
           <ProgressBar completed={progressBar} />
-          {/* <h2>Total Number of Items Base Data in State: {itemsBaseData.length}</h2> */}
           <h2>Total Number of Items Detail Data in State: {itemsDetailData.length}</h2>
         </section>
         :
