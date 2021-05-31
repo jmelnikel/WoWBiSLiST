@@ -8,26 +8,80 @@ const SlotList = (props) => {
   let { itemsData } = props;
 
   let slots = [
-    "Head",
-    "Neck",
-    "Shoulder",
-    "Back",
-    "Chest",
-    "Wrist",
-    "Hands",
-    "Waist",
-    "Legs",
-    "Feet",
-    "Finger",
-    "Trinket",
-    "Off Hand",
-    "Held In Off-hand",
-    "Relic",
-    "Tabard",
-    "Main Hand",
-    "One-Hand",
-    "Off Hand",
-    "Two-Hand",
+    {
+      type: "HEAD",
+      name: "Head"
+    },
+    {
+      type: "NECK",
+      name: "Neck"
+    },
+    {
+      type: "SHOULDER",
+      name: "Shoulders"
+    },
+    // {
+    //   type: "BACK",
+    //   name: "Back"
+    // },
+    // {
+    //   type: "CHEST",
+    //   name: "Chest"
+    // },
+    // {
+    //   type: "WRIST",
+    //   name: "Wrist"
+    // },
+    // {
+    //   type: "HAND",
+    //   name: "Hands"
+    // },
+    // {
+    //   type: "WAIST",
+    //   name: "Waist"
+    // },
+    // {
+    //   type: "LEGS",
+    //   name: "Legs"
+    // },
+    // {
+    //   type: "FEET",
+    //   name: "Feet"
+    // },
+    // {
+    //   type: "FINGER",
+    //   name: "Finger"
+    // },
+    // {
+    //   type: "TRINKET",
+    //   name: "Trinket"
+    // },
+    // {
+    //   type: "OFFHAND",
+    //   name: "Off Hand"
+    // },
+    // {
+    //   type: "RELIC",
+    //   name: "Relic"
+    // },
+    // {
+    //   type: "TABARD",
+    //   name: "Tabard"
+    // },
+    // {
+    //   type: "MAINHAND",
+    //   name: "Main Hand"
+    // },
+    // {
+    //   type: "ONEHAND",
+    //   name: "One Hand"
+    // },
+    // {
+    //   type: "TWOHAND",
+    //   name: "Two Hand"
+    // },
+
+    // "Held In Off-hand",
     // "Ranged",
     // "RANGEDRIGHT",
     // "Thrown",
@@ -36,16 +90,14 @@ const SlotList = (props) => {
   // Ranged slots are hard coded in: Ranged, RANGEDRIGHT,THROWN.
 
 
-
-
   slots = slots.map((slot, index) => {
-    return <Slot key={index} slot={slot} itemsData={itemsData}></Slot>
-  })
+    return < Slot key={index} slot={slot} itemsData={itemsData} ></Slot>
+  });
 
   return (
     <ul className="xSlotList--ul">
       {slots}
-      <li className="slot--li">
+      {/* <li className="slot--li">
         <h2>Ranged</h2>
         <ItemList itemsData={itemsData = itemsData.filter((item) => {
           return (
@@ -55,8 +107,7 @@ const SlotList = (props) => {
           );
         })}
         />
-        {/* <h2>Number of items: {itemsData.length}</h2> */}
-      </li>
+      </li> */}
     </ul >
   )
 }

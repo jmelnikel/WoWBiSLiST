@@ -29,18 +29,6 @@ const App = () => {
   let [itemsData, setItemsData] = useState([])
   // const [loading, setLoading] = useState(false);
 
-  // const headers = [
-  //   "id",
-  //   "name",
-  //   "quality",
-  //   "level",
-  //   "required_level",
-  //   "item_class",
-  //   "item_subclass",
-  //   "inventory_type",
-  //   "preview_item",
-  // ];
-
   useEffect(() => {
     getClientAuthToken()
       .then((clientAuthToken) => {
@@ -135,7 +123,6 @@ const App = () => {
             const allItems = await getAllItems();
             const itemsData = allItems.data;
             setItemsData(itemsData);
-            console.log(allItems)
             // setLoading(false)
           }}>
             Get all Items

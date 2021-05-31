@@ -7,34 +7,38 @@ import _ from "lodash";
 const ItemList = (props) => {
   let [itemsData, setItemsData] = useState([]);
 
+
+
   useEffect(() => {
     setItemsData(props.itemsData)
   }, [props]);
 
-  const removeItem = (id) => {
-    const prevState = _.cloneDeep(itemsData);
+  // const removeItem = (id) => {
+  //   const prevState = _.cloneDeep(itemsData);
 
-    for (let item of prevState) {
-      if (item.id === id) {
-        item.show = false;
-        setItemsData([...prevState, { show: false }])
-        return;
-      }
-    }
-  };
+  //   for (let item of prevState) {
+  //     if (item.id === id) {
+  //       item.show = false;
+  //       setItemsData([...prevState, { show: false }])
+  //       return;
+  //     }
+  //   }
+  // };
 
+
+  const items = itemsData.map((item, index) => {
+    return (
+      <Item
+        key={index}
+        item={item}
+      // removeItem={removeItem}
+      />
+    )
+  })
 
   return (
     <ul className="itemList--ul">
-      {itemsData.map((item, index) => {
-        return (
-          <Item
-            key={index}
-            item={item}
-            removeItem={removeItem}
-          />
-        )
-      })}
+      {items}
     </ul>
   )
 }

@@ -3,27 +3,19 @@ import PropTypes from 'prop-types';
 import '../styling/item.css';
 
 const Item = (props) => {
-  const { removeItem } = props;
-  const {
-    id,
-    name,
-    // level,
-    // required_level,
-    // item_class,
-    // item_subclass,
-    // inventory_type,
-    // quality
-    show,
-  } = props.item;
+  // const { removeItem } = props;
+  const { show, preview_item } = props.item
+
 
   return (
     <>
       {show &&
-        <li className="item--li">
-          <a href="void" data-wowhead={`item=${id}`}>{name}</a>
+        <li className="item--li" style={{ width: "150px" }}>
+          <h4>{preview_item.name}</h4>
+          {/* <a href="void" data-wowhead={`item=${id}`}>{name}</a> */}
           <button
             onClick={() => {
-              removeItem(id)
+              // removeItem(id)
             }}
           >Remove Item</button>
         </li>

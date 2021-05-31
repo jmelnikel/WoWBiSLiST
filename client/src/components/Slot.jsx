@@ -6,16 +6,14 @@ import '../styling/slot.css';
 const Slot = (props) => {
   let { slot, itemsData } = props;
 
-  itemsData = itemsData.filter((item) => {
-    return item.inventory_type === slot
+  const itemsDataBySlot = itemsData.filter((item) => {
+    return item.preview_item.inventory_type.type === slot.type;
   })
 
   return (
     <li className="slot--li">
-      <h2>{slot}</h2>
-      <ItemList itemsData={itemsData}
-      />
-      {/* <h2>Number of items: {itemsData.length}</h2> */}
+      <h2>{slot.name}</h2>
+      <ItemList itemsData={itemsDataBySlot} />
     </li>
   )
 }
