@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { CSVLink } from "react-csv";
 import {
   clearItemsTable,
-  writeBaseDataItemsTable,
+  // writeBaseDataItemsTable,
+  writeDetailDataItemsTable,
   getAllItems,
 } from './APIs/database';
 import {
   getClientAuthToken,
   getItemsBaseData,
-  // getItemsDetailsData,
+  getItemsDetailData,
 } from './APIs/blizzard'
 import reformatBaseData from './helpers';
 import ProgressBar from './components/ProgressBar';
@@ -23,19 +24,22 @@ const App = () => {
   const [admin, setAdmin] = useState(false)
   const [clientAuthToken, setClientAuthToken] = useState("");
   const [progressBar, setProgressBar] = useState("0");
+  let [itemsBaseData, setItemsBaseData] = useState([])
+  let [itemsDetailData, setItemsDetailData] = useState([])
   let [itemsData, setItemsData] = useState([])
-  // const [loading, setLoading] = useState(false)
-  const headers = [
-    "id",
-    "name",
-    "quality",
-    "level",
-    "required_level",
-    "item_class",
-    "item_subclass",
-    "inventory_type",
-    // "preview_item",
-  ];
+  // const [loading, setLoading] = useState(false);
+
+  // const headers = [
+  //   "id",
+  //   "name",
+  //   "quality",
+  //   "level",
+  //   "required_level",
+  //   "item_class",
+  //   "item_subclass",
+  //   "inventory_type",
+  //   "preview_item",
+  // ];
 
   useEffect(() => {
     getClientAuthToken()
@@ -53,7 +57,7 @@ const App = () => {
     audio.play()
   }
 
-  const handleGetItemsData = async () => {
+  const handleGetItemsBaseData = async () => {
     const start = 1
     let results = []
     const itemsBaseData = await getItemsBaseData({ clientAuthToken, start, results })
@@ -66,58 +70,66 @@ const App = () => {
 
     const reformattedBaseData = reformatBaseData(itemsBaseData);
 
-    // for (let itemObject of reformattedBaseData) {
-    //   const id = itemObject.id
-    //   const itemsDetailsData = await getItemsDetailsData({ clientAuthToken, id })
-    //     .then((response) => {
-    //       return response
-    //     })
-    //     .catch((error) => {
-    //       throw new Error(error.message);
-    //     });
-    //   const preview_item = JSON.stringify(itemsDetailsData.data.preview_item);
-    //   itemObject["preview-item"] = preview_item;
-    //   setProgressBar((100 * (id / 38506)).toFixed(1))
-    // }
-
-    // console.log("This is reformattedBaseData", reformattedBaseData)
-    setItemsData(reformattedBaseData)
-
-    // writeItemsTable(JSON.stringify(results));
+    setItemsBaseData(reformattedBaseData)
     playAlert();
-    console.log("Items batch sent to be written to database.")
   };
 
+  const handleGetItemsDetailData = async () => {
+    for (let item of itemsBaseData) {
+      const id = item.id
+      const results = await getItemsDetailData({ clientAuthToken, id })
+        .then((response) => {
+          return response
+        })
+        .catch((error) => {
+          throw new Error(error.message);
+        });
+
+      item["preview_item"] = results.data
+      setProgressBar((100 * (id / 38506)).toFixed(1))
+    }
+
+    setItemsDetailData(itemsBaseData)
+    playAlert();
+  }
 
   return (
     <>
       {true
         ?
         <section>
-          <h2>Last items table reset: May 20, 2012 (Patch 2.5.1)</h2>
+          <h2>Last items table reset: May 30, 2012 (Patch 2.5.1)</h2>
           <div style={{ display: "flex", flexDirection: "column", width: "30%" }}>
-            <button onClick={handleGetItemsData}>
-              Get Items Data
-            </button>
-            <CSVLink
-              data={itemsData}
-              headers={headers}
-              filename={"itemsData.csv"}
-            >Download Items Data CSV
-            </CSVLink>
             <button onClick={() => { clearItemsTable() }}>
               Clear Items Table
             </button>
-            <button onClick={() => { writeBaseDataItemsTable() }}>
+            <button onClick={handleGetItemsBaseData}>
+              Get Items Base Data
+            </button>
+            {/* <CSVLink
+              data={itemsBaseData}
+              headers={headers}
+              filename={"itemsData.csv"}
+            >Download Items Data CSV
+            </CSVLink> */}
+
+            {/* <button onClick={() => { writeBaseDataItemsTable(JSON.stringify(itemsBaseData)) }}>
               Write Base Data Items Table
-          </button>
+            </button> */}
+            <button onClick={handleGetItemsDetailData}>
+              Get Items Detail Data
+            </button>
+            <button onClick={() => { writeDetailDataItemsTable(JSON.stringify(itemsDetailData)) }}>
+              Write Detail Data Items Table
+            </button>
           </div>
           <ProgressBar completed={progressBar} />
-          <h1>Number of Total Items: {itemsData.length}</h1>
+          {/* <h2>Total Number of Items Base Data in State: {itemsBaseData.length}</h2> */}
+          <h2>Total Number of Items Detail Data in State: {itemsDetailData.length}</h2>
         </section>
         :
         <section>
-          <Filters />
+          {/* <Filters /> */}
           <button onClick={async () => {
             // setLoading(true)
             const allItems = await getAllItems();

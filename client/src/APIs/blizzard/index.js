@@ -47,7 +47,7 @@ export const getItemsBaseData = async ({ clientAuthToken, start, results }) => {
   return results
 };
 
-export const getItemsDetailsData = async ({ clientAuthToken, id }) => {
+export const getItemsDetailData = async ({ clientAuthToken, id }) => {
   const url = `https://us.api.blizzard.com/data/wow/item/${id}?namespace=static-classic-us&locale=en_US`
 
   const getItemsDetailsDataAxios = axios.create({
