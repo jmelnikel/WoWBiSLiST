@@ -17,23 +17,23 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 // Clear and Initialize items Table
 app.post(`/${process.env.CLEAR_ITEMS_TABLE_URL}`, (req, res) => {
   try {
-    pool.query("DROP TABLE IF EXISTS items; CREATE TABLE items(id INT NOT NULL, show BOOLEAN, preview_item JSON);");
+    pool.query("DROP TABLE IF EXISTS items; CREATE TABLE items(item_key SERIAL PRIMARY KEY, id INT NOT NULL, show BOOLEAN, level INT, preview_item JSON);");
     console.log("Database Cleared and Initialized");
   } catch (error) {
     throw new Error(error.message);
   }
 })
 
-// Seed items Table
+// Write items Table
 app.post(`/${process.env.WRITE_DETAIL_DATA_ITEMS_TABLE_URL}`, async (req, res) => {
   try {
     console.log(req.body)
     const array = req.body
     for (let itemObject of array) {
-      const { id, show, preview_item } = itemObject;
+      const { id, show, level, preview_item } = itemObject;
 
       await pool.query(
-        "INSERT INTO items (id, show, preview_item) VALUES($1, $2, $3) RETURNING *;", [id, show, preview_item]
+        "INSERT INTO items (id, show, level, preview_item) VALUES($1, $2, $3, $4);", [id, show, level, preview_item]
       );
     }
   } catch (error) {
@@ -44,7 +44,7 @@ app.post(`/${process.env.WRITE_DETAIL_DATA_ITEMS_TABLE_URL}`, async (req, res) =
 
 app.get("/items", async (req, res) => {
   try {
-    const allItems = await pool.query("SELECT * FROM items");
+    const allItems = await pool.query("SELECT * FROM items ORDER BY level ASC");
     res.json(allItems.rows);
   } catch (error) {
     throw new Error(error.message);
