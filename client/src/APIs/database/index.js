@@ -21,6 +21,17 @@ export const writeDetailDataItemsTable = async (data) => {
   await writeDetailDataItemsTableAxios.post(url, data)
 }
 
+export const deleteDuplicatesItemsTable = async () => {
+  const url = process.env.REACT_APP_DELETE_DUPLICATES_ITEM_TABLE_URL
+  const deleteDuplicatesItemsTableAxios = axios.create({
+    baseURL: "http://localhost:5000",
+    // headers: { "Content-Type": "application/json" },
+  });
+  deleteDuplicatesItemsTableAxios.post(url)
+  console.log("Table: items - Cleared and Initialized")
+}
+
+
 export const getAllItems = async () => {
   const url = "/items"
   const getAllItemsAxios = axios.create({

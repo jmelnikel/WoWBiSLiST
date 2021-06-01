@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   clearItemsTable,
   writeDetailDataItemsTable,
+  deleteDuplicatesItemsTable,
   getAllItems,
 } from './APIs/database';
 import {
@@ -21,9 +22,12 @@ const App = () => {
   const [admin, setAdmin] = useState(false)
   const [clientAuthToken, setClientAuthToken] = useState("");
   const [progressBar, setProgressBar] = useState("0");
-  let [itemsBaseData, setItemsBaseData] = useState([])
-  let [itemsDetailData, setItemsDetailData] = useState([])
-  let [itemsData, setItemsData] = useState([])
+  let [itemsBaseData, setItemsBaseData] = useState([]);
+  let [itemsDetailData, setItemsDetailData] = useState([]);
+  let [itemsData, setItemsData] = useState([]);
+  const [filters, setFilters] = useState({
+    inventory_type: "all",
+  });
   // const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -36,6 +40,23 @@ const App = () => {
         throw new Error(error.message);
       });
   }, [admin]);
+
+  useEffect(async () => {
+    getAllItems()
+      .then((response) => {
+        const itemsData = response.data;
+        setItemsData(itemsData);
+      })
+      .catch((error) => {
+        throw new Error(error.message);
+      });
+  }, [])
+
+  useEffect(() => {
+
+  }, [filters])
+
+
 
   const playAlert = () => {
     const audio = document.getElementById('audioAlert');
@@ -77,7 +98,7 @@ const App = () => {
     setItemsDetailData(itemsBaseData)
     playAlert();
   }
-
+  console.log("This is itemsData", itemsData)
   return (
     <>
       {false
@@ -85,7 +106,7 @@ const App = () => {
         <section>
           <h2>Last items table reset: May 30, 2012 (Patch 2.5.1)</h2>
           <div style={{ display: "flex", flexDirection: "column", width: "30%" }}>
-            <button onClick={handleGetItemsBaseData}>
+            <button onClick={handleGetItemsBaseData()}>
               Get Items Base Data
             </button>
             <button onClick={handleGetItemsDetailData}>
@@ -97,22 +118,19 @@ const App = () => {
             <button onClick={() => { writeDetailDataItemsTable(JSON.stringify(itemsDetailData)) }}>
               Write Detail Data Items Table
             </button>
+            <button onClick={() => { deleteDuplicatesItemsTable() }}>
+              Delete Duplicate Rows Items Table
+            </button>
           </div>
           <ProgressBar completed={progressBar} />
           <h2>Total Number of Items Detail Data in State: {itemsDetailData.length}</h2>
         </section>
         :
         <section>
-          {/* <Filters /> */}
-          <button onClick={async () => {
-            // setLoading(true)
-            const allItems = await getAllItems();
-            const itemsData = allItems.data;
-            setItemsData(itemsData);
-            // setLoading(false)
-          }}>
-            Get all Items
-          </button>
+          <Filters filters={filters} setFilters={setFilters} />
+          {/* <button onClick={async () => {}}>
+            Apply Filter
+          </button> */}
           <br></br>
           <SlotList
             itemsData={itemsData}

@@ -20,7 +20,7 @@ const Item = (props) => {
     requirements,
     set,
   } = preview_item;
-  // console.log("This is set in Items", set)
+
   return (
     <>
       {show &&
@@ -47,7 +47,7 @@ const Item = (props) => {
 }
 
 Item.propTypes = {
-  item: PropTypes.object
+  item: PropTypes.object,
 }
 
 export default Item

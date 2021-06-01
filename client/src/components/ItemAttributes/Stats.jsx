@@ -25,7 +25,7 @@ const Stats = (props) => {
 }
 
 Stats.propTypes = {
-
+  stats: PropTypes.array,
 }
 
 export default Stats;
