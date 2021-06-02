@@ -125,7 +125,7 @@ const App = () => {
             setItemsData(itemsData);
             // setLoading(false)
           }}>
-            Get all Items
+            Apply Filter
           </button>
           <br></br>
           <SlotList
