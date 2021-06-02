@@ -91,11 +91,7 @@ const SlotList = (props) => {
 
 
   slots = slots.map((slot, index) => {
-    return < Slot
-      key={index}
-      slot={slot}
-      itemsData={itemsData}
-    />
+    return < Slot key={index} slot={slot} itemsData={itemsData} ></Slot>
   });
 
   return (

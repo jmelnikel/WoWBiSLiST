@@ -28,18 +28,16 @@ const ItemList = (props) => {
 
   const items = itemsData.map((item, index) => {
     return (
-      <li key={index} className="item--li">
-        <Item
-          item={item}
-        // removeItem={removeItem}
-        />
-      </li>
+      <Item
+        key={index}
+        item={item}
+      // removeItem={removeItem}
+      />
     )
   })
 
   return (
     <ul className="itemList--ul">
-
       {items}
     </ul>
   )
