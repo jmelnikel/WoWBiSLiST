@@ -44,6 +44,7 @@ export const getItemsBaseData = async ({ clientAuthToken, start, results }) => {
     results.push(itemsArray)
     await getItemsBaseData({ clientAuthToken, start, results })
   }
+
   return results
 };
 

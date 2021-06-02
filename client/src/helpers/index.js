@@ -7,6 +7,7 @@ const reformatBaseData = (resultsArray) => {
 
       reformattedArray["id"] = data.id;
       reformattedArray["show"] = true;
+      reformattedArray["level"] = data.level;
 
       return reformattedArray;
     })

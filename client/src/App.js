@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   clearItemsTable,
   writeDetailDataItemsTable,
+  deleteDuplicateRowsItemsTable,
   getAllItems,
 } from './APIs/database';
 import {
@@ -78,24 +79,37 @@ const App = () => {
     playAlert();
   }
 
+  const handleRemoveTestItems = () => {
+
+  }
+
   return (
     <>
-      {false
+      {true
         ?
         <section>
           <h2>Last items table reset: May 30, 2012 (Patch 2.5.1)</h2>
           <div style={{ display: "flex", flexDirection: "column", width: "30%" }}>
-            <button onClick={() => { clearItemsTable() }}>
-              Clear Items Table
-            </button>
             <button onClick={handleGetItemsBaseData}>
               Get Items Base Data
             </button>
             <button onClick={handleGetItemsDetailData}>
               Get Items Detail Data
             </button>
+
+            <button onClick={handleRemoveTestItems}>
+              Remove Test Items
+            </button>
+
+
+            <button onClick={() => { clearItemsTable() }}>
+              Clear Items Table
+            </button>
             <button onClick={() => { writeDetailDataItemsTable(JSON.stringify(itemsDetailData)) }}>
               Write Detail Data Items Table
+            </button>
+            <button onClick={() => { deleteDuplicateRowsItemsTable() }}>
+              Delete Duplicate Rows
             </button>
           </div>
           <ProgressBar completed={progressBar} />
