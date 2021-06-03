@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 app.post(`/${process.env.CLEAR_ITEMS_TABLE_URL}`, (req, res) => {
   try {
     pool.query("DROP TABLE IF EXISTS items; CREATE TABLE items(item_key SERIAL PRIMARY KEY, id INT NOT NULL, show BOOLEAN, level INT, preview_item JSON);");
-    console.log("Database Cleared and Initialized");
+    console.log("items Table Cleared and Initialized");
   } catch (error) {
     throw new Error(error.message);
   }

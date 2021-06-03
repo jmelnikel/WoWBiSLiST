@@ -32,7 +32,7 @@ const Sets = (props) => {
 }
 
 Sets.propTypes = {
-
+  set: PropTypes.object
 }
 
 export default Sets;

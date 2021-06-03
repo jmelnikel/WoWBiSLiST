@@ -9,7 +9,7 @@ const Requirements = (props) => {
     const attributes = Object.keys(requirements);
     requirementAttributes = attributes.map((attribute, index) => {
       return (
-        <li>
+        <li key={index}>
           <h4>{requirements[attribute].display_string}</h4>
         </li>
       )
@@ -26,7 +26,7 @@ const Requirements = (props) => {
 }
 
 Requirements.propTypes = {
-
+  requirements: PropTypes.object
 }
 
 export default Requirements;

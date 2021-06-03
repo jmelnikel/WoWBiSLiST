@@ -8,23 +8,23 @@ const ItemList = (props) => {
   let [itemsData, setItemsData] = useState([]);
 
   useEffect(() => {
-    setItemsData(props.itemsData)
-  }, [props]);
+    setItemsData(itemsData)
+  }, [itemsData]);
 
   // const removeItem = (id) => {
-  //   const prevState = _.cloneDeep(itemsData);
+  //   const prevState = _.cloneDeep(itemsListData);
 
   //   for (let item of prevState) {
   //     if (item.id === id) {
   //       item.show = false;
-  //       setItemsData([...prevState, { show: false }])
+  //       setItemsLstData([...prevState, { show: false }])
   //       return;
   //     }
   //   }
   // };
 
 
-  const items = itemsData.map((item, index) => {
+  const items = itemsListData.map((item, index) => {
     return (
       <li key={index} className="item--li">
         <Item

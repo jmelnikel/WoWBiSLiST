@@ -25,7 +25,7 @@ const Spells = (props) => {
 }
 
 Spells.propTypes = {
-
+  spells: PropTypes.array,
 }
 
 export default Spells;

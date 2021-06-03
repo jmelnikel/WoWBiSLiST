@@ -22,9 +22,12 @@ const App = () => {
   const [admin, setAdmin] = useState(false)
   const [clientAuthToken, setClientAuthToken] = useState("");
   const [progressBar, setProgressBar] = useState("0");
-  let [itemsBaseData, setItemsBaseData] = useState([])
-  let [itemsDetailData, setItemsDetailData] = useState([])
-  let [itemsData, setItemsData] = useState([])
+  let [itemsBaseData, setItemsBaseData] = useState([]);
+  let [itemsDetailData, setItemsDetailData] = useState([]);
+  let [itemsData, setItemsData] = useState([]);
+  const [filters, setFilters] = useState({
+    inventory_type: "all",
+  });
   // const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -37,6 +40,23 @@ const App = () => {
         throw new Error(error.message);
       });
   }, [admin]);
+
+  useEffect(async () => {
+    getAllItems()
+      .then((response) => {
+        const itemsData = response.data;
+        setItemsData(itemsData);
+      })
+      .catch((error) => {
+        throw new Error(error.message);
+      });
+  }, [])
+
+  useEffect(() => {
+
+  }, [filters])
+
+
 
   const playAlert = () => {
     const audio = document.getElementById('audioAlert');
@@ -90,7 +110,7 @@ const App = () => {
         <section>
           <h2>Last items table reset: May 30, 2012 (Patch 2.5.1)</h2>
           <div style={{ display: "flex", flexDirection: "column", width: "30%" }}>
-            <button onClick={handleGetItemsBaseData}>
+            <button onClick={handleGetItemsBaseData()}>
               Get Items Base Data
             </button>
             <button onClick={handleGetItemsDetailData}>

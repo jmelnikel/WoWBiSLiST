@@ -1,37 +1,25 @@
-// import React, { useState } from 'react'
-// import PropTypes from 'prop-types'
-// import LevelRangeFilter from './LevelRangeFilter'
+import React from 'react'
+import PropTypes from 'prop-types'
+import InventoryType from './InventoryType'
 
-// const Filters = (props) => {
-//   const [filters, setFilters] = useState({})
-//   let [lowerRange, setLowerRange] = useState(null)
-//   let [upperRange, setUpperRange] = useState(null)
+const Filters = (props) => {
+  const { filters, setFilters } = props
 
-//   useEffect(() => {
-//     if (lowerRange > upperRange) {
-//       return Error
-//     } else {
-//       const prevState = _.cloneDeep(itemsData);
-//       setItemsData([...prevState, { show: false }])
-//     }
-//   }, [lowerRange, upperRange])
+  const handleOnChange = (params) => {
+    setFilters(params)
+  }
 
+  return (
+    <form>
+      <InventoryType handleOnChange={handleOnChange} filters={filters} />
+    </form>
+  )
+}
 
-//   return (
-//     <div>
-//       <LevelRangeFilter
-//         lowerRange={lowerRange}
-//         setLowerRange={setLowerRange}
-//         upperRange={upperRange}
-//         setUpperRange={setUpperRange}
-//       />
-//     </div>
-//   )
-// }
+Filters.propTypes = {
+  filters: PropTypes.object,
+  setFilters: PropTypes.func,
+}
 
-// Filters.propTypes = {
-
-// }
-
-// export default Filters;
+export default Filters
 
