@@ -24,7 +24,7 @@ const ItemList = (props) => {
   // };
 
 
-  const items = itemsListData.map((item, index) => {
+  const items = itemsData.map((item, index) => {
     return (
       <li key={index} className="item--li">
         <Item
