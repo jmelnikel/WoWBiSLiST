@@ -41,16 +41,16 @@ const App = () => {
       });
   }, [admin]);
 
-  // useEffect(async () => {
-  //   getAllItems()
-  //     .then((response) => {
-  //       const itemsData = response.data;
-  //       setItemsData(itemsData);
-  //     })
-  //     .catch((error) => {
-  //       throw new Error(error.message);
-  //     });
-  // }, [])
+  useEffect(async () => {
+    getAllItems()
+      .then((response) => {
+        const itemsData = response.data;
+        setItemsData(itemsData);
+      })
+      .catch((error) => {
+        throw new Error(error.message);
+      });
+  }, [])
 
   // useEffect(() => {
 
@@ -64,7 +64,6 @@ const App = () => {
   }
 
   const handleGetItemsBaseData = async () => {
-    console.log("This is firing")
     const start = 1
     let results = []
     const itemsBaseData = await getItemsBaseData({ clientAuthToken, start, results })
@@ -106,7 +105,7 @@ const App = () => {
 
   return (
     <>
-      {true
+      {false
         ?
         <section>
           <h2>Last items table reset: May 30, 2012 (Patch 2.5.1)</h2>

@@ -6,7 +6,6 @@ import '../styling/xSlotList.css';
 
 const SlotList = (props) => {
   let { itemsData } = props;
-
   const armorSlots = [
     "Head",
     "Shoulder",

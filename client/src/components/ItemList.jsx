@@ -5,11 +5,12 @@ import '../styling/itemList.css';
 
 
 const ItemList = (props) => {
-  let [itemsData, setItemsData] = useState([]);
+  const { itemsData } = props;
+  let [itemsListData, setItemsListData] = useState([]);
 
-  // useEffect(() => {
-  //   setItemsData(itemsData)
-  // }, [itemsData]);
+  useEffect(() => {
+    setItemsListData(itemsData)
+  }, [itemsData]);
 
   // const removeItem = (id) => {
   //   const prevState = _.cloneDeep(itemsListData);
@@ -24,7 +25,7 @@ const ItemList = (props) => {
   // };
 
 
-  const items = itemsData.map((item, index) => {
+  const items = itemsListData.map((item, index) => {
     return (
       <li key={index} className="item--li">
         <Item
