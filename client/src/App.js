@@ -85,7 +85,7 @@ const App = () => {
 
   return (
     <>
-      {true
+      {false
         ?
         <section>
           <h2>Last items table reset: May 30, 2012 (Patch 2.5.1)</h2>

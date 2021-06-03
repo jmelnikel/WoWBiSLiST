@@ -7,8 +7,6 @@ import '../styling/itemList.css';
 const ItemList = (props) => {
   let [itemsData, setItemsData] = useState([]);
 
-
-
   useEffect(() => {
     setItemsData(props.itemsData)
   }, [props]);
@@ -28,11 +26,12 @@ const ItemList = (props) => {
 
   const items = itemsData.map((item, index) => {
     return (
-      <Item
-        key={index}
-        item={item}
-      // removeItem={removeItem}
-      />
+      <li key={index} className="item--li">
+        <Item
+          item={item}
+        // removeItem={removeItem}
+        />
+      </li>
     )
   })
 

@@ -52,7 +52,7 @@ app.post(`/${process.env.DELETE_DUPLICATE_ROWS_ITEMS_TABLE_URL}`, (req, res) => 
 
 app.get("/items", async (req, res) => {
   try {
-    const allItems = await pool.query("SELECT * FROM items");
+    const allItems = await pool.query("SELECT * FROM items ORDER BY level ASC");
     res.json(allItems.rows);
   } catch (error) {
     throw new Error(error.message);
