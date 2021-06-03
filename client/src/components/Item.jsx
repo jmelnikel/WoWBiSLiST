@@ -20,11 +20,12 @@ const Item = (props) => {
     set,
     unique_equipped,
   } = preview_item;
+  console.log("This si firing")
   return (
     <>
       {show &&
         <>
-          <h4>{name}</h4>
+          {/* <h4>{name}</h4>
           <h4>Level: {level}</h4>
           {binding && <h4>{binding.name}</h4>}
           {item_subclass && <h4>{item_subclass.name}</h4>}
@@ -33,7 +34,7 @@ const Item = (props) => {
           {spells && <Spells spells={spells} />}
           {requirements && <Requirements requirements={requirements} />}
           {set && <Sets set={set} />}
-          {unique_equipped && <h4>{unique_equipped}</h4>}
+          {unique_equipped && <h4>{unique_equipped}</h4>} */}
 
           {/* <button
             onClick={() => {

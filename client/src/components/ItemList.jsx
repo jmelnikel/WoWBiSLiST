@@ -7,9 +7,9 @@ import '../styling/itemList.css';
 const ItemList = (props) => {
   let [itemsData, setItemsData] = useState([]);
 
-  useEffect(() => {
-    setItemsData(itemsData)
-  }, [itemsData]);
+  // useEffect(() => {
+  //   setItemsData(itemsData)
+  // }, [itemsData]);
 
   // const removeItem = (id) => {
   //   const prevState = _.cloneDeep(itemsListData);

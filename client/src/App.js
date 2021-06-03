@@ -12,7 +12,7 @@ import {
 } from './APIs/blizzard'
 import reformatBaseData from './helpers';
 import ProgressBar from './components/ProgressBar';
-import Filters from './components/Filters/Filters';
+// import Filters from './components/Filters/Filters';
 // import beanEater from './assets/images/beanEater.svg'
 import SlotList from './components/SlotList'
 import './styling/App.css';
@@ -25,9 +25,9 @@ const App = () => {
   let [itemsBaseData, setItemsBaseData] = useState([]);
   let [itemsDetailData, setItemsDetailData] = useState([]);
   let [itemsData, setItemsData] = useState([]);
-  const [filters, setFilters] = useState({
-    inventory_type: "all",
-  });
+  // const [filters, setFilters] = useState({
+  //   inventory_type: "all",
+  // });
   // const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -41,20 +41,20 @@ const App = () => {
       });
   }, [admin]);
 
-  useEffect(async () => {
-    getAllItems()
-      .then((response) => {
-        const itemsData = response.data;
-        setItemsData(itemsData);
-      })
-      .catch((error) => {
-        throw new Error(error.message);
-      });
-  }, [])
+  // useEffect(async () => {
+  //   getAllItems()
+  //     .then((response) => {
+  //       const itemsData = response.data;
+  //       setItemsData(itemsData);
+  //     })
+  //     .catch((error) => {
+  //       throw new Error(error.message);
+  //     });
+  // }, [])
 
-  useEffect(() => {
+  // useEffect(() => {
 
-  }, [filters])
+  // }, [filters])
 
 
 
@@ -64,6 +64,7 @@ const App = () => {
   }
 
   const handleGetItemsBaseData = async () => {
+    console.log("This is firing")
     const start = 1
     let results = []
     const itemsBaseData = await getItemsBaseData({ clientAuthToken, start, results })
@@ -99,27 +100,27 @@ const App = () => {
     playAlert();
   }
 
-  const handleRemoveTestItems = () => {
+  // const handleRemoveTestItems = () => {
 
-  }
+  // }
 
   return (
     <>
-      {false
+      {true
         ?
         <section>
           <h2>Last items table reset: May 30, 2012 (Patch 2.5.1)</h2>
           <div style={{ display: "flex", flexDirection: "column", width: "30%" }}>
-            <button onClick={handleGetItemsBaseData()}>
+            <button onClick={handleGetItemsBaseData}>
               Get Items Base Data
             </button>
             <button onClick={handleGetItemsDetailData}>
               Get Items Detail Data
             </button>
 
-            <button onClick={handleRemoveTestItems}>
+            {/* <button onClick={handleRemoveTestItems}>
               Remove Test Items
-            </button>
+            </button> */}
 
 
             <button onClick={() => { clearItemsTable() }}>
