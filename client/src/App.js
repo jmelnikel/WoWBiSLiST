@@ -10,13 +10,16 @@ import {
   getItemsBaseData,
   getItemsDetailData,
 } from './APIs/blizzard'
-import reformatBaseData from './helpers';
+import {
+  reformatBaseData,
+  playAlert,
+  splitItemsData,
+} from './helpers';
 import ProgressBar from './components/ProgressBar';
-// import Filters from './components/Filters/Filters';
 // import beanEater from './assets/images/beanEater.svg'
-import SlotList from './components/SlotList'
+import MainArmorSlotsList from './components/SlotListGroups/MainArmorSlotsList'
+import OtherArmorSlotsList from './components/SlotListGroups/OtherArmorSlotsList'
 import './styling/App.css';
-
 
 const App = () => {
   const [admin, setAdmin] = useState(false)
@@ -25,9 +28,6 @@ const App = () => {
   let [itemsBaseData, setItemsBaseData] = useState([]);
   let [itemsDetailData, setItemsDetailData] = useState([]);
   let [itemsData, setItemsData] = useState([]);
-  // const [filters, setFilters] = useState({
-  //   inventory_type: "all",
-  // });
   // const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -41,27 +41,17 @@ const App = () => {
       });
   }, [admin]);
 
-  useEffect(() => {
-    getAllItems()
-      .then((response) => {
-        const itemsData = response.data;
-        setItemsData(itemsData);
-      })
-      .catch((error) => {
-        throw new Error(error.message);
-      });
-  }, [])
-
   // useEffect(() => {
+  //   getAllItems()
+  //     .then((response) => {
+  //       const itemsData = response.data;
+  //       setItemsData(itemsData);
+  //     })
+  //     .catch((error) => {
+  //       throw new Error(error.message);
+  //     });
+  // }, [])
 
-  // }, [filters])
-
-
-
-  const playAlert = () => {
-    const audio = document.getElementById('audioAlert');
-    audio.play()
-  }
 
   const handleGetItemsBaseData = async () => {
     const start = 1
@@ -97,11 +87,37 @@ const App = () => {
 
     setItemsDetailData(itemsBaseData)
     playAlert();
-  }
+  };
 
-  // const handleRemoveTestItems = () => {
 
-  // }
+  //   type: "OFFHAND",
+  //   name: "Off Hand"
+  // },
+  // {
+  //   type: "RELIC",
+  //   name: "Relic"
+  // },
+  // {
+  //   type: "MAINHAND",
+  //   name: "Main Hand"
+  // },
+  // {
+  //   type: "ONEHAND",
+  //   name: "One Hand"
+  // },
+  // {
+  //   type: "TWOHAND",
+  //   name: "Two Hand"
+  // },
+
+  // "Held In Off-hand",
+  // "Ranged",
+  // "RANGEDRIGHT",
+  // "Thrown",
+  // "Non-equippable"
+
+  // Ranged slots are hard coded in: Ranged, RANGEDRIGHT,THROWN.
+
 
   return (
     <>
@@ -137,7 +153,6 @@ const App = () => {
         </section>
         :
         <section>
-          {/* <Filters /> */}
           <button onClick={async () => {
             // setLoading(true)
             const allItems = await getAllItems();
@@ -147,10 +162,26 @@ const App = () => {
           }}>
             Apply Filter
           </button>
-          <br></br>
-          <SlotList
-            itemsData={itemsData}
-          />
+          <MainArmorSlotsList itemsData={splitItemsData(itemsData, "Armor")} />
+          {/* <OtherArmorSlotsList itemsData={splitItemsData(itemsData, "Armor")} /> */}
+          {/* <WeaponSlots itemsData={splitItemsData(itemsData, "Weapon")} /> */}
+
+          {/* Main and Shield
+2H weapon
+Dual Wield
+Held in off hand
+
+Relics
+Ranged
+
+wands?? */}
+          {/* Todo
+Proptypes
+Admin login
+remove test items
+testing before filtering
+filters for each */}
+
         </section>
       }
     </>
