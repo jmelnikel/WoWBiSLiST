@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 const Requirements = (props) => {
   let { requirements } = props;
@@ -26,7 +26,10 @@ const Requirements = (props) => {
 }
 
 Requirements.propTypes = {
-  requirements: PropTypes.object
+  requirements: PropTypes.object,
 }
+
+
+
 
 export default Requirements;

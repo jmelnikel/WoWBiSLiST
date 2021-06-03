@@ -41,7 +41,7 @@ const App = () => {
       });
   }, [admin]);
 
-  useEffect(async () => {
+  useEffect(() => {
     getAllItems()
       .then((response) => {
         const itemsData = response.data;

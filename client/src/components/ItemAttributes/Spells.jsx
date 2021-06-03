@@ -28,4 +28,6 @@ Spells.propTypes = {
   spells: PropTypes.array,
 }
 
+
+
 export default Spells;

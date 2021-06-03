@@ -20,7 +20,7 @@ const Slot = (props) => {
 
 Slot.propTypes = {
   itemsData: PropTypes.arrayOf(PropTypes.object),
-  slot: PropTypes.object,
+  slot: PropTypes.string,
 }
 
 export default Slot;

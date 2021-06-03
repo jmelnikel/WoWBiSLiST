@@ -20,7 +20,7 @@ const Item = (props) => {
     set,
     unique_equipped,
   } = preview_item;
-  console.log("This si firing")
+
   return (
     <>
       {show &&

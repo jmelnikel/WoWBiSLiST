@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Slot from './Slot';
-import ItemList from './ItemList'
 import '../styling/xSlotList.css';
 
 const SlotList = (props) => {
