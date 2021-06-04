@@ -41,16 +41,16 @@ const App = () => {
       });
   }, [admin]);
 
-  // useEffect(() => {
-  //   getAllItems()
-  //     .then((response) => {
-  //       const itemsData = response.data;
-  //       setItemsData(itemsData);
-  //     })
-  //     .catch((error) => {
-  //       throw new Error(error.message);
-  //     });
-  // }, [])
+  useEffect(() => {
+    getAllItems()
+      .then((response) => {
+        const itemsData = response.data;
+        setItemsData(itemsData);
+      })
+      .catch((error) => {
+        throw new Error(error.message);
+      });
+  }, [])
 
 
   const handleGetItemsBaseData = async () => {
@@ -153,7 +153,8 @@ const App = () => {
         </section>
         :
         <section>
-          <button onClick={async () => {
+          <MainArmorSlotsList itemsData={splitItemsData(itemsData, "Armor")} />
+          {/* <button onClick={async () => {
             // setLoading(true)
             const allItems = await getAllItems();
             const itemsData = allItems.data;
@@ -161,8 +162,8 @@ const App = () => {
             // setLoading(false)
           }}>
             Apply Filter
-          </button>
-          <MainArmorSlotsList itemsData={splitItemsData(itemsData, "Armor")} />
+          </button> */}
+
           {/* <OtherArmorSlotsList itemsData={splitItemsData(itemsData, "Armor")} /> */}
           {/* <WeaponSlots itemsData={splitItemsData(itemsData, "Weapon")} /> */}
 
