@@ -4,10 +4,13 @@ export const reformatBaseData = (resultsArray) => {
     array = array.map((itemObject) => {
       let reformattedArray = {}
       const { data } = itemObject;
+      const { id, level, item_class, quality } = data;
 
-      reformattedArray["id"] = data.id;
+      reformattedArray["id"] = id;
       reformattedArray["show"] = true;
-      reformattedArray["level"] = data.level;
+      reformattedArray["level"] = level;
+      reformattedArray["item_class"] = item_class;
+      reformattedArray["quality"] = quality;
 
       return reformattedArray;
     })

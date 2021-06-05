@@ -2,35 +2,65 @@
 import axios from 'axios';
 
 
-export const clearItemsTable = async () => {
-  const url = process.env.REACT_APP_CLEAR_ITEM_TABLE_URL
-  const clearItemsTableAxios = axios.create({
+export const clearArmorTable = async () => {
+  const url = process.env.REACT_APP_CLEAR_ARMOR_TABLE_URL
+  const clearArmorTableAxios = axios.create({
     baseURL: "http://localhost:5000",
     // headers: { "Content-Type": "application/json" },
   });
-  clearItemsTableAxios.post(url)
-  console.log("Table: items - Cleared and Initialized")
+  clearArmorTableAxios.post(url)
+  console.log("Table: armor - Cleared and initialized")
 }
 
-export const writeDetailDataItemsTable = async (data) => {
-  const url = process.env.REACT_APP_WRITE_DETAIL_DATA_ITEMS_TABLE_URL
-  const writeDetailDataItemsTableAxios = axios.create({
+export const writeDetailDataArmorTable = async (data) => {
+  const url = process.env.REACT_APP_WRITE_DETAIL_DATA_ARMOR_TABLE_URL
+  const writeDetailDataArmorTableAxios = axios.create({
     baseURL: "http://localhost:5000",
     headers: { "Content-Type": "application/json" },
   });
-  await writeDetailDataItemsTableAxios.post(url, data)
+  await writeDetailDataArmorTableAxios.post(url, data)
+  console.log("Table: armor - Data sent to be written")
 }
 
-export const deleteDuplicateRowsItemsTable = async (data) => {
-  const url = process.env.REACT_APP_DELETE_DUPLICATE_ROWS_ITEM_TABLE_URL
-  const deleteDuplicateRowsItemsTableAxios = axios.create({
+export const deleteDuplicateRowsArmorTable = async (data) => {
+  const url = process.env.REACT_APP_DELETE_DUPLICATE_ROWS_ARMOR_TABLE_URL
+  const deleteDuplicateRowsArmorTableAxios = axios.create({
     baseURL: "http://localhost:5000",
     // headers: { "Content-Type": "application/json" },
   });
-  deleteDuplicateRowsItemsTableAxios.post(url)
-  console.log("Table: items - Cleared and Initialized")
+  deleteDuplicateRowsArmorTableAxios.post(url)
+  console.log("Table: armor - Duplicate data deleted")
 }
 
+export const clearWeaponTable = async () => {
+  const url = process.env.REACT_APP_CLEAR_WEAPON_TABLE_URL
+  const clearWeaponTableAxios = axios.create({
+    baseURL: "http://localhost:5000",
+    // headers: { "Content-Type": "application/json" },
+  });
+  clearWeaponTableAxios.post(url)
+  console.log("Table: weapon - Cleared and initialized")
+}
+
+export const writeDetailDataWeaponTable = async (data) => {
+  const url = process.env.REACT_APP_WRITE_DETAIL_DATA_WEAPON_TABLE_URL
+  const writeDetailDataWeaponTableAxios = axios.create({
+    baseURL: "http://localhost:5000",
+    headers: { "Content-Type": "application/json" },
+  });
+  await writeDetailDataWeaponTableAxios.post(url, data)
+  console.log("Table: weapon - Data sent to be written")
+}
+
+export const deleteDuplicateRowsWeaponTable = async (data) => {
+  const url = process.env.REACT_APP_DELETE_DUPLICATE_ROWS_WEAPON_TABLE_URL
+  const deleteDuplicateRowsWeaponTableAxios = axios.create({
+    baseURL: "http://localhost:5000",
+    // headers: { "Content-Type": "application/json" },
+  });
+  deleteDuplicateRowsWeaponTableAxios.post(url)
+  console.log("Table: weapon - Duplicate data deleted")
+}
 
 export const getAllItems = async () => {
   const url = "/items"

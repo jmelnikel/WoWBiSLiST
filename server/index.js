@@ -14,37 +14,75 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 
 
 // Routes
-// Clear and Initialize items Table
-app.post(`/${process.env.CLEAR_ITEMS_TABLE_URL}`, (req, res) => {
+// Clear and Initialize armor Table
+app.post(`/${process.env.CLEAR_ARMOR_TABLE_URL}`, (req, res) => {
   try {
-    pool.query("DROP TABLE IF EXISTS items; CREATE TABLE items(item_key SERIAL PRIMARY KEY, id INT NOT NULL, show BOOLEAN, level INT, preview_item JSON);");
-    console.log("items Table Cleared and Initialized");
+    pool.query("DROP TABLE IF EXISTS armor; CREATE TABLE armor(item_key SERIAL PRIMARY KEY, id INT NOT NULL, show BOOLEAN, level INT, preview_item JSON);");
+    console.log("armor Table Cleared and Initialized");
   } catch (error) {
     throw new Error(error.message);
   }
 })
 
-// Seed items Table
-app.post(`/${process.env.WRITE_DETAIL_DATA_ITEMS_TABLE_URL}`, async (req, res) => {
+// Write armor Table
+app.post(`/${process.env.WRITE_DETAIL_DATA_ARMOR_TABLE_URL}`, async (req, res) => {
   try {
-    console.log(req.body)
     const array = req.body
     for (let itemObject of array) {
       const { id, show, level, preview_item } = itemObject;
 
       await pool.query(
-        "INSERT INTO items (id, show, level, preview_item) VALUES($1, $2, $3, $4) RETURNING *;", [id, show, level, preview_item]
+        "INSERT INTO armor (id, show, level, preview_item) VALUES($1, $2, $3, $4) RETURNING *;", [id, show, level, preview_item]
       );
     }
+    console.log("armor Table Written");
   } catch (error) {
     throw new Error(error.message);
   }
 });
 
-app.post(`/${process.env.DELETE_DUPLICATE_ROWS_ITEMS_TABLE_URL}`, (req, res) => {
+// Delete Duplicate Rows from armor Table
+app.post(`/${process.env.DELETE_DUPLICATE_ROWS_ARMOR_TABLE_URL}`, (req, res) => {
   try {
-    pool.query("DELETE FROM items a USING items b WHERE a.item_key > b.item_key AND a.id = b.id;");
-    console.log("Duplicates Deleted");
+    pool.query("DELETE FROM armor a USING armor b WHERE a.item_key > b.item_key AND a.id = b.id;");
+    console.log("Duplicate Data Deleted");
+  } catch (error) {
+    throw new Error(error.message);
+  }
+})
+
+// Clear and Initialize weapon Table
+app.post(`/${process.env.CLEAR_WEAPON_TABLE_URL}`, (req, res) => {
+  try {
+    pool.query("DROP TABLE IF EXISTS weapon; CREATE TABLE weapon(item_key SERIAL PRIMARY KEY, id INT NOT NULL, show BOOLEAN, level INT, preview_item JSON);");
+    console.log("weapon Table Cleared and Initialized");
+  } catch (error) {
+    throw new Error(error.message);
+  }
+})
+
+// Write weapon Table
+app.post(`/${process.env.WRITE_DETAIL_DATA_WEAPON_TABLE_URL}`, async (req, res) => {
+  try {
+    const array = req.body
+    for (let itemObject of array) {
+      const { id, show, level, preview_item } = itemObject;
+
+      await pool.query(
+        "INSERT INTO weapon (id, show, level, preview_item) VALUES($1, $2, $3, $4) RETURNING *;", [id, show, level, preview_item]
+      );
+    }
+    console.log("weapon Table Written");
+  } catch (error) {
+    throw new Error(error.message);
+  }
+});
+
+// Delete Duplicate Rows from weapon Table
+app.post(`/${process.env.DELETE_DUPLICATE_ROWS_WEAPON_TABLE_URL}`, (req, res) => {
+  try {
+    pool.query("DELETE FROM weapon a USING weapon b WHERE a.item_key > b.item_key AND a.id = b.id;");
+    console.log("Duplicates Data Deleted");
   } catch (error) {
     throw new Error(error.message);
   }
