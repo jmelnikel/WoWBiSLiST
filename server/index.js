@@ -97,15 +97,16 @@ app.get("/armor", async (req, res) => {
   }
 });
 
+app.get("/weapon", async (req, res) => {
+  try {
+    const allItems = await pool.query("SELECT * FROM weapon ORDER BY level ASC");
+    res.json(allItems.rows);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+});
 
-// app.get("/items", async (req, res) => {
-//   try {
-//     const allItems = await pool.query("SELECT * FROM items ORDER BY level ASC");
-//     res.json(allItems.rows);
-//   } catch (error) {
-//     throw new Error(error.message);
-//   }
-// });
+
 
 
 

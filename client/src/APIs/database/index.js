@@ -64,9 +64,18 @@ export const deleteDuplicateRowsWeaponTable = async (data) => {
 
 export const getArmorItems = async () => {
   const url = "/armor"
-  const getAllItemsAxios = axios.create({
+  const getArmorItemsAxios = axios.create({
     baseURL: "http://localhost:5000",
     // headers: { "Content-Type": "application/json" },
   });
-  return await getAllItemsAxios.get(url)
+  return await getArmorItemsAxios.get(url)
+}
+
+export const getWeaponItems = async () => {
+  const url = "/weapon"
+  const getWeaponItemsAxios = axios.create({
+    baseURL: "http://localhost:5000",
+    // headers: { "Content-Type": "application/json" },
+  });
+  return await getWeaponItemsAxios.get(url)
 }

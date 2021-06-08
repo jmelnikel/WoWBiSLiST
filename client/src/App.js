@@ -219,10 +219,10 @@ const App = () => {
         </section>
         :
         <section>
-          <MainArmorSlotsList itemsData={armorDetailData} />
+          {/* <MainArmorSlotsList itemsData={armorDetailData} /> */}
 
           {/* <OtherArmorSlotsList itemsData={armorDetailData} /> */}
-          {/* <WeaponSlots itemsData={weaponDetailData} /> */}
+          <WeaponSlots itemsData={weaponDetailData} />
 
           {/* Main and Shield
 2H weapon
