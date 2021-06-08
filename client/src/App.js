@@ -16,13 +16,14 @@ import {
 import {
   reformatBaseData,
   playAlert,
-  handleSplitBaseData,
+  cleanBaseData,
 } from './helpers';
 import ProgressBar from './components/ProgressBar';
 // import beanEater from './assets/images/beanEater.svg'
 import MainArmorSlotsList from './components/SlotListGroups/MainArmorSlotsList'
 import OtherArmorSlotsList from './components/SlotListGroups/OtherArmorSlotsList'
 import './styling/App.css';
+import _ from 'lodash';
 
 const App = () => {
   const [admin, setAdmin] = useState(false)
@@ -31,13 +32,9 @@ const App = () => {
   const [itemsBaseData, setItemsBaseData] = useState([])
   const [cleanedBaseData, setCleanedBaseData] = useState([])
   let [armorBaseData, setArmorBaseData] = useState([]);
-  let [weaponBaseData, setWeaponBaseData] = useState([]);
   let [armorDetailData, setArmorDetailData] = useState([]);
-
-
+  let [weaponBaseData, setWeaponBaseData] = useState([]);
   let [weaponDetailData, setWeaponDetailData] = useState([]);
-  let [itemsDetailData, setItemsDetailData] = useState([]);
-  let [itemsData, setItemsData] = useState([]);
   // const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -50,18 +47,6 @@ const App = () => {
         throw new Error(error.message);
       });
   }, [admin]);
-
-  // useEffect(() => {
-  //   getAllItems()
-  //     .then((response) => {
-  //       const itemsData = response.data;
-  //       setItemsData(itemsData);
-  //     })
-  //     .catch((error) => {
-  //       throw new Error(error.message);
-  //     });
-  // }, [])
-
 
   // This function gets all Armor/Weapon base data, reformates the structure, and sets state as a flattened array of item objects.
   const handleGetItemsBaseData = async () => {
@@ -83,34 +68,32 @@ const App = () => {
 
   // This function removes POOR, COMMON, and UNCOMMON quality items and sets state as an array of item objects.
   const handleCleanBaseData = (itemsBaseData) => {
-    for (let i = itemsBaseData.length - 1; i >= 0; i--) {
-      const quality = itemsBaseData[i].quality.type;
-      if (quality === "POOR" || quality === "COMMON" || quality === "UNCOMMON") {
-        itemsBaseData.splice(i, 1)
-      }
-    }
-    setCleanedBaseData(itemsBaseData)
+    const itemsBaseDataCopy = _.cloneDeep(itemsBaseData)
+    const cleanedBaseData = cleanBaseData(itemsBaseDataCopy)
+    setCleanedBaseData(cleanedBaseData)
     console.log("Data Cleaned", itemsBaseData.length)
   }
 
   // This function splits the data into Armor and Weapon and sets each into individual state.
   const handleSplitBaseData = (cleanedBaseData) => {
-    const armorData = cleanedBaseData.filter((item) => {
+    const cleanedBaseDataCopy = _.cloneDeep(cleanedBaseData)
+    const armorData = cleanedBaseDataCopy.filter((item) => {
       return item.item_class.name.en_US === "Armor"
     })
     setArmorBaseData(armorData)
     console.log("This is armorBaseData", armorData.length)
 
-    const weaponData = cleanedBaseData.filter((item) => {
+    const weaponData = cleanedBaseDataCopy.filter((item) => {
       return item.item_class.name.en_US === "Weapon"
     })
     setWeaponBaseData(weaponData)
     console.log("This is weaponBaseData", weaponData.length)
   }
 
-  // Takes armorBaseData, gets and adds proveiw_item data and sets to state.
+  // Takes armorBaseData, gets and adds proveiw_item data, and sets to state.
   const handleGetArmorDetailData = async () => {
-    for (let item of armorBaseData) {
+    const armorBaseDataCopy = _.cloneDeep(armorBaseData)
+    for (let item of armorBaseDataCopy) {
       const id = item.id
       const results = await getItemsDetailData({ clientAuthToken, id })
         .then((response) => {
@@ -124,16 +107,13 @@ const App = () => {
       setProgressBar((100 * (id / 38506)).toFixed(1))
     }
 
-    setArmorDetailData(armorBaseData)
+    setArmorDetailData(armorBaseDataCopy)
     playAlert();
   }
 
-
-
-
-
-
-  const handleGetWeaponDetailData = async (item_class) => {
+  // Takes weaponBaseData, gets and adds proveiw_item data, and sets to state.
+  const handleGetWeaponDetailData = async () => {
+    const weaponBaseDataCopy = _.cloneDeep(weaponBaseData)
     for (let item of weaponBaseData) {
       const id = item.id
       const results = await getItemsDetailData({ clientAuthToken, id })
@@ -148,7 +128,7 @@ const App = () => {
       setProgressBar((100 * (id / 38506)).toFixed(1))
     }
 
-    setWeaponDetailData(weaponBaseData)
+    setWeaponDetailData(weaponBaseDataCopy)
     playAlert();
 
   };
@@ -186,10 +166,10 @@ const App = () => {
 
   return (
     <>
-      {true
+      {false
         ?
         <section>
-          <h2>Last items table reset: May 30, 2012 (Patch 2.5.1)</h2>
+          <h2>Last items table reset: June 06, 2012 (Patch 2.5.1)</h2>
           <div style={{ display: "flex", flexDirection: "column", width: "30%" }}>
             <button onClick={handleGetItemsBaseData}>
               Get Items Base Data
@@ -231,17 +211,6 @@ const App = () => {
               Delete Weapon Duplicate Rows
             </button>
 
-
-
-
-            {/* <button onClick={handleRemoveTestItems}>
-              Remove Test Items
-            </button> */}
-
-
-
-
-
           </div>
           <ProgressBar completed={progressBar} />
           <h2>Total Number of armorDetailData in State: {armorDetailData.length}</h2>
@@ -250,19 +219,10 @@ const App = () => {
         </section>
         :
         <section>
-          {/* <MainArmorSlotsList itemsData={splitItemsData(itemsData, "Armor")} /> */}
-          {/* <button onClick={async () => {
-            // setLoading(true)
-            const allItems = await getAllItems();
-            const itemsData = allItems.data;
-            setItemsData(itemsData);
-            // setLoading(false)
-          }}>
-            Apply Filter
-          </button> */}
+          <MainArmorSlotsList itemsData={armorDetailData} />
 
-          {/* <OtherArmorSlotsList itemsData={splitItemsData(itemsData, "Armor")} /> */}
-          {/* <WeaponSlots itemsData={splitItemsData(itemsData, "Weapon")} /> */}
+          {/* <OtherArmorSlotsList itemsData={armorDetailData} /> */}
+          {/* <WeaponSlots itemsData={weaponDetailData} /> */}
 
           {/* Main and Shield
 2H weapon
@@ -276,7 +236,7 @@ wands?? */}
           {/* Todo
 Proptypes
 Admin login
-remove test items
+remove monster items
 testing before filtering
 filters for each */}
 

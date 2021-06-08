@@ -62,8 +62,8 @@ export const deleteDuplicateRowsWeaponTable = async (data) => {
   console.log("Table: weapon - Duplicate data deleted")
 }
 
-export const getAllItems = async () => {
-  const url = "/items"
+export const getArmorItems = async () => {
+  const url = "/armor"
   const getAllItemsAxios = axios.create({
     baseURL: "http://localhost:5000",
     // headers: { "Content-Type": "application/json" },
