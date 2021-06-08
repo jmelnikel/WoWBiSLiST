@@ -8,6 +8,7 @@ const MainArmorSlotsList = () => {
   // const [armorData, setArmorData] = useState([]);
   const [itemSubclassFilter, setItemSubclassFilter] = useState(null);
   const [statsFilter, setStatsFilter] = useState(null);
+  const [itemlevelFilter, setItemlevelFilter] = useState(0);
   const [filterData, setFilterData] = useState([]);
 
   const subClassesFilterList = [
@@ -53,6 +54,13 @@ const MainArmorSlotsList = () => {
     )
   });
 
+  const itemLevelFilterField = <input
+    type="number"
+    name="itemLevel"
+    value={itemlevelFilter}
+    onChange={(event) => { handleOnChange("itemLevel", event.target.value) }}
+  />
+
   const mainArmorSlotsList = [
     "Head",
     "Shoulder",
@@ -77,6 +85,8 @@ const MainArmorSlotsList = () => {
       setItemSubclassFilter([value])
     } else if (field === "stats") {
       setStatsFilter([value])
+    } else if (field === "itemLevel") {
+      setItemlevelFilter(value)
     }
   };
 
@@ -97,16 +107,21 @@ const MainArmorSlotsList = () => {
         return item.preview_item.item_subclass.name === itemSubclassFilter[0]
       })
     }
-    if (statsFilter) {
 
+
+
+
+
+
+    if (itemlevelFilter) {
+      filterDataCopy = filterDataCopy.filter((item) => {
+        return item.level >= itemlevelFilter
+      })
     }
 
-
-
     console.log(filterDataCopy)
-    // setFilterData(filterDataCopy);
+    setFilterData(filterDataCopy);
   }
-
 
   return (
     <form>
@@ -116,6 +131,7 @@ const MainArmorSlotsList = () => {
       <ul>
         {statsFilterList}
       </ul>
+      {itemLevelFilterField}
       <button
         type="submit"
         onClick={(event) => { handleApplyFilter(event) }}
