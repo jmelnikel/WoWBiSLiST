@@ -5,7 +5,6 @@ import { getArmorItems } from '../../APIs/database';
 import _ from 'lodash';
 
 const MainArmorSlotsList = () => {
-  // const [armorData, setArmorData] = useState([]);
   const [itemSubclassFilter, setItemSubclassFilter] = useState("");
   const [statsFilter, setStatsFilter] = useState("");
   const [itemlevelFilter, setItemlevelFilter] = useState(0);
@@ -24,7 +23,7 @@ const MainArmorSlotsList = () => {
           id={subClass}
           name="subClassFilter"
           value={subClass}
-          // checked={filter[subClass]}
+          checked={itemSubclassFilter === subClass}
           onChange={(event) => { handleOnChange("item_subclass", event.target.value) }}
         />
         <label htmlFor={subClass}>{subClass}</label>
@@ -46,7 +45,7 @@ const MainArmorSlotsList = () => {
           id={stat}
           name="statsFilter"
           value={stat}
-          // checked={filter[stats]}
+          checked={statsFilter === stat}
           onChange={(event) => { handleOnChange("stats", event.target.value) }}
         />
         <label htmlFor={stat}>{stat}</label>
@@ -90,7 +89,7 @@ const MainArmorSlotsList = () => {
     }
   };
 
-  const handleApplyFilter = async (event) => {
+  const applyFilter = async (event) => {
     event.preventDefault();
     const response = await getArmorItems()
       .then((response) => {
@@ -136,6 +135,13 @@ const MainArmorSlotsList = () => {
     setFilterData(filterDataCopy);
   }
 
+  const handleClearFilter = () => {
+    setItemSubclassFilter("")
+    setStatsFilter("")
+    setItemlevelFilter(0)
+    setFilterData([])
+  }
+
   return (
     <form>
       <ul>
@@ -147,8 +153,13 @@ const MainArmorSlotsList = () => {
       {itemLevelFilterField}
       <button
         type="submit"
-        onClick={(event) => { handleApplyFilter(event) }}
+        onClick={(event) => { applyFilter(event) }}
       >Apply Filter
+      </button>
+      <button
+        type="button"
+        onClick={handleClearFilter}
+      >Clear Filter
       </button>
       {mainArmorSlotsList}
     </form>
