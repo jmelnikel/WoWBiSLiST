@@ -6,8 +6,8 @@ import _ from 'lodash';
 
 const MainArmorSlotsList = () => {
   // const [armorData, setArmorData] = useState([]);
-  const [itemSubclassFilter, setItemSubclassFilter] = useState(null);
-  const [statsFilter, setStatsFilter] = useState(null);
+  const [itemSubclassFilter, setItemSubclassFilter] = useState("");
+  const [statsFilter, setStatsFilter] = useState("");
   const [itemlevelFilter, setItemlevelFilter] = useState(0);
   const [filterData, setFilterData] = useState([]);
 
@@ -82,9 +82,9 @@ const MainArmorSlotsList = () => {
 
   const handleOnChange = (field, value) => {
     if (field === "item_subclass") {
-      setItemSubclassFilter([value])
+      setItemSubclassFilter(value)
     } else if (field === "stats") {
-      setStatsFilter([value])
+      setStatsFilter(value)
     } else if (field === "itemLevel") {
       setItemlevelFilter(value)
     }
@@ -104,14 +104,28 @@ const MainArmorSlotsList = () => {
 
     if (itemSubclassFilter) {
       filterDataCopy = filterDataCopy.filter((item) => {
-        return item.preview_item.item_subclass.name === itemSubclassFilter[0]
+        return item.preview_item.item_subclass.name === itemSubclassFilter
       })
     }
 
+    if (statsFilter) {
+      filterDataCopy = filterDataCopy.filter((item) => {
+        const array = item.preview_item.stats;
+        const statsArray = [];
 
+        if (array) {
+          for (let element of array) {
+            statsArray.push(element.type.name)
+          }
 
-
-
+          if (statsArray.includes(statsFilter)) {
+            return true;
+          } else {
+            return false
+          }
+        }
+      })
+    }
 
     if (itemlevelFilter) {
       filterDataCopy = filterDataCopy.filter((item) => {
@@ -119,7 +133,6 @@ const MainArmorSlotsList = () => {
       })
     }
 
-    console.log(filterDataCopy)
     setFilterData(filterDataCopy);
   }
 
