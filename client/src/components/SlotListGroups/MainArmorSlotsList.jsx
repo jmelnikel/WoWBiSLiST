@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types';
 import Slot from '../Slot';
 import { getArmorItems } from '../../APIs/database';
 import _ from 'lodash';
@@ -164,10 +163,6 @@ const MainArmorSlotsList = () => {
       {mainArmorSlotsList}
     </form>
   )
-}
-
-MainArmorSlotsList.propTypes = {
-  itemsData: PropTypes.arrayOf(PropTypes.object),
 }
 
 export default MainArmorSlotsList;

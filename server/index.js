@@ -32,7 +32,7 @@ app.post(`/${process.env.WRITE_DETAIL_DATA_ARMOR_TABLE_URL}`, async (req, res) =
       const { id, show, level, preview_item } = itemObject;
 
       await pool.query(
-        "INSERT INTO armor (id, show, level, preview_item) VALUES($1, $2, $3, $4) RETURNING *;", [id, show, level, preview_item]
+        "INSERT INTO armor (id, show, level, preview_item) VALUES($1, $2, $3, $4);", [id, show, level, preview_item]
       );
     }
     console.log("armor Table Written");
@@ -69,7 +69,7 @@ app.post(`/${process.env.WRITE_DETAIL_DATA_WEAPON_TABLE_URL}`, async (req, res) 
       const { id, show, level, preview_item } = itemObject;
 
       await pool.query(
-        "INSERT INTO weapon (id, show, level, preview_item) VALUES($1, $2, $3, $4) RETURNING *;", [id, show, level, preview_item]
+        "INSERT INTO weapon (id, show, level, preview_item) VALUES($1, $2, $3, $4);", [id, show, level, preview_item]
       );
     }
     console.log("weapon Table Written");

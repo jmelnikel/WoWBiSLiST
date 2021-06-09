@@ -22,6 +22,7 @@ import ProgressBar from './components/ProgressBar';
 // import beanEater from './assets/images/beanEater.svg'
 import MainArmorSlotsList from './components/SlotListGroups/MainArmorSlotsList'
 import OtherArmorSlotsList from './components/SlotListGroups/OtherArmorSlotsList'
+import WeaponSlotsList from './components/SlotListGroups/WeaponSlotsList'
 import './styling/App.css';
 import _ from 'lodash';
 
@@ -114,7 +115,7 @@ const App = () => {
   // Takes weaponBaseData, gets and adds proveiw_item data, and sets to state.
   const handleGetWeaponDetailData = async () => {
     const weaponBaseDataCopy = _.cloneDeep(weaponBaseData)
-    for (let item of weaponBaseData) {
+    for (let item of weaponBaseDataCopy) {
       const id = item.id
       const results = await getItemsDetailData({ clientAuthToken, id })
         .then((response) => {
@@ -127,49 +128,16 @@ const App = () => {
       item["preview_item"] = results.data.preview_item
       setProgressBar((100 * (id / 38506)).toFixed(1))
     }
-
     setWeaponDetailData(weaponBaseDataCopy)
     playAlert();
-
   };
-
-
-  //   type: "OFFHAND",
-  //   name: "Off Hand"
-  // },
-  // {
-  //   type: "RELIC",
-  //   name: "Relic"
-  // },
-  // {
-  //   type: "MAINHAND",
-  //   name: "Main Hand"
-  // },
-  // {
-  //   type: "ONEHAND",
-  //   name: "One Hand"
-  // },
-  // {
-  //   type: "TWOHAND",
-  //   name: "Two Hand"
-  // },
-
-  // "Held In Off-hand",
-  // "Ranged",
-  // "RANGEDRIGHT",
-  // "Thrown",
-  // "Non-equippable"
-
-  // Ranged slots are hard coded in: Ranged, RANGEDRIGHT,THROWN.
-
-  // ?refactor functions above - try.
 
   return (
     <>
       {false
         ?
         <section>
-          <h2>Last items table reset: June 06, 2012 (Patch 2.5.1)</h2>
+          <h2>Last items table reset: June 08, 2012 (Patch 2.5.1)</h2>
           <div style={{ display: "flex", flexDirection: "column", width: "30%" }}>
             <button onClick={handleGetItemsBaseData}>
               Get Items Base Data
@@ -220,26 +188,8 @@ const App = () => {
         :
         <section>
           {/* <MainArmorSlotsList itemsData={armorDetailData} /> */}
-
           {/* <OtherArmorSlotsList itemsData={armorDetailData} /> */}
-          <WeaponSlots itemsData={weaponDetailData} />
-
-          {/* Main and Shield
-2H weapon
-Dual Wield
-Held in off hand
-
-Relics
-Ranged
-
-wands?? */}
-          {/* Todo
-Proptypes
-Admin login
-remove monster items
-testing before filtering
-filters for each */}
-
+          <WeaponSlotsList itemsData={weaponDetailData} />
         </section>
       }
     </>
@@ -247,3 +197,10 @@ filters for each */}
 };
 
 export default App;
+
+// --Todo--
+// rings and such in sets?
+// Proptypes
+// Admin login
+// ?refactor functions above - try.
+// testing before filtering

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import Slot from '../Slot'
 import { getArmorItems } from '../../APIs/database';
 import _ from 'lodash';
@@ -21,6 +20,10 @@ const OtherArmorSlotsList = () => {
     // "Tabard",
     "Finger",
     "Trinket",
+    "Off Hand",
+    "Held In Off-hand",
+    "Relic",
+    // "Non-equippable",
   ].map((slot, index) => {
     return (
       <Slot
@@ -80,10 +83,6 @@ const OtherArmorSlotsList = () => {
     </form>
 
   )
-}
-
-OtherArmorSlotsList.propTypes = {
-  itemsData: PropTypes.arrayOf(PropTypes.object),
 }
 
 export default OtherArmorSlotsList;

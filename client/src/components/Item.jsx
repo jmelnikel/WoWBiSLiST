@@ -19,6 +19,7 @@ const Item = (props) => {
     requirements,
     set,
     unique_equipped,
+    weapon,
   } = preview_item;
 
   return (
@@ -30,6 +31,9 @@ const Item = (props) => {
           {binding && <h4>{binding.name}</h4>}
           {item_subclass && <h4>{item_subclass.name}</h4>}
           {armor && <h4>Armor: {armor.value}</h4>}
+          {weapon && <h4>{weapon.dps.display_string}</h4>}
+          {weapon && <h4>{weapon.damage.display_string}</h4>}
+          {weapon && <h4>Attack {weapon.attack_speed.display_string}</h4>}
           {stats && <Stats stats={stats} />}
           {spells && <Spells spells={spells} />}
           {requirements && <Requirements requirements={requirements} />}
