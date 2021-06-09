@@ -10,7 +10,7 @@ const Requirements = (props) => {
     requirementAttributes = attributes.map((attribute, index) => {
       return (
         <li key={index}>
-          <h4>{requirements[attribute].display_string}</h4>
+          <p>{requirements[attribute].display_string}</p>
         </li>
       )
     })

@@ -8,7 +8,7 @@ const Stats = (props) => {
     stats = stats.map((stat, index) => {
       return (
         <li key={index}>
-          <h4>{stat.display.display_string}</h4>
+          <p>{stat.display.display_string}</p>
         </li>
       )
     });

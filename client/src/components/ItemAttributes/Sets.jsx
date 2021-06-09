@@ -6,11 +6,11 @@ const Sets = (props) => {
   let { effects, item_set, items } = set;
 
   effects = effects.map((effect, index) => {
-    return <h4 key={index}>{effect.display_string}</h4>
+    return <p key={index}>{effect.display_string}</p>
   });
 
   items = items.map((item, index) => {
-    return <h4 key={index}>{item.item.name}</h4>
+    return <p key={index}>{item.item.name}</p>
   });
 
   if (set) {

@@ -8,7 +8,7 @@ const Spells = (props) => {
     spells = spells.map((spell, index) => {
       return (
         <li key={index}>
-          <h4>{spell.description}</h4>
+          <p>{spell.description}</p>
         </li>
       )
     });

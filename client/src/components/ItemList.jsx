@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Item from './Item'
 import '../styling/itemList.css';
+import _ from 'lodash';
 
 
 const ItemList = (props) => {
@@ -12,25 +13,14 @@ const ItemList = (props) => {
     setItemsListData(itemsData)
   }, [itemsData]);
 
-  // const removeItem = (id) => {
-  //   const prevState = _.cloneDeep(itemsListData);
 
-  //   for (let item of prevState) {
-  //     if (item.id === id) {
-  //       item.show = false;
-  //       setItemsLstData([...prevState, { show: false }])
-  //       return;
-  //     }
-  //   }
-  // };
 
 
   const items = itemsListData.map((item, index) => {
     return (
-      <li key={index} className="item--li">
+      <li key={index} className="itemList--li">
         <Item
           item={item}
-        // removeItem={removeItem}
         />
       </li>
     )

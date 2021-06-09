@@ -12,7 +12,7 @@ const Slot = (props) => {
 
   return (
     <li className="slot--li">
-      <h2>{slot}</h2>
+      <h3 className="slot--title">{slot}</h3>
       <ItemList itemsData={itemsDataBySlot} />
     </li>
   )

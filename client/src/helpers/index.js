@@ -35,7 +35,10 @@ export const cleanBaseData = (data) => {
       quality === "UNCOMMON" ||
       name.includes("TEST") ||
       name.includes("Test") ||
-      name.includes("Monster")
+      name.includes("Monster") ||
+      name.includes("[ph]") ||
+      name.includes("[PH]") ||
+      name.includes("[PH[")
     ) {
       data.splice(i, 1);
     }
