@@ -7,7 +7,7 @@ const Stats = (props) => {
   if (stats) {
     stats = stats.map((stat, index) => {
       return (
-        <li key={index}>
+        <li key={index} style={{ listStyle: "none" }}>
           <p>{stat.display.display_string}</p>
         </li>
       )

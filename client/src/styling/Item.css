@@ -1,0 +1,34 @@
+.itemContainer {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  max-height: 57vh;
+  overflow-y: scroll;
+}
+
+.itemContainerRare {
+  border: blue solid 3px;
+}
+
+.itemContainerEpic {
+  border: purple solid 3px;
+}
+
+.itemContainerLegendary {
+  border: orange solid 3px;
+}
+
+.itemContainerArtifact {
+  border: yellow solid 3px;
+}
+
+.itemContainerLarge {
+  width: 250px;
+}
+
+.itemContainerSmall {
+  width: 150px;
+}
+
+.itemContainer h4, p {
+  margin: 0 0 0.3rem 0;
+}

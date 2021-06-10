@@ -195,7 +195,7 @@ const App = () => {
           </section>
         }
       </main>
-      <footer></footer>
+      <footer>footer</footer>
     </div>
   );
 };

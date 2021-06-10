@@ -7,7 +7,7 @@ const Spells = (props) => {
   if (spells) {
     spells = spells.map((spell, index) => {
       return (
-        <li key={index}>
+        <li key={index} style={{ listStyle: "none" }}>
           <p>{spell.description}</p>
         </li>
       )
