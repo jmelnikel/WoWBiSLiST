@@ -1,0 +1,38 @@
+input[type='radio'] { 
+     transform: scale(1.5); 
+ }
+
+.mainArmor--section {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.mainArmor--ul {
+  width: 50vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  list-style: none;
+}
+
+.mainArmor--subClass__ul li {
+  margin-right: 1.0rem;
+}
+
+.mainArmor--radio {
+  margin-right: 0.5rem;
+}
+
+.mainArmor--label {
+  margin-right: 3.0rem;
+}
+
+.mainArmor--levelNumber {
+  width: 3.0rem;
+  margin-left: 0.5rem;
+}
+
+.mainArmor--section__buttons {
+  margin-bottom: 2.0rem;
+}

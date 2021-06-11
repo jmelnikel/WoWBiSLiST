@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Slot from '../Slot';
 import { getArmorItems } from '../../APIs/database';
+import '../../styling/Filters.css'
 import _ from 'lodash';
 
 const MainArmorSlotsList = () => {
@@ -18,6 +19,7 @@ const MainArmorSlotsList = () => {
     return (
       <li key={index}>
         <input
+          className="mainArmor--radio"
           type="radio"
           id={subClass}
           name="subClassFilter"
@@ -25,7 +27,7 @@ const MainArmorSlotsList = () => {
           checked={itemSubclassFilter === subClass}
           onChange={(event) => { handleOnChange("item_subclass", event.target.value) }}
         />
-        <label htmlFor={subClass}>{subClass}</label>
+        <label className="mainArmor--label" htmlFor={subClass}>{subClass}</label>
       </li>
     )
   });
@@ -40,6 +42,7 @@ const MainArmorSlotsList = () => {
     return (
       <li key={index}>
         <input
+          className="mainArmor--radio"
           type="radio"
           id={stat}
           name="statsFilter"
@@ -47,17 +50,10 @@ const MainArmorSlotsList = () => {
           checked={statsFilter === stat}
           onChange={(event) => { handleOnChange("stats", event.target.value) }}
         />
-        <label htmlFor={stat}>{stat}</label>
+        <label className="mainArmor--label" htmlFor={stat}>{stat}</label>
       </li>
     )
   });
-
-  const itemLevelFilterField = <input
-    type="number"
-    name="itemLevel"
-    value={itemlevelFilter}
-    onChange={(event) => { handleOnChange("itemLevel", event.target.value) }}
-  />
 
   const mainArmorSlotsList = [
     "Head",
@@ -143,23 +139,44 @@ const MainArmorSlotsList = () => {
 
   return (
     <form>
-      <ul>
-        {subClassesFilterList}
-      </ul>
-      <ul>
-        {statsFilterList}
-      </ul>
-      {itemLevelFilterField}
-      <button
-        type="submit"
-        onClick={(event) => { applyFilter(event) }}
-      >Apply Filter
-      </button>
-      <button
-        type="button"
-        onClick={handleClearFilter}
-      >Clear Filter
-      </button>
+      <section className="mainArmor--section">
+        <h3>Armor Class: </h3>
+        <ul className="mainArmor--ul">
+          {subClassesFilterList}
+        </ul>
+      </section>
+
+      <section className="mainArmor--section">
+        <h3>Armor Attribute: </h3>
+        <ul className="mainArmor--ul">
+          {statsFilterList}
+        </ul>
+      </section>
+
+      <section className="mainArmor--section">
+        <h3>Minimum Item Level: </h3>
+        <input
+          className="mainArmor--levelNumber"
+          type="number"
+          name="itemLevel"
+          value={itemlevelFilter}
+          onChange={(event) => { handleOnChange("itemLevel", event.target.value) }}
+        />
+      </section>
+
+      <section className="mainArmor--section__buttons">
+        <button
+          type="submit"
+          onClick={(event) => { applyFilter(event) }}
+        >Apply Filter
+        </button>
+        <button
+          type="button"
+          onClick={handleClearFilter}
+        >Clear Filter
+        </button>
+      </section>
+
       {mainArmorSlotsList}
     </form>
   )

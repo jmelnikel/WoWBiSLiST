@@ -189,9 +189,18 @@ const App = () => {
           </section>
           :
           <section>
-            <MainArmorSlotsList itemsData={armorDetailData} />
-            <OtherArmorSlotsList itemsData={armorDetailData} />
-            <WeaponSlotsList itemsData={weaponDetailData} />
+            <div className="App--slotSections">
+              <h1>Main Armor Slots</h1>
+              <MainArmorSlotsList itemsData={armorDetailData} />
+            </div>
+            <div className="App--slotSections">
+              <h1>Other Armor Slots</h1>
+              <OtherArmorSlotsList itemsData={armorDetailData} />
+            </div>
+            <div className="App--slotSections">
+              <h1>Weapon Slots</h1>
+              <WeaponSlotsList itemsData={weaponDetailData} />
+            </div>
           </section>
         }
       </main>

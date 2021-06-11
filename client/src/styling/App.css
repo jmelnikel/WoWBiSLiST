@@ -7,3 +7,7 @@ body {
   color: white;
   background-attachment: fixed;
 }
+
+.App--slotSections {
+  margin: 0 0 5.0rem 2.0rem;
+}

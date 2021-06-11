@@ -5,7 +5,7 @@ import Stats from './ItemAttributes/Stats';
 import Spells from './ItemAttributes/Spells';
 import Requirements from './ItemAttributes/Requirements';
 import Sets from './ItemAttributes/Sets';
-import '../styling/Item.css'
+import '../styling/slotsAndItems.css'
 
 const Item = (props) => {
   const { item } = props;
