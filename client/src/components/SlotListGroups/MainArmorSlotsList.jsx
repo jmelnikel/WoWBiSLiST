@@ -88,7 +88,7 @@ const MainArmorSlotsList = () => {
 
   const applyFilter = async (event) => {
     event.preventDefault();
-    // setLoading(true)
+    setLoading(true)
     const response = await getArmorItems()
       .then((response) => {
         return response;
@@ -130,7 +130,7 @@ const MainArmorSlotsList = () => {
       })
     }
     setFilterData(filterDataCopy);
-    // setLoading(false)
+    setLoading(false)
   }
 
   const handleClearFilter = () => {
@@ -150,7 +150,7 @@ const MainArmorSlotsList = () => {
       </section>
 
       <section className="mainArmor--section">
-        <h3>Armor Attribute: </h3>
+        <h3>Primary Attribute: </h3>
         <ul className="mainArmor--ul">
           {statsFilterList}
         </ul>

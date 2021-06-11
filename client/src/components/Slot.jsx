@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import ItemList from './ItemList'
 import '../styling/slotsAndItems.css';
 
 const Slot = (props) => {
   let { slot, itemsData } = props;
+
 
   const itemsDataBySlot = itemsData.filter((item) => {
     return item.preview_item.inventory_type.name === slot;

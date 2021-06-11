@@ -143,43 +143,43 @@ const App = () => {
             <div style={{ display: "flex", flexDirection: "column", width: "30%" }}>
               <button onClick={handleGetItemsBaseData}>
                 Get Items Base Data
-            </button>
+              </button>
               <button onClick={() => { handleCleanBaseData(itemsBaseData) }}>
                 Clean Base Data
-            </button>
+              </button>
               <button onClick={() => { handleSplitBaseData(cleanedBaseData) }}>
                 Split Base Data
-            </button>
+              </button>
 
               <br></br>
 
               <button onClick={handleGetArmorDetailData}>
                 Get Armor Detail Data
-            </button>
+              </button>
               <button onClick={() => { clearArmorTable() }}>
                 Clear Armor Table
-            </button>
+              </button>
               <button onClick={() => { writeDetailDataArmorTable(JSON.stringify(armorDetailData)) }}>
                 Write Detail Data Armor Table
-            </button>
+              </button>
               <button onClick={() => { deleteDuplicateRowsArmorTable() }}>
                 Delete Armor Duplicate Rows
-            </button>
+              </button>
 
               <br></br>
 
               <button onClick={handleGetWeaponDetailData}>
                 Get Weapon Detail Data
-            </button>
+              </button>
               <button onClick={() => { clearWeaponTable() }}>
                 Clear Weapon Table
-            </button>
+              </button>
               <button onClick={() => { writeDetailDataWeaponTable(JSON.stringify(weaponDetailData)) }}>
                 Write Detail Data Weapon Table
-            </button>
+              </button>
               <button onClick={() => { deleteDuplicateRowsWeaponTable() }}>
                 Delete Weapon Duplicate Rows
-            </button>
+              </button>
 
             </div>
             <ProgressBar completed={progressBar} />
@@ -216,3 +216,4 @@ export default App;
 // Admin login
 // refactor functions
 // testing
+// instructions: a lot of gear is being loaded. 15 seconds
