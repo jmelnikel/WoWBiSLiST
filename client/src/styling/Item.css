@@ -1,31 +1,3 @@
-.slot--li {
-  display: flex;
-  flex-direction: row;
-  background-color: rgb(50, 50, 50);
-  width: fit-content;
-  margin: 0 0 1.0rem 0;
-  padding: 0;
-}
-
-.slot--title {
-  width: 6.0rem;
-  margin: 1.0rem 0 0 1.0rem;
-  padding: 0;
-}
-
-.itemList--ul {
-  display: flex;
-  flex-direction: row;
-  list-style: none;
-  align-items: flex-start;
-  margin: 0;
-  padding: 0;
-}
-
-.itemList--li {
-  max-height: 60vh;
-}
-
 .itemContainer {
   padding: 0.5rem;
   margin: 0.5rem;

@@ -1,0 +1,12 @@
+.itemList--ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+}
+
+.itemList--li {
+  max-height: 60vh;
+}

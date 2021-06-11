@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Item from './Item'
-import '../styling/slotsAndItems.css';
+import '../styling/itemList.css';
 import _ from 'lodash';
 
 

@@ -7,6 +7,13 @@ const OtherArmorSlotsList = () => {
   const [itemlevelFilter, setItemlevelFilter] = useState(0);
   const [filterData, setFilterData] = useState([]);
 
+  const itemLevelFilterField = <input
+    type="number"
+    name="itemLevel"
+    value={itemlevelFilter}
+    onChange={(event) => { handleOnChange("itemLevel", event.target.value) }}
+  />
+
   const otherArmorSlotsList = [
     "Neck",
     "Back",
@@ -61,30 +68,17 @@ const OtherArmorSlotsList = () => {
 
   return (
     <form>
-      <section className="mainArmor--section">
-        <h3>Minimum Item Level: </h3>
-        <input
-          className="mainArmor--levelNumber"
-          type="number"
-          name="itemLevel"
-          value={itemlevelFilter}
-          onChange={(event) => { handleOnChange("itemLevel", event.target.value) }}
-        />
-      </section>
-
-      <section className="mainArmor--section__buttons">
-        <button
-          type="submit"
-          onClick={(event) => { applyFilter(event) }}
-        >Apply Filter
-        </button>
-        <button
-          type="button"
-          onClick={handleClearFilter}
-        >Clear Filter
-        </button>
-      </section>
-
+      {itemLevelFilterField}
+      <button
+        type="submit"
+        onClick={(event) => { applyFilter(event) }}
+      >Apply Filter
+      </button>
+      <button
+        type="button"
+        onClick={handleClearFilter}
+      >Clear Filter
+      </button>
       {otherArmorSlotsList}
     </form>
 
