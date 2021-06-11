@@ -134,7 +134,7 @@ const App = () => {
 
   return (
     <div>
-      <header>logo<h1>title</h1><nav></nav></header>
+      <header>logo<h1 style={{ fontFamily: "LifeCraft" }}>WoW BiS LiST</h1><nav>Navbar</nav></header>
       <main>
         {false
           ?

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Slot from '../Slot';
+import ItemList from '../ItemList'
 import { getWeaponItems } from '../../APIs/database';
 import _ from 'lodash';
 
@@ -12,9 +13,7 @@ const WeaponSlotsList = () => {
     "Main Hand",
     "One-Hand",
     "Off Hand",
-    // "Ranged",
-    // "RANGEDRIGHT", need .type
-    // "Thrown",
+
   ].map((slot, index) => {
     return (
       <Slot
@@ -57,6 +56,14 @@ const WeaponSlotsList = () => {
     setFilterData([])
   }
 
+  const rangedItems = filterData.filter((item) => {
+    return (
+      item.preview_item.inventory_type.name === "Ranged" ||
+      item.preview_item.inventory_type.name === "Thrown" ||
+      item.preview_item.inventory_type.type === "RANGEDRIGHT"
+    )
+  })
+
   return (
     <form>
       <section className="mainArmor--section">
@@ -83,24 +90,19 @@ const WeaponSlotsList = () => {
         </button>
       </section>
 
-
-      {WeaponSlotsList}
+      <ul>
+        {WeaponSlotsList}
+        <li className="slot--li">
+          <h3 className="slot--title">Ranged</h3>
+          <ItemList itemsData={rangedItems} />
+        </li>
+      </ul>
     </form>
   )
 }
 
 export default WeaponSlotsList;
 
-  // "Held In Off-hand",
-  // Ranged slots are hard coded in: Ranged, RANGEDRIGHT,THROWN or Thrown??.
-  // "Non-equippable"
-
-// Main and Shield - are shields in armor?
-// 2H weapon
-// Dual Wield
-// Held in off hand
-
-// Relics, idols, libram, etc?
-// Ranged
-
-// wands??
+// "Ranged",
+// "RANGEDRIGHT", need .type
+// "Thrown",

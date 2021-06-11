@@ -84,8 +84,9 @@ const OtherArmorSlotsList = () => {
         >Clear Filter
         </button>
       </section>
-
-      {otherArmorSlotsList}
+      <ul>
+        {otherArmorSlotsList}
+      </ul>
     </form>
 
   )
