@@ -54,9 +54,21 @@
 }
 
 .itemContainerSmall {
-  width: 150px;
+  width: 50px;
+  overflow: hidden;
+  height: 50px;
 }
 
 .itemContainer h4, p {
   margin: 0 0 0.3rem 0;
+}
+
+.itemContainer--buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.itemContainerHidden {
+  visibility: hidden;
 }

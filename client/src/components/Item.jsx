@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimesCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import classNames from 'classnames'
 import Stats from './ItemAttributes/Stats';
 import Spells from './ItemAttributes/Spells';
@@ -9,7 +11,12 @@ import '../styling/slotsAndItems.css'
 
 const Item = (props) => {
   const { item } = props;
-  let { id, show, level, preview_item } = item
+  let {
+    // id,
+    show,
+    level,
+    preview_item
+  } = item
   const {
     name,
     armor,
@@ -33,8 +40,11 @@ const Item = (props) => {
     itemContainerLarge: itemContainerSize === "large",
     itemContainerSmall: itemContainerSize === "small",
   });
+  const itemContainerItemInfo = classNames({
+    itemContainerHidden: itemContainerSize === "small",
+  })
 
-  const handleChangeSize = () => {
+  const handleToggleSize = () => {
     if (itemContainerSize === "large") {
       setItemContainerSize("small")
     } else {
@@ -42,29 +52,38 @@ const Item = (props) => {
     }
   }
 
-
   return (
     <>
       {show &&
         <div className={itemContainerToggle}>
-          <h4>{name}</h4>
-          <p>Level: {level}</p>
-          {binding && <p>{binding.name}</p>}
-          {item_subclass && <p>{item_subclass.name}</p>}
-          {armor && <p>Armor: {armor.value}</p>}
-          {weapon && <p>{weapon.dps.display_string}</p>}
-          {weapon && <p>{weapon.damage.display_string}</p>}
-          {weapon && <p>Attack {weapon.attack_speed.display_string}</p>}
-          {stats && <Stats stats={stats} />}
-          {spells && <Spells spells={spells} />}
-          {requirements && <Requirements requirements={requirements} />}
-          {set && <Sets set={set} />}
-          {unique_equipped && <p>{unique_equipped}</p>}
+          <div className="itemContainer--buttons">
+            <FontAwesomeIcon
+              icon={faTimesCircle}
+              style={{ color: "red", fontSize: "1.5rem", marginBottom: "1.0rem" }}
+              onClick={handleToggleSize}
+            />
+            <FontAwesomeIcon
+              icon={faCheckCircle}
+              style={{ color: "green", fontSize: "1.5rem" }}
+              className={itemContainerItemInfo}
+            />
+          </div>
+          <div className={itemContainerItemInfo}>
+            <h4>{name}</h4>
+            <p>Level: {level}</p>
+            {binding && <p>{binding.name}</p>}
+            {item_subclass && <p>{item_subclass.name}</p>}
+            {armor && <p>Armor: {armor.value}</p>}
+            {weapon && <p>{weapon.dps.display_string}</p>}
+            {weapon && <p>{weapon.damage.display_string}</p>}
+            {weapon && <p>Attack {weapon.attack_speed.display_string}</p>}
+            {stats && <Stats stats={stats} />}
+            {spells && <Spells spells={spells} />}
+            {requirements && <Requirements requirements={requirements} />}
+            {set && <Sets set={set} />}
+            {unique_equipped && <p>{unique_equipped}</p>}
+          </div>
 
-          <button
-            type="button"
-            onClick={handleChangeSize}
-          >Change Size</button>
         </div>
       }
     </>
