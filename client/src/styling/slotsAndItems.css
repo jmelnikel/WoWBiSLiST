@@ -1,7 +1,7 @@
 .slot--li {
   display: flex;
   flex-direction: row;
-  background-color: rgb(50, 50, 50);
+  background-color: rgb(60, 60, 60);
   width: fit-content;
   margin: 0 0 1.0rem 0;
   padding: 0;
@@ -11,6 +11,7 @@
   width: 6.0rem;
   margin: 1.0rem 0 0 1.0rem;
   padding: 0;
+  font-family: 'Almendra', serif;
 }
 
 .itemList--ul {
@@ -34,19 +35,27 @@
 }
 
 .itemContainerRare {
-  border: blue solid 3px;
+  border-bottom: blue solid 3px;
+  border-right: blue solid 3px;
+  box-shadow: 6px 6px 8px 2px rgb(0, 0, 0);
 }
 
 .itemContainerEpic {
-  border: purple solid 3px;
+  border-bottom: purple solid 3px;
+  border-right: purple solid 3px;
+  box-shadow: 6px 6px 8px 2px rgb(0, 0, 0);
 }
 
 .itemContainerLegendary {
-  border: orange solid 3px;
+  border-bottom: orange solid 3px;
+  border-right: orange solid 3px;
+  box-shadow: 6px 6px 8px 2px rgb(0, 0, 0);
 }
 
 .itemContainerArtifact {
-  border: yellow solid 3px;
+  border-bottom: yellow solid 3px;
+  border-right: yellow solid 3px;
+  box-shadow: 6px 6px 8px 2px rgb(0, 0, 0);
 }
 
 .itemContainerLarge {
@@ -67,6 +76,23 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.mainArmor--section__button {
+  margin-right: 1.0rem;
+  background-color: #FFEC1C;
+  border: none;
+  border-bottom: solid 4px rgb(47, 47, 242);
+  height: 2.5rem;
+  width: 10vw;
+  font-size: 1.2rem;
+}
+.mainArmor--section__button:hover {
+  margin-right: 1.0rem;
+  background-color: rgb(47, 47, 242);
+  border: none;
+  border-bottom: solid 4px rgb(47, 47, 242);
+  color: white;
 }
 
 .itemContainerHidden {

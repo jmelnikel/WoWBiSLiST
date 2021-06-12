@@ -31,6 +31,7 @@ const Item = (props) => {
     weapon,
   } = preview_item;
   let [itemContainerSize, setItemContainerSize] = useState("large")
+
   const itemContainerToggle = classNames({
     itemContainer: true,
     itemContainerRare: quality.name === "Rare",
@@ -62,11 +63,11 @@ const Item = (props) => {
               style={{ color: "red", fontSize: "1.5rem", marginBottom: "1.0rem" }}
               onClick={handleToggleSize}
             />
-            <FontAwesomeIcon
+            {/* <FontAwesomeIcon
               icon={faCheckCircle}
               style={{ color: "green", fontSize: "1.5rem" }}
               className={itemContainerItemInfo}
-            />
+            /> */}
           </div>
           <div className={itemContainerItemInfo}>
             <h4>{name}</h4>
@@ -92,7 +93,6 @@ const Item = (props) => {
 
 Item.propTypes = {
   item: PropTypes.object,
-  // hideItem: PropTypes.func,
 }
 
 export default Item;

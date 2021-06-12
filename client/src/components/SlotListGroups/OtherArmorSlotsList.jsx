@@ -74,11 +74,13 @@ const OtherArmorSlotsList = () => {
 
       <section className="mainArmor--section__buttons">
         <button
+          className="mainArmor--section__button"
           type="submit"
           onClick={(event) => { applyFilter(event) }}
         >Apply Filter
         </button>
         <button
+          className="mainArmor--section__button"
           type="button"
           onClick={handleClearFilter}
         >Clear Filter

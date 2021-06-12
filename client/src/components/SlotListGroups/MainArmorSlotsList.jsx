@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Slot from '../Slot';
 import { getArmorItems } from '../../APIs/database';
-import loadingImage from '../../assets/images/loadingImage.svg'
 import '../../styling/Filters.css'
 import _ from 'lodash';
 
@@ -10,7 +9,6 @@ const MainArmorSlotsList = () => {
   const [statsFilter, setStatsFilter] = useState("");
   const [itemlevelFilter, setItemlevelFilter] = useState(0);
   const [filterData, setFilterData] = useState([]);
-  const [loading, setLoading] = useState(false)
 
   const subClassesFilterList = [
     "Cloth",
@@ -88,7 +86,6 @@ const MainArmorSlotsList = () => {
 
   const applyFilter = async (event) => {
     event.preventDefault();
-    setLoading(true)
     const response = await getArmorItems()
       .then((response) => {
         return response;
@@ -130,7 +127,6 @@ const MainArmorSlotsList = () => {
       })
     }
     setFilterData(filterDataCopy);
-    setLoading(false)
   }
 
   const handleClearFilter = () => {
@@ -169,24 +165,21 @@ const MainArmorSlotsList = () => {
 
       <section className="mainArmor--section__buttons">
         <button
+          className="mainArmor--section__button"
           type="submit"
           onClick={(event) => { applyFilter(event) }}
         >Apply Filter
         </button>
         <button
+          className="mainArmor--section__button"
           type="button"
           onClick={handleClearFilter}
         >Clear Filter
         </button>
       </section>
-
-      {loading ?
-        <img src={loadingImage} /> :
-        <ul>
-          {mainArmorSlotsList}
-        </ul>
-      }
-
+      <ul>
+        {mainArmorSlotsList}
+      </ul>
     </form>
   )
 }

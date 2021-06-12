@@ -24,6 +24,7 @@ import MainArmorSlotsList from './components/SlotListGroups/MainArmorSlotsList'
 import OtherArmorSlotsList from './components/SlotListGroups/OtherArmorSlotsList'
 import WeaponSlotsList from './components/SlotListGroups/WeaponSlotsList'
 import './styling/App.css';
+import logo from './assets/images/logo.png'
 import _ from 'lodash';
 
 const App = () => {
@@ -133,8 +134,8 @@ const App = () => {
   };
 
   return (
-    <div>
-      <header>logo<h1 style={{ fontFamily: "LifeCraft" }}>WoW BiS LiST</h1><nav>Navbar</nav></header>
+    <>
+      <header className="App--header"><img src={logo} className="App--title" /></header>
       <main>
         {false
           ?
@@ -190,22 +191,22 @@ const App = () => {
           :
           <section>
             <div className="App--slotSections">
-              <h1>Main Armor Slots</h1>
+              <h1 className="App--slotSections__title">Main Armor Slots</h1>
               <MainArmorSlotsList itemsData={armorDetailData} />
             </div>
             <div className="App--slotSections">
-              <h1>Other Armor Slots</h1>
+              <h1 className="App--slotSections__title">Other Armor Slots</h1>
               <OtherArmorSlotsList itemsData={armorDetailData} />
             </div>
             <div className="App--slotSections">
-              <h1>Weapon Slots</h1>
+              <h1 className="App--slotSections__title">Weapon Slots</h1>
               <WeaponSlotsList itemsData={weaponDetailData} />
             </div>
           </section>
         }
       </main>
       <footer>footer</footer>
-    </div>
+    </>
   );
 };
 
