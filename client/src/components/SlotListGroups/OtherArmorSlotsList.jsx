@@ -62,7 +62,7 @@ const OtherArmorSlotsList = () => {
   return (
     <form>
       <section className="mainArmor--section">
-        <h3>Minimum Item Level: </h3>
+        <h4>Minimum Item Level: </h4>
         <input
           className="mainArmor--levelNumber"
           type="number"

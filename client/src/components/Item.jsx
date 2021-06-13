@@ -70,7 +70,7 @@ const Item = (props) => {
             /> */}
           </div>
           <div className={itemContainerItemInfo}>
-            <h4>{name}</h4>
+            <h5>{name}</h5>
             <p>Level: {level}</p>
             {binding && <p>{binding.name}</p>}
             {item_subclass && <p>{item_subclass.name}</p>}

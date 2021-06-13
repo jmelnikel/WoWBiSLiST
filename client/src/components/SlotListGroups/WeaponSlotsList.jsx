@@ -67,7 +67,7 @@ const WeaponSlotsList = () => {
   return (
     <form>
       <section className="mainArmor--section">
-        <h3>Minimum Item Level: </h3>
+        <h4>Minimum Item Level: </h4>
         <input
           className="mainArmor--levelNumber"
           type="number"
@@ -95,7 +95,7 @@ const WeaponSlotsList = () => {
       <ul>
         {WeaponSlotsList}
         <li className="slot--li">
-          <h3 className="slot--title">Ranged</h3>
+          <h5 className="slot--title">Ranged</h5>
           <ItemList itemsData={rangedItems} />
         </li>
       </ul>

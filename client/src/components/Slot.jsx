@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import ItemList from './ItemList'
 import '../styling/slotsAndItems.css';
@@ -6,14 +6,13 @@ import '../styling/slotsAndItems.css';
 const Slot = (props) => {
   let { slot, itemsData } = props;
 
-
   const itemsDataBySlot = itemsData.filter((item) => {
     return item.preview_item.inventory_type.name === slot;
   })
 
   return (
     <li className="slot--li">
-      <h3 className="slot--title">{slot}</h3>
+      <h5 className="slot--title">{slot}</h5>
       <ItemList itemsData={itemsDataBySlot} />
     </li>
   )

@@ -10,7 +10,7 @@ body {
 }
 
 .App--header {
-  background-image: url('../assets/images/zangarmarsh.png');
+  background-image: url('../assets/images/zangarmarsh1.png');
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
@@ -19,12 +19,13 @@ body {
   width: 100vw;
   height: 160px;
   margin: 0;
+  border-bottom: solid #FFEC1C 5px;
 }
 
 .App--title {
   height: 85px;
   width: auto;
-  margin: 4.0rem 5.0rem 0 0 ;
+  margin: 3.0rem 10vw 0 0 ;
 }
 
 .App--slotSections {
@@ -33,7 +34,32 @@ body {
   align-items: flex-start;
   margin: 0 0 5.0rem 2.0rem;
 }
+
 .App--slotSections__title {
   align-self: center;
   font-family: 'Almendra', serif;
+}
+
+.App--footer__container {
+  height: 120px;
+  width: 100vw;
+  background-color: #ffec1c;
+  border-top: solid rgb(47, 47, 242) 5px;
+  color: black;
+  padding: 0.5rem 1.0rem;
+}
+
+.App--footer__button {
+  background-color: rgb(47, 47, 242);
+  border: none;
+  height: 2.5rem;
+  width: 10vw;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.App--footer__button:hover {
+  background-color: #FFEC1C;
+  border: solid 4px rgb(47, 47, 242);
+  color: black;
 }

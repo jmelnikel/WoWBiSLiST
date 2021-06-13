@@ -88,10 +88,7 @@
   font-size: 1.2rem;
 }
 .mainArmor--section__button:hover {
-  margin-right: 1.0rem;
   background-color: rgb(47, 47, 242);
-  border: none;
-  border-bottom: solid 4px rgb(47, 47, 242);
   color: white;
 }
 

@@ -16,7 +16,7 @@ const Sets = (props) => {
   if (set) {
     set =
       <>
-        <h4>{item_set.name}</h4>
+        <h5>{item_set.name}</h5>
         {items}
         {effects}
       </>

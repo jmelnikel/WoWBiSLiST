@@ -139,21 +139,21 @@ const MainArmorSlotsList = () => {
   return (
     <form>
       <section className="mainArmor--section">
-        <h3>Armor Class: </h3>
+        <h4>Armor Class: </h4>
         <ul className="mainArmor--ul">
           {subClassesFilterList}
         </ul>
       </section>
 
       <section className="mainArmor--section">
-        <h3>Primary Attribute: </h3>
+        <h4>Primary Attribute: </h4>
         <ul className="mainArmor--ul">
           {statsFilterList}
         </ul>
       </section>
 
       <section className="mainArmor--section">
-        <h3>Minimum Item Level: </h3>
+        <h4>Minimum Item Level: </h4>
         <input
           className="mainArmor--levelNumber"
           type="number"

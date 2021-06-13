@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   clearArmorTable,
   writeDetailDataArmorTable,
@@ -20,15 +22,16 @@ import {
 } from './helpers';
 import ProgressBar from './components/ProgressBar';
 // import beanEater from './assets/images/beanEater.svg'
-import MainArmorSlotsList from './components/SlotListGroups/MainArmorSlotsList'
-import OtherArmorSlotsList from './components/SlotListGroups/OtherArmorSlotsList'
-import WeaponSlotsList from './components/SlotListGroups/WeaponSlotsList'
+import MainArmorSlotsList from './components/SlotListGroups/MainArmorSlotsList';
+import OtherArmorSlotsList from './components/SlotListGroups/OtherArmorSlotsList';
+import WeaponSlotsList from './components/SlotListGroups/WeaponSlotsList';
+import MoreInfo from './Modals/MoreInfo'
 import './styling/App.css';
 import logo from './assets/images/logo.png'
 import _ from 'lodash';
 
 const App = () => {
-  const [admin, setAdmin] = useState(false)
+  // const [admin, setAdmin] = useState(false)
   const [clientAuthToken, setClientAuthToken] = useState("");
   const [progressBar, setProgressBar] = useState("0");
   const [itemsBaseData, setItemsBaseData] = useState([])
@@ -37,18 +40,19 @@ const App = () => {
   let [armorDetailData, setArmorDetailData] = useState([]);
   let [weaponBaseData, setWeaponBaseData] = useState([]);
   let [weaponDetailData, setWeaponDetailData] = useState([]);
+  const [show, setShow] = useState(false);
   // const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getClientAuthToken()
       .then((clientAuthToken) => {
         setClientAuthToken(clientAuthToken.data.access_token);
-        setAdmin(true)
+        // setAdmin(true)
       })
       .catch((error) => {
         throw new Error(error.message);
       });
-  }, [admin]);
+  }, []);
 
   // This function gets all Armor/Weapon base data, reformates the structure, and sets state as a flattened array of item objects.
   const handleGetItemsBaseData = async () => {
@@ -133,9 +137,21 @@ const App = () => {
     playAlert();
   };
 
+  const handleShow = () => {
+    console.log("This is firing")
+    setShow(true)
+  };
+  const handleClose = () => setShow(false);
+
   return (
     <>
-      <header className="App--header"><img src={logo} className="App--title" /></header>
+      <header className="App--header">
+        <img
+          src={logo}
+          className="App--title"
+          alt="WoW BiS LiST logo"
+        />
+      </header>
       <main>
         {false
           ?
@@ -205,7 +221,20 @@ const App = () => {
           </section>
         }
       </main>
-      <footer>footer</footer>
+      <footer className="App--footer__container">
+        <p>Version 1.0.0</p>
+        <button
+          className="App--footer__button"
+          type="button"
+          onClick={handleShow}
+        >More Info
+        </button>
+      </footer>
+
+      <MoreInfo
+        show={show}
+        handleClose={handleClose}
+      />
     </>
   );
 };
