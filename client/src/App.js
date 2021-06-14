@@ -148,7 +148,7 @@ const App = () => {
       <header className="App--header">
         <img
           src={logo}
-          className="App--title"
+          className="App--titleImage"
           alt="WoW BiS LiST logo"
         />
       </header>
@@ -222,7 +222,7 @@ const App = () => {
         }
       </main>
       <footer className="App--footer__container">
-        <p>Version 1.0.0</p>
+        <p style={{ color: "white" }}>Version 1.0.0</p>
         <button
           className="App--footer__button"
           type="button"

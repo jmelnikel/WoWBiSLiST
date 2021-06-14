@@ -14,18 +14,20 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
+  flex-direction: column;
   justify-content: flex-end;
-  align-items: center;
-  width: 100vw;
+  align-items: flex-end;
+  width: auto;
   height: 160px;
   margin: 0;
-  border-bottom: solid #FFEC1C 5px;
+  border-bottom: solid #FFEC1C 10px;
+  font-family: 'Almendra', serif;
 }
 
-.App--title {
+.App--titleImage {
+  margin: 3.0rem 10vw 0.5rem 0;
   height: 85px;
   width: auto;
-  margin: 3.0rem 10vw 0 0 ;
 }
 
 .App--slotSections {
@@ -42,24 +44,24 @@ body {
 
 .App--footer__container {
   height: 120px;
-  width: 100vw;
-  background-color: #ffec1c;
-  border-top: solid rgb(47, 47, 242) 5px;
+  width: auto;
+  background-color: rgb(60, 60, 60);
+  border-top: solid rgb(47, 47, 242) 10px;
   color: black;
   padding: 0.5rem 1.0rem;
 }
 
 .App--footer__button {
-  background-color: rgb(47, 47, 242);
+  background-color: #ffec1c;
   border: none;
+  border-bottom: solid rgb(47, 47, 242) 4px;
   height: 2.5rem;
   width: 10vw;
   font-size: 1.2rem;
-  color: white;
+  color: black;
 }
 
 .App--footer__button:hover {
-  background-color: #FFEC1C;
-  border: solid 4px rgb(47, 47, 242);
-  color: black;
+  background-color: rgb(47, 47, 242);
+  color: white;
 }

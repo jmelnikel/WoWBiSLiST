@@ -14,6 +14,7 @@ input[type='radio'] {
   flex-direction: row;
   justify-content: flex-start;
   list-style: none;
+  margin: 0;
 }
 
 .mainArmor--subClass__ul li {

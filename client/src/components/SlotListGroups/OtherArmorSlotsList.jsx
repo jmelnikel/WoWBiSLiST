@@ -85,6 +85,7 @@ const OtherArmorSlotsList = () => {
           onClick={handleClearFilter}
         >Clear Filter
         </button>
+        <p>Please Note: "Apply Filter" can take up to 20 secs to render.</p>
       </section>
       <ul>
         {otherArmorSlotsList}

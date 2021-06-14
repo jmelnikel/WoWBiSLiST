@@ -28,17 +28,20 @@ export const playAlert = () => {
 export const cleanBaseData = (data) => {
   for (let i = data.length - 1; i >= 0; i--) {
     const quality = data[i].quality.type;
+    const level = data[i].level
     const name = data[i].name.en_US;
     if (
       quality === "POOR" ||
       quality === "COMMON" ||
       quality === "UNCOMMON" ||
+      level < 60 ||
       name.includes("TEST") ||
       name.includes("Test") ||
       name.includes("Monster") ||
       name.includes("[ph]") ||
       name.includes("[PH]") ||
-      name.includes("[PH[")
+      name.includes("[PH[") ||
+      name.includes("Deprecated")
     ) {
       data.splice(i, 1);
     }
