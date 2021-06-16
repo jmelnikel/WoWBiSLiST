@@ -81,7 +81,8 @@
   border-bottom: solid 4px rgb(47, 47, 242);
   height: 2.5rem;
   width: 10vw;
-  font-size: 1.2rem;
+  font-family: 'Almendra', serif;
+  font-size: 1.5rem;
 }
 .mainArmor--section__button:hover {
   background-color: rgb(47, 47, 242);

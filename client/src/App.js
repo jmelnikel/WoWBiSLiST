@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   clearArmorTable,
@@ -26,12 +25,13 @@ import MainArmorSlotsList from './components/SlotListGroups/MainArmorSlotsList';
 import OtherArmorSlotsList from './components/SlotListGroups/OtherArmorSlotsList';
 import WeaponSlotsList from './components/SlotListGroups/WeaponSlotsList';
 import MoreInfo from './Modals/MoreInfo'
+import Login from './Modals/Login'
 import './styling/App.css';
 import logo from './assets/images/logo.png'
 import _ from 'lodash';
 
 const App = () => {
-  // const [admin, setAdmin] = useState(false)
+  let [user, setUser] = useState(false)
   const [clientAuthToken, setClientAuthToken] = useState("");
   const [progressBar, setProgressBar] = useState("0");
   const [itemsBaseData, setItemsBaseData] = useState([])
@@ -40,8 +40,8 @@ const App = () => {
   let [armorDetailData, setArmorDetailData] = useState([]);
   let [weaponBaseData, setWeaponBaseData] = useState([]);
   let [weaponDetailData, setWeaponDetailData] = useState([]);
-  const [show, setShow] = useState(false);
-  // const [loading, setLoading] = useState(false);
+  const [showMoreInfo, setShowMoreInfo] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   useEffect(() => {
     getClientAuthToken()
@@ -137,23 +137,43 @@ const App = () => {
     playAlert();
   };
 
-  const handleShow = () => {
-    console.log("This is firing")
-    setShow(true)
-  };
-  const handleClose = () => setShow(false);
+  const handleShowMoreInfo = () => setShowMoreInfo(true);
+  const handleCloseMoreInfo = () => setShowMoreInfo(false);
+  const handleShowLogin = () => setShowLogin(true)
+  const handleCloseLogin = () => setShowLogin(false)
+
+  const handleLogout = () => setUser(false);
+
+
 
   return (
     <>
       <header className="App--header">
+        <nav className="App--header__NavBar">
+          {user ?
+            <button
+              className="App--navBar__button"
+              type="button"
+              onClick={handleLogout}
+            >Logout
+            </button>
+            :
+            <button
+              className="App--navBar__button"
+              type="button"
+              onClick={handleShowLogin}
+            >Login
+            </button>
+          }
+        </nav>
         <img
-          src={logo}
           className="App--titleImage"
+          src={logo}
           alt="WoW BiS LiST logo"
         />
       </header>
       <main>
-        {false
+        {user.data?.admin
           ?
           <section>
             <h2>Last items table reset: June 08, 2012 (Patch 2.5.1)</h2>
@@ -226,14 +246,19 @@ const App = () => {
         <button
           className="App--footer__button"
           type="button"
-          onClick={handleShow}
+          onClick={handleShowMoreInfo}
         >More Info
         </button>
       </footer>
 
       <MoreInfo
-        show={show}
-        handleClose={handleClose}
+        showMoreInfo={showMoreInfo}
+        handleCloseMoreInfo={handleCloseMoreInfo}
+      />
+      <Login
+        showLogin={showLogin}
+        handleCloseLogin={handleCloseLogin}
+        setUser={setUser}
       />
     </>
   );
@@ -247,3 +272,4 @@ export default App;
 // refactor functions
 // testing
 // instructions: a lot of gear is being loaded. 15 seconds
+// hash passwords

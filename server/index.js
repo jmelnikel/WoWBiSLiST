@@ -13,7 +13,17 @@ app.use(bodyParser.json({ limit: '50mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 
 
-// Routes
+// Get user login data
+app.get("/user/:email", async (req, res) => {
+  try {
+    const { email } = req.params;
+    const userLoginData = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+    res.json(userLoginData.rows[0]);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+});
+
 // Clear and Initialize armor Table
 app.post(`/${process.env.CLEAR_ARMOR_TABLE_URL}`, (req, res) => {
   try {
@@ -88,6 +98,7 @@ app.post(`/${process.env.DELETE_DUPLICATE_ROWS_WEAPON_TABLE_URL}`, (req, res) =>
   }
 })
 
+// Get all armor items
 app.get("/armor", async (req, res) => {
   try {
     const allItems = await pool.query("SELECT * FROM armor ORDER BY level ASC");
@@ -97,6 +108,7 @@ app.get("/armor", async (req, res) => {
   }
 });
 
+// Get all weapon items
 app.get("/weapon", async (req, res) => {
   try {
     const allItems = await pool.query("SELECT * FROM weapon ORDER BY level ASC");
@@ -115,58 +127,58 @@ app.get("/weapon", async (req, res) => {
 
 
 // Create
-app.post("/items", async (req, res) => {
-  try {
+// app.post("/items", async (req, res) => {
+//   try {
 
-    // res.json(newItem.rows[0]);
-  } catch (error) {
-    throw new Error(error.message);
-  }
-});
+//     // res.json(newItem.rows[0]);
+//   } catch (error) {
+//     throw new Error(error.message);
+//   }
+// });
 
 // Get all
-app.get("/items", async (req, res) => {
-  try {
-    const allItems = await pool.query("SELECT * FROM items");
-    res.json(allItems.rows);
-  } catch (error) {
-    throw new Error(error.message);
-  }
-});
+// app.get("/items", async (req, res) => {
+//   try {
+//     const allItems = await pool.query("SELECT * FROM items");
+//     res.json(allItems.rows);
+//   } catch (error) {
+//     throw new Error(error.message);
+//   }
+// });
 
 // Get one
-app.get("/items/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const item = await pool.query("SELECT * FROM items WHERE id = $1", [id]);
-    res.json(item.rows[0]);
-  } catch (error) {
-    throw new Error(error.message);
-  }
-});
+// app.get("/items/:id", async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const item = await pool.query("SELECT * FROM items WHERE id = $1", [id]);
+//     res.json(item.rows[0]);
+//   } catch (error) {
+//     throw new Error(error.message);
+//   }
+// });
 
 // Update
-app.put("/items/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { item_class } = req.body;
-    await pool.query("UPDATE items SET item_class = $1 WHERE id = $2", [item_class, id]);
-    res.json("Item was updated.")
-  } catch (error) {
-    throw new Error(error.message);
-  }
-});
+// app.put("/items/:id", async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const { item_class } = req.body;
+//     await pool.query("UPDATE items SET item_class = $1 WHERE id = $2", [item_class, id]);
+//     res.json("Item was updated.")
+//   } catch (error) {
+//     throw new Error(error.message);
+//   }
+// });
 
 // Delete
-app.delete("/items/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    await pool.query("DELETE FROM items WHERE id = $1", [id]);
-    res.json("Item was deleted.")
-  } catch (error) {
-    throw new Error(error.message);
-  }
-});
+// app.delete("/items/:id", async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     await pool.query("DELETE FROM items WHERE id = $1", [id]);
+//     res.json("Item was deleted.")
+//   } catch (error) {
+//     throw new Error(error.message);
+//   }
+// });
 
 
 // Listening

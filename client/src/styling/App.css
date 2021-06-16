@@ -15,17 +15,35 @@ body {
   background-size: cover;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: flex-end;
   width: auto;
-  height: 160px;
+  height: 25vh;
   margin: 0;
   border-bottom: solid #FFEC1C 10px;
   font-family: 'Almendra', serif;
 }
 
+.App--header__NavBar {
+  margin: 1.0rem 1.0rem 0 0;
+}
+
+.App--navBar__button {
+  width: 8.0rem;
+  border: none;
+  background-color: #FFEC1C;
+  border-bottom: solid rgb(47, 47, 242) 4px;
+  height: 2.5rem;
+  font-size: 1.5rem;
+}
+
+.App--navBar__button:hover {
+  background-color: rgb(47, 47, 242);
+  color: white;
+}
+
 .App--titleImage {
-  margin: 3.0rem 10vw 0.5rem 0;
+  margin: 0 15vw 1.0rem 0;
   height: 85px;
   width: auto;
 }
@@ -57,8 +75,9 @@ body {
   border-bottom: solid rgb(47, 47, 242) 4px;
   height: 2.5rem;
   width: 10vw;
-  font-size: 1.2rem;
   color: black;
+  font-family: 'Almendra', serif;
+  font-size: 1.5rem;
 }
 
 .App--footer__button:hover {

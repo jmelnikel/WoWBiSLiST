@@ -31,3 +31,8 @@ SELECT COUNT(*) FROM items
   AND inventory_type != 'Relic'
   AND inventory_type != 'Tabard'
   AND inventory_type != 'Non-equippable';
+
+
+  CREATE TABLE users(users_key SERIAL PRIMARY KEY, email VARCHAR(120) NOT NULL UNIQUE, password VARCHAR(120) NOT NULL, admin BOOL);
+  
+  INSERT INTO users (email, password, admin) VALUES ('jmelnikel@gmail.com', '1234567890', true);

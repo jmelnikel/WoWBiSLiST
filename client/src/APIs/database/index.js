@@ -2,6 +2,16 @@
 import axios from 'axios';
 
 
+export const getUserLoginData = async (email) => {
+  const url = `/user/${email}`
+  const getUserLoginDataAxios = axios.create({
+    baseURL: "http://localhost:5000",
+    // headers: { "Content-Type": "application/json" },
+  });
+  console.log("Table: users - User information sent")
+  return getUserLoginDataAxios.get(url)
+}
+
 export const clearArmorTable = async () => {
   const url = process.env.REACT_APP_CLEAR_ARMOR_TABLE_URL
   const clearArmorTableAxios = axios.create({
@@ -22,7 +32,7 @@ export const writeDetailDataArmorTable = async (data) => {
   console.log("Table: armor - Data sent to be written")
 }
 
-export const deleteDuplicateRowsArmorTable = async (data) => {
+export const deleteDuplicateRowsArmorTable = async () => {
   const url = process.env.REACT_APP_DELETE_DUPLICATE_ROWS_ARMOR_TABLE_URL
   const deleteDuplicateRowsArmorTableAxios = axios.create({
     baseURL: "http://localhost:5000",
