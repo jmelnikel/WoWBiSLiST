@@ -33,6 +33,11 @@ SELECT COUNT(*) FROM items
   AND inventory_type != 'Non-equippable';
 
 
-  CREATE TABLE users(users_key SERIAL PRIMARY KEY, email VARCHAR(120) NOT NULL UNIQUE, password VARCHAR(120) NOT NULL, admin BOOL);
+  CREATE TABLE users(users_key SERIAL PRIMARY KEY, email TEXT NOT NULL UNIQUE, password TEXT NOT NULL, admin BOOL);
   
-  INSERT INTO users (email, password, admin) VALUES ('jmelnikel@gmail.com', '1234567890', true);
+  INSERT INTO users (email, password, admin) VALUES ('jmelnikel@gmail.com', 'NotMyPassword', true);
+
+
+  CREATE TABLE sources(sources_key SERIAL PRIMARY KEY, item_name TEXT, location TEXT, creature TEXT);
+
+  COPY sources(item_name, location, creature) FROM '/Users/jm-laptop/Desktop/sources.csv' DELIMITER ',' CSV HEADER;

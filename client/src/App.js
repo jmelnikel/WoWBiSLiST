@@ -7,7 +7,6 @@ import {
   clearWeaponTable,
   writeDetailDataWeaponTable,
   deleteDuplicateRowsWeaponTable,
-  // getAllItems,
 } from './APIs/database';
 import {
   getClientAuthToken,
@@ -20,7 +19,6 @@ import {
   cleanBaseData,
 } from './helpers';
 import ProgressBar from './components/ProgressBar';
-// import beanEater from './assets/images/beanEater.svg'
 import MainArmorSlotsList from './components/SlotListGroups/MainArmorSlotsList';
 import OtherArmorSlotsList from './components/SlotListGroups/OtherArmorSlotsList';
 import WeaponSlotsList from './components/SlotListGroups/WeaponSlotsList';
@@ -143,8 +141,6 @@ const App = () => {
   const handleCloseLogin = () => setShowLogin(false)
 
   const handleLogout = () => setUser(false);
-
-
 
   return (
     <>
