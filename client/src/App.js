@@ -41,16 +41,15 @@ const App = () => {
   const [showMoreInfo, setShowMoreInfo] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
 
-  useEffect(() => {
-    getClientAuthToken()
-      .then((clientAuthToken) => {
-        setClientAuthToken(clientAuthToken.data.access_token);
-        // setAdmin(true)
-      })
-      .catch((error) => {
-        throw new Error(error.message);
-      });
-  }, []);
+  // useEffect(() => {
+  //   getClientAuthToken()
+  //     .then((clientAuthToken) => {
+  //       setClientAuthToken(clientAuthToken.data.access_token);
+  //     })
+  //     .catch((error) => {
+  //       throw new Error(error.message);
+  //     });
+  // }, []);
 
   // This function gets all Armor/Weapon base data, reformates the structure, and sets state as a flattened array of item objects.
   const handleGetItemsBaseData = async () => {
@@ -238,6 +237,7 @@ const App = () => {
         }
       </main>
       <footer className="App--footer__container">
+        <span id="siteseal"><script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=wPAl7VslUTuyabRaAzjjmgQ1AoLUjFDhHgGvLFlbJIvj53UuLiAAKcAxTfdq"></script></span>
         <p style={{ color: "white" }}>Version 1.0.0</p>
         <button
           className="App--footer__button"
@@ -245,7 +245,7 @@ const App = () => {
           onClick={handleShowMoreInfo}
         >More Info
         </button>
-        <span id="siteseal"><script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=wPAl7VslUTuyabRaAzjjmgQ1AoLUjFDhHgGvLFlbJIvj53UuLiAAKcAxTfdq"></script></span>
+
       </footer>
 
       <MoreInfo
