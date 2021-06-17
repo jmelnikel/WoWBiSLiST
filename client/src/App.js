@@ -245,6 +245,7 @@ const App = () => {
           onClick={handleShowMoreInfo}
         >More Info
         </button>
+        <span id="siteseal"><script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=wPAl7VslUTuyabRaAzjjmgQ1AoLUjFDhHgGvLFlbJIvj53UuLiAAKcAxTfdq"></script></span>
       </footer>
 
       <MoreInfo
