@@ -168,7 +168,8 @@ const App = () => {
         />
       </header>
       <main>
-        {user.data?.admin
+        {true
+          // {user.data?.admin
           ?
           <section>
             <h2>Last items table reset: June 08, 2012 (Patch 2.5.1)</h2>
