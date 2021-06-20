@@ -237,7 +237,6 @@ const App = () => {
         }
       </main>
       <footer className="App--footer__container">
-        <span id="siteseal"><script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=wPAl7VslUTuyabRaAzjjmgQ1AoLUjFDhHgGvLFlbJIvj53UuLiAAKcAxTfdq"></script></span>
         <p style={{ color: "white" }}>Version 1.0.0</p>
         <button
           className="App--footer__button"
