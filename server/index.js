@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = 3000;
+const PORT = 5000;
 const cors = require('cors');
 const bodyParser = require('body-parser')
 const pool = require('./db')
@@ -17,9 +17,7 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 app.get("/user/:email", async (req, res) => {
   try {
     const { email } = req.params;
-    console.log("This is email at server going in to DB", email)
     const userLoginData = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
-    console.log("This is the response from the DB", userLoginData)
     res.json(userLoginData.rows[0]);
   } catch (error) {
     throw new Error(error.message);
