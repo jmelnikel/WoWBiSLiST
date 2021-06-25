@@ -41,15 +41,15 @@ const App = () => {
   const [showMoreInfo, setShowMoreInfo] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
 
-  useEffect(() => {
-    getClientAuthToken()
-      .then((clientAuthToken) => {
-        setClientAuthToken(clientAuthToken.data.access_token);
-      })
-      .catch((error) => {
-        throw new Error(error.message);
-      });
-  }, []);
+  // useEffect(() => {
+  //   getClientAuthToken()
+  //     .then((clientAuthToken) => {
+  //       setClientAuthToken(clientAuthToken.data.access_token);
+  //     })
+  //     .catch((error) => {
+  //       throw new Error(error.message);
+  //     });
+  // }, []);
 
   // This function gets all Armor/Weapon base data, reformates the structure, and sets state as a flattened array of item objects.
   const handleGetItemsBaseData = async () => {
