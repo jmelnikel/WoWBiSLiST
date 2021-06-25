@@ -25,7 +25,7 @@ const MoreInfo = (props) => {
         }}>
         <div className="moreInfo--container">
           <p>Q: How do I contact you?</p>
-          <p>A: I can't make the site better without you. Your constructive feedback and ideas are always welcome. I can be reached at: admin at wowbislist.ca</p>
+          <p>A: I can't make the site better without you. Your constructive feedback and ideas are always welcome. I can be reached at: </p>
           <br></br>
           <p>Q: What new things are to come?</p>
           <p>A: The next phase is for you to be able to create a shopping list of your items that will tell you where to get them; all nicely organized by drop location. The final phase will allow you to upload your character so that your current items will show at the beginning of each slot and you can better compare and plan your BiS list.</p>
