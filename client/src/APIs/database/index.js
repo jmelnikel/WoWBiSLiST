@@ -8,6 +8,7 @@ export const getUserLoginData = async (email) => {
     .get(`/user/${email}`)
     .then((response) => {
       console.log("This is axios responsse", response);
+      return response;
     })
     .catch((error) => {
       console.log(error.response.status);
