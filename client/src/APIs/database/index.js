@@ -3,8 +3,6 @@ import axios from 'axios';
 
 // const baseURL = "https://www.wowbislist.ca";
 
-
-
 export const getUserLoginData = async (email) => {
   const url = `/user/${email}`
   const getUserLoginDataAxios = axios.create({
@@ -14,6 +12,8 @@ export const getUserLoginData = async (email) => {
   console.log("Table: users - User information sent")
   return getUserLoginDataAxios.get(url)
 }
+
+
 
 
 
