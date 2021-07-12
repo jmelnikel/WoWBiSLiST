@@ -4,6 +4,21 @@ import axios from 'axios';
 // const baseURL = "https://www.wowbislist.ca";
 
 export const getUserLoginData = async (email) => {
+  axios
+    .get(`/user/${email}`)
+    .then((response) => {
+      console.log("This is axios responsse", response);
+    })
+    .catch((error) => {
+      console.log(error.response.status);
+      console.log(error.response.headers);
+      console.log(error.response.data);
+    });
+
+
+
+
+
   // const url = `/user/${email}`
   // const getUserLoginDataAxios = axios.create({
   //   baseURL: "http://www.wowbislist.ca",
