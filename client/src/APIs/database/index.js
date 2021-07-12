@@ -4,29 +4,13 @@ import axios from 'axios';
 // const baseURL = "https://www.wowbislist.ca";
 
 export const getUserLoginData = async (email) => {
-  axios
-    .get(`/user/${email}`)
-    .then((response) => {
-      console.log("This is axios responsse", response);
-      return response;
-    })
-    .catch((error) => {
-      console.log(error.response.status);
-      console.log(error.response.headers);
-      console.log(error.response.data);
-    });
-
-
-
-
-
-  // const url = `/user/${email}`
-  // const getUserLoginDataAxios = axios.create({
-  //   baseURL: "http://www.wowbislist.ca",
-  //   headers: { "Content-Type": "application/json" },
-  // });
-  // console.log("Table: users - User information sent")
-  // return getUserLoginDataAxios.get(url)
+  const url = `/user/${email}`
+  const getUserLoginDataAxios = axios.create({
+    baseURL: "http://www.wowbislist.ca",
+    headers: { "Content-Type": "application/json" },
+  });
+  console.log("Table: users - User information sent")
+  return getUserLoginDataAxios.get(url)
 }
 
 
