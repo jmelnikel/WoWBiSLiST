@@ -10,8 +10,10 @@ export const getUserLoginData = async (email) => {
     baseURL: "http://www.wowbislist.ca",
     headers: { "Content-Type": "application/json" },
   });
-  console.log("Table: users - User information recieved", getUserLoginDataAxios.get(url))
-  return getUserLoginDataAxios.get(url)
+
+  const response = getUserLoginDataAxios.get(url);
+  console.log("Table: users - User information recieved", response);
+  return response;
 }
 
 
