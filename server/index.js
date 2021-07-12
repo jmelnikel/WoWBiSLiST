@@ -14,17 +14,17 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 
 
 // Get user login data
-app.get("/user/:email", async (req, res) => {
-  try {
-    const { email } = req.params;
-    console.log("This is email going in for DB query", email)
-    const userLoginData = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
-    res.json(userLoginData.rows[0]);
-    console.log("This is userLoginData", userLoginData.rows[0])
-  } catch (error) {
-    throw new Error(error.message);
-  }
-});
+// app.get("/user/:email", async (req, res) => {
+//   try {
+//     const { email } = req.params;
+//     console.log("This is email going in for DB query", email)
+//     const userLoginData = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+//     res.json(userLoginData.rows[0]);
+//     console.log("This is userLoginData", userLoginData.rows[0])
+//   } catch (error) {
+//     throw new Error(error.message);
+//   }
+// });
 
 // Clear and Initialize armor Table
 app.post(`/${process.env.CLEAR_ARMOR_TABLE_URL}`, (req, res) => {
