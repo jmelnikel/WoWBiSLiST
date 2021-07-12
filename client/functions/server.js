@@ -14,17 +14,16 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 
 
 // Get user login data
-app.get("/user/:email", async (req, res) => {
-  try {
-    // const { email } = req.params;
-    // const userLoginData = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
-    // res.json(userLoginData.rows[0]);
+// app.get("/user/:email", async (req, res) => {
+//   try {
+//     const { email } = req.params;
+//     const userLoginData = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+//     res.json(userLoginData.rows[0]);
 
-    res.json("This is a string")
-  } catch (error) {
-    throw new Error(error.message);
-  }
-});
+//   } catch (error) {
+//     throw new Error(error.message);
+//   }
+// });
 
 // Listening
 app.listen(PORT, () => {
