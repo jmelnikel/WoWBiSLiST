@@ -3,15 +3,27 @@ import axios from 'axios';
 
 // const baseURL = "https://www.wowbislist.ca";
 
+
+
+
+
+
+
+
+
 export const getUserLoginData = async (email) => {
   const url = `/user/${email}`
   const getUserLoginDataAxios = axios.create({
-    baseURL: "https://www.wowbislist.ca"
+    baseURL: "https://www.wowbislist.ca",
     // headers: { "Content-Type": "application/json" },
   });
   console.log("Table: users - User information sent")
   return getUserLoginDataAxios.get(url)
 }
+
+
+
+
 
 export const clearArmorTable = async () => {
   const url = process.env.REACT_APP_CLEAR_ARMOR_TABLE_URL
@@ -72,6 +84,23 @@ export const deleteDuplicateRowsWeaponTable = async (data) => {
   deleteDuplicateRowsWeaponTableAxios.post(url)
   console.log("Table: weapon - Duplicate data deleted")
 }
+
+
+
+
+
+axios
+  .get("/api/appointments")
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((error) => {
+    console.log(error.response.status);
+    console.log(error.response.headers);
+    console.log(error.response.data);
+  });
+
+
 
 export const getArmorItems = async () => {
   const url = "/armor"
