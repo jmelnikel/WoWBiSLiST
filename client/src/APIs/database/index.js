@@ -8,7 +8,7 @@ export const getUserLoginData = async (email) => {
   const url = `/user/${email}`
   const getUserLoginDataAxios = axios.create({
     baseURL: "http://www.wowbislist.ca",
-    // headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json" },
   });
 
   const response = getUserLoginDataAxios.get(url);
