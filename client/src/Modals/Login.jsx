@@ -15,7 +15,7 @@ const Login = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const userLoginData = await getUserLoginData(loginData.email)
+    // const userLoginData = await getUserLoginData(loginData.email)
     console.log("This is login data coming from db", userLoginData)
     if (loginData.password === userLoginData.data.password) {
       setUser(userLoginData);
