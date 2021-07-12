@@ -4,12 +4,13 @@ import axios from 'axios';
 // const baseURL = "https://www.wowbislist.ca";
 
 export const getUserLoginData = async (email) => {
+  console.log("Table: users - User information sent", email)
   const url = `/user/${email}`
   const getUserLoginDataAxios = axios.create({
     baseURL: "http://www.wowbislist.ca",
     headers: { "Content-Type": "application/json" },
   });
-  console.log("Table: users - User information sent")
+  console.log("Table: users - User information recieved", getUserLoginDataAxios.get(url))
   return getUserLoginDataAxios.get(url)
 }
 
