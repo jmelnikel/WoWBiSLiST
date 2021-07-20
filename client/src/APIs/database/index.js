@@ -1,8 +1,9 @@
 /* eslint-disable space-before-function-paren */
 import axios from 'axios';
 
-const baseURL = "http://localhost:3001/api"
+// const baseURL = "http://localhost:3001/api"
 
+const baseURL = process.env.NODE_ENV === 'production' ? "/api" : "http://localhost:3001/api"
 
 export const getUserLoginData = async (email) => {
   const url = `/user/${email}`
