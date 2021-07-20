@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 
 
 // Get user login data
-app.get("/user/:email", async (req, res) => {
+app.get("/api/user/:email", async (req, res) => {
   try {
     const { email } = req.params;
     const userLoginData = await pool.query("SELECT * FROM users WHERE email = $1", [email]);

@@ -4,7 +4,7 @@ import axios from 'axios';
 // const baseURL = "https://www.wowbislist.ca";
 
 export const getUserLoginData = async (email) => {
-  const url = `/user/${email}`
+  const url = `/api/user/${email}`
   const getUserLoginDataAxios = axios.create({
     baseURL: "http://localhost:3001",
     // headers: { "Content-Type": "application/json" },
