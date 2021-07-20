@@ -33,9 +33,9 @@ SELECT COUNT(*) FROM items
   AND inventory_type != 'Non-equippable';
 
 
-  CREATE TABLE users(users_key SERIAL PRIMARY KEY, email TEXT NOT NULL UNIQUE, password TEXT NOT NULL, admin BOOL);
+  CREATE TABLE users(users_key SERIAL PRIMARY KEY NOT NULL, email TEXT NOT NULL UNIQUE, password TEXT NOT NULL, admin BOOL);
   
-  INSERT INTO users (email, password, admin) VALUES ('jmelnikel@gmail.com', 'notMyPassword', true);
+  INSERT INTO users (email, password, admin) VALUES ('jmelnikel@gmail.com', '', true);
 
 
   CREATE TABLE sources(sources_key SERIAL PRIMARY KEY, item_name TEXT, location TEXT, creature TEXT);
