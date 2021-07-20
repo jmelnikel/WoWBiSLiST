@@ -1,18 +1,26 @@
 /* eslint-disable space-before-function-paren */
 import axios from 'axios';
 
-// const baseURL = "https://www.wowbislist.ca";
-
 export const getUserLoginData = async (email) => {
   const url = `/api/user/${email}`
   const getUserLoginDataAxios = axios.create({
     baseURL: "http://localhost:3001",
-    // headers: { "Content-Type": "application/json" },
   });
 
   const response = getUserLoginDataAxios.get(url);
   return response;
 }
+
+
+
+
+
+
+
+
+
+
+
 
 export const clearArmorTable = async () => {
   const url = process.env.REACT_APP_CLEAR_ARMOR_TABLE_URL

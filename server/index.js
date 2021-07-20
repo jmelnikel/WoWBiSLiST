@@ -24,6 +24,17 @@ app.get("/api/user/:email", async (req, res) => {
   }
 });
 
+
+
+
+
+
+
+
+
+
+
+
 // Clear and Initialize armor Table
 app.post(`/${process.env.CLEAR_ARMOR_TABLE_URL}`, (req, res) => {
   try {
