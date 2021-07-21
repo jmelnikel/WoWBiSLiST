@@ -1,4 +1,5 @@
 /* eslint-disable space-before-function-paren */
+require('dotenv').config()
 import axios from 'axios';
 
 const baseURL = process.env.NODE_ENV === 'production' ? "/api" : "http://localhost:3001/api"
