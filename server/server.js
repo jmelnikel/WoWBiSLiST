@@ -26,6 +26,15 @@ app.get("/api/user/:email", async (req, res) => {
 
 
 
+
+
+
+
+
+
+
+
+
 // Clear and Initialize armor Table
 app.get("/api/clearArmorTable", (req, res) => {
   try {
@@ -36,13 +45,8 @@ app.get("/api/clearArmorTable", (req, res) => {
   }
 })
 
-
-
-
-
-
 // Write armor Table
-app.post(`/api/${process.env.WRITE_DETAIL_DATA_ARMOR_TABLE_URL}`, async (req, res) => {
+app.post("/api/writeDetailDataArmorTable", async (req, res) => {
   try {
     const array = req.body
     for (let itemObject of array) {
@@ -59,7 +63,7 @@ app.post(`/api/${process.env.WRITE_DETAIL_DATA_ARMOR_TABLE_URL}`, async (req, re
 });
 
 // Delete Duplicate Rows from armor Table
-app.post(`/api/${process.env.DELETE_DUPLICATE_ROWS_ARMOR_TABLE_URL}`, (req, res) => {
+app.get("/api/deleteDuplicateRowsArmorTable", (req, res) => {
   try {
     pool.query("DELETE FROM armor a USING armor b WHERE a.item_key > b.item_key AND a.id = b.id;");
     console.log("Duplicate Data Deleted");
@@ -69,7 +73,7 @@ app.post(`/api/${process.env.DELETE_DUPLICATE_ROWS_ARMOR_TABLE_URL}`, (req, res)
 })
 
 // Clear and Initialize weapon Table
-app.post(`/api/${process.env.CLEAR_WEAPON_TABLE_URL}`, (req, res) => {
+app.get("/api/clearWeaponTable", (req, res) => {
   try {
     pool.query("DROP TABLE IF EXISTS weapon; CREATE TABLE weapon(item_key SERIAL PRIMARY KEY, id INT NOT NULL, show BOOLEAN, level INT, preview_item JSON);");
     console.log("weapon Table Cleared and Initialized");
@@ -79,7 +83,7 @@ app.post(`/api/${process.env.CLEAR_WEAPON_TABLE_URL}`, (req, res) => {
 })
 
 // Write weapon Table
-app.post(`/api/${process.env.WRITE_DETAIL_DATA_WEAPON_TABLE_URL}`, async (req, res) => {
+app.post("/api/writeDetailDataWeaponTable", async (req, res) => {
   try {
     const array = req.body
     for (let itemObject of array) {
@@ -96,7 +100,7 @@ app.post(`/api/${process.env.WRITE_DETAIL_DATA_WEAPON_TABLE_URL}`, async (req, r
 });
 
 // Delete Duplicate Rows from weapon Table
-app.post(`/api/${process.env.DELETE_DUPLICATE_ROWS_WEAPON_TABLE_URL}`, (req, res) => {
+app.get("/api/deleteDuplicateRowsWeaponTable", (req, res) => {
   try {
     pool.query("DELETE FROM weapon a USING weapon b WHERE a.item_key > b.item_key AND a.id = b.id;");
     console.log("Duplicates Data Deleted");
@@ -106,7 +110,7 @@ app.post(`/api/${process.env.DELETE_DUPLICATE_ROWS_WEAPON_TABLE_URL}`, (req, res
 })
 
 // Get all armor items
-app.get("/api/armor", async (req, res) => {
+app.get("/api/getArmorItems", async (req, res) => {
   try {
     const allItems = await pool.query("SELECT * FROM armor ORDER BY level ASC");
     res.json(allItems.rows);
@@ -116,7 +120,7 @@ app.get("/api/armor", async (req, res) => {
 });
 
 // Get all weapon items
-app.get("/api/weapon", async (req, res) => {
+app.get("/api/getWeaponItems", async (req, res) => {
   try {
     const allItems = await pool.query("SELECT * FROM weapon ORDER BY level ASC");
     res.json(allItems.rows);

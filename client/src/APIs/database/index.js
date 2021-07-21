@@ -13,6 +13,14 @@ export const getUserLoginData = async (email) => {
 
 
 
+
+
+
+
+
+
+
+
 export const clearArmorTable = async () => {
   const url = "/clearArmorTable"
   const clearArmorTableAxios = axios.create({ baseURL });
@@ -21,17 +29,8 @@ export const clearArmorTable = async () => {
   console.log("Table: armor - Cleared and initialized")
 }
 
-
-
-
-
-
-
-
-
-
 export const writeDetailDataArmorTable = async (data) => {
-  const url = process.env.REACT_APP_WRITE_DETAIL_DATA_ARMOR_TABLE_URL
+  const url = "/writeDetailDataArmorTable"
   const writeDetailDataArmorTableAxios = axios.create({ baseURL });
 
   await writeDetailDataArmorTableAxios.post(url, data)
@@ -39,23 +38,23 @@ export const writeDetailDataArmorTable = async (data) => {
 }
 
 export const deleteDuplicateRowsArmorTable = async () => {
-  const url = process.env.REACT_APP_DELETE_DUPLICATE_ROWS_ARMOR_TABLE_URL
+  const url = "/deleteDuplicateRowsArmorTable"
   const deleteDuplicateRowsArmorTableAxios = axios.create({ baseURL });
 
-  deleteDuplicateRowsArmorTableAxios.post(url)
+  deleteDuplicateRowsArmorTableAxios.get(url)
   console.log("Table: armor - Duplicate data deleted")
 }
 
 export const clearWeaponTable = async () => {
-  const url = process.env.REACT_APP_CLEAR_WEAPON_TABLE_URL
+  const url = "/clearWeaponTable"
   const clearWeaponTableAxios = axios.create({ baseURL });
 
-  clearWeaponTableAxios.post(url)
+  clearWeaponTableAxios.get(url)
   console.log("Table: weapon - Cleared and initialized")
 }
 
 export const writeDetailDataWeaponTable = async (data) => {
-  const url = process.env.REACT_APP_WRITE_DETAIL_DATA_WEAPON_TABLE_URL
+  const url = "/writeDetailDataWeaponTable"
   const writeDetailDataWeaponTableAxios = axios.create({ baseURL });
 
   await writeDetailDataWeaponTableAxios.post(url, data)
@@ -63,22 +62,22 @@ export const writeDetailDataWeaponTable = async (data) => {
 }
 
 export const deleteDuplicateRowsWeaponTable = async (data) => {
-  const url = process.env.REACT_APP_DELETE_DUPLICATE_ROWS_WEAPON_TABLE_URL
+  const url = "/deleteDuplicateRowsWeaponTable"
   const deleteDuplicateRowsWeaponTableAxios = axios.create({ baseURL });
 
-  deleteDuplicateRowsWeaponTableAxios.post(url)
+  deleteDuplicateRowsWeaponTableAxios.get(url)
   console.log("Table: weapon - Duplicate data deleted")
 }
 
 export const getArmorItems = async () => {
-  const url = "/armor"
+  const url = "/getArmorItems"
   const getArmorItemsAxios = axios.create({ baseURL });
 
   return await getArmorItemsAxios.get(url)
 }
 
 export const getWeaponItems = async () => {
-  const url = "/weapon"
+  const url = "/getWeaponItems"
   const getWeaponItemsAxios = axios.create({ baseURL });
 
   return await getWeaponItemsAxios.get(url)
