@@ -1,10 +1,10 @@
 /* eslint-disable space-before-function-paren */
 import axios from 'axios';
 
-const baseURL = process.env.NODE_ENV === 'production' ? "/api" : "http://localhost:3001"
+const baseURL = process.env.NODE_ENV === 'production' ? "/api" : "http://localhost:3001/api"
 
 export const getUserLoginData = async (email) => {
-  const url = `/api/user/${email}`
+  const url = `/user/${email}`
   const getUserLoginDataAxios = axios.create({ baseURL });
 
   const response = getUserLoginDataAxios.get(url);
@@ -14,7 +14,7 @@ export const getUserLoginData = async (email) => {
 
 
 export const clearArmorTable = async () => {
-  const url = "/api/clearArmorTable"
+  const url = "/clearArmorTable"
   const clearArmorTableAxios = axios.create({ baseURL });
 
   clearArmorTableAxios.get(url)
