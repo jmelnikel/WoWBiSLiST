@@ -1,6 +1,6 @@
 /* eslint-disable space-before-function-paren */
-require('dotenv').config()
 import axios from 'axios';
+require('dotenv').config()
 
 
 export const getClientAuthToken = async () => {
