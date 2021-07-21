@@ -26,24 +26,20 @@ app.get("/api/user/:email", async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
 // Clear and Initialize armor Table
-app.post(`/api/${process.env.CLEAR_ARMOR_TABLE_URL}`, (req, res) => {
+app.get("/api/clearArmorTable", (req, res) => {
   try {
     pool.query("DROP TABLE IF EXISTS armor; CREATE TABLE armor(item_key SERIAL PRIMARY KEY, id INT NOT NULL, show BOOLEAN, level INT, preview_item JSON);");
-    console.log("armor Table Cleared and Initialized");
+    console.log("Table: armor - Cleared and initialized");
   } catch (error) {
     throw new Error(error.message);
   }
 })
+
+
+
+
+
 
 // Write armor Table
 app.post(`/api/${process.env.WRITE_DETAIL_DATA_ARMOR_TABLE_URL}`, async (req, res) => {

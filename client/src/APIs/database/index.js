@@ -1,12 +1,10 @@
 /* eslint-disable space-before-function-paren */
 import axios from 'axios';
 
-// const baseURL = "http://localhost:3001/api"
-
-const baseURL = process.env.NODE_ENV === 'production' ? "/api" : "http://localhost:3001/api"
+const baseURL = process.env.NODE_ENV === 'production' ? "/api" : "http://localhost:3001"
 
 export const getUserLoginData = async (email) => {
-  const url = `/user/${email}`
+  const url = `/api/user/${email}`
   const getUserLoginDataAxios = axios.create({ baseURL });
 
   const response = getUserLoginDataAxios.get(url);
@@ -15,22 +13,22 @@ export const getUserLoginData = async (email) => {
 
 
 
-
-
-
-
-
-
-
-
-
 export const clearArmorTable = async () => {
-  const url = process.env.REACT_APP_CLEAR_ARMOR_TABLE_URL
+  const url = "/api/clearArmorTable"
   const clearArmorTableAxios = axios.create({ baseURL });
 
-  clearArmorTableAxios.post(url)
+  clearArmorTableAxios.get(url)
   console.log("Table: armor - Cleared and initialized")
 }
+
+
+
+
+
+
+
+
+
 
 export const writeDetailDataArmorTable = async (data) => {
   const url = process.env.REACT_APP_WRITE_DETAIL_DATA_ARMOR_TABLE_URL
@@ -71,23 +69,6 @@ export const deleteDuplicateRowsWeaponTable = async (data) => {
   deleteDuplicateRowsWeaponTableAxios.post(url)
   console.log("Table: weapon - Duplicate data deleted")
 }
-
-
-
-
-
-// axios
-//   .get("/api/appointments")
-//   .then((response) => {
-//     console.log(response);
-//   })
-//   .catch((error) => {
-//     console.log(error.response.status);
-//     console.log(error.response.headers);
-//     console.log(error.response.data);
-//   });
-
-
 
 export const getArmorItems = async () => {
   const url = "/armor"
