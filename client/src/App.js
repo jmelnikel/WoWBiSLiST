@@ -191,7 +191,7 @@ const App = () => {
               <button onClick={() => { clearArmorTable() }}>
                 Clear Armor Table
               </button>
-              <button onClick={() => { writeDetailDataArmorTable(JSON.stringify(armorDetailData)) }}>
+              <button onClick={() => { writeDetailDataArmorTable(armorDetailData) }}>
                 Write Detail Data Armor Table
               </button>
               <button onClick={() => { deleteDuplicateRowsArmorTable() }}>
@@ -206,7 +206,7 @@ const App = () => {
               <button onClick={() => { clearWeaponTable() }}>
                 Clear Weapon Table
               </button>
-              <button onClick={() => { writeDetailDataWeaponTable(JSON.stringify(weaponDetailData)) }}>
+              <button onClick={() => { writeDetailDataWeaponTable(weaponDetailData) }}>
                 Write Detail Data Weapon Table
               </button>
               <button onClick={() => { deleteDuplicateRowsWeaponTable() }}>

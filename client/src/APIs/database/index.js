@@ -32,7 +32,10 @@ export const clearArmorTable = async () => {
 
 export const writeDetailDataArmorTable = async (data) => {
   const url = "/writeDetailDataArmorTable"
-  const writeDetailDataArmorTableAxios = axios.create({ baseURL });
+  const writeDetailDataArmorTableAxios = axios.create({
+    baseURL,
+    'Content-Type': 'application/json'
+  });
 
   await writeDetailDataArmorTableAxios.post(url, data)
   console.log("Table: armor - Data sent to be written")
@@ -56,7 +59,10 @@ export const clearWeaponTable = async () => {
 
 export const writeDetailDataWeaponTable = async (data) => {
   const url = "/writeDetailDataWeaponTable"
-  const writeDetailDataWeaponTableAxios = axios.create({ baseURL });
+  const writeDetailDataWeaponTableAxios = axios.create({
+    baseURL,
+    'Content-Type': 'application/json'
+  });
 
   await writeDetailDataWeaponTableAxios.post(url, data)
   console.log("Table: weapon - Data sent to be written")

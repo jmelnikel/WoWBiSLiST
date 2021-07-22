@@ -1,16 +1,28 @@
 require('dotenv').config()
+const cors = require('cors');
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3001;
-const cors = require('cors');
-const bodyParser = require('body-parser')
+// const bodyParser = require('body-parser')
 const pool = require('./db')
 
 
 // Middleware
 app.use(cors());
-app.use(bodyParser.json({ limit: '50mb', extended: true }))
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
+app.use(express.json({ limit: '50mb', extended: true }));
+
+// app.use((req, res, next) => {
+//   console.log("this is middleware", req.body)
+//   next()
+// })
+
+
+
+
+
+// app.use(bodyParser.json({ limit: '50mb', extended: true }))
+// app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
+
 
 
 // Get user login data
@@ -48,7 +60,7 @@ app.get("/api/clearArmorTable", (req, res) => {
 // Write armor Table
 app.post("/api/writeDetailDataArmorTable", async (req, res) => {
   try {
-    const array = req.body
+    const array = req.body;
     for (let itemObject of array) {
       const { id, show, level, preview_item } = itemObject;
 
@@ -85,7 +97,7 @@ app.get("/api/clearWeaponTable", (req, res) => {
 // Write weapon Table
 app.post("/api/writeDetailDataWeaponTable", async (req, res) => {
   try {
-    const array = req.body
+    const array = req.body;
     for (let itemObject of array) {
       const { id, show, level, preview_item } = itemObject;
 
@@ -108,6 +120,11 @@ app.get("/api/deleteDuplicateRowsWeaponTable", (req, res) => {
     throw new Error(error.message);
   }
 })
+
+
+
+
+
 
 // Get all armor items
 app.get("/api/getArmorItems", async (req, res) => {
