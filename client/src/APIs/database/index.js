@@ -15,15 +15,9 @@ export const getUserLoginData = async (email) => {
 
 
 
-
-
-
-
-
-
-
 export const clearArmorTable = async () => {
-  const url = "/clearArmorTable"
+  const url = `/${process.env.REACT_APP_CLEAR_ARMOR_TABLE}`
+  // const url = "/clearArmorTable"
   const clearArmorTableAxios = axios.create({ baseURL });
 
   clearArmorTableAxios.get(url)
@@ -31,7 +25,8 @@ export const clearArmorTable = async () => {
 }
 
 export const writeDetailDataArmorTable = async (data) => {
-  const url = "/writeDetailDataArmorTable"
+  const url = `/${process.env.REACT_APP_WRITE_DETAIL_DATA_ARMOR_TABLE}`
+  // const url = "/writeDetailDataArmorTable"
   const writeDetailDataArmorTableAxios = axios.create({
     baseURL,
     'Content-Type': 'application/json'
@@ -41,6 +36,11 @@ export const writeDetailDataArmorTable = async (data) => {
   console.log("Table: armor - Data sent to be written")
 }
 
+
+
+
+
+
 export const deleteDuplicateRowsArmorTable = async () => {
   const url = "/deleteDuplicateRowsArmorTable"
   const deleteDuplicateRowsArmorTableAxios = axios.create({ baseURL });
@@ -49,8 +49,14 @@ export const deleteDuplicateRowsArmorTable = async () => {
   console.log("Table: armor - Duplicate data deleted")
 }
 
+
+
+
+
+
 export const clearWeaponTable = async () => {
-  const url = "/clearWeaponTable"
+  const url = `/${process.env.REACT_APP_CLEAR_WEAPON_TABLE}`
+  // const url = "/clearWeaponTable"
   const clearWeaponTableAxios = axios.create({ baseURL });
 
   clearWeaponTableAxios.get(url)
@@ -58,7 +64,8 @@ export const clearWeaponTable = async () => {
 }
 
 export const writeDetailDataWeaponTable = async (data) => {
-  const url = "/writeDetailDataWeaponTable"
+  const url = `/${process.env.REACT_APP_WRITE_DETAIL_DATA_WEAPON_TABLE}`
+  // const url = "/writeDetailDataWeaponTable"
   const writeDetailDataWeaponTableAxios = axios.create({
     baseURL,
     'Content-Type': 'application/json'
@@ -67,6 +74,11 @@ export const writeDetailDataWeaponTable = async (data) => {
   await writeDetailDataWeaponTableAxios.post(url, data)
   console.log("Table: weapon - Data sent to be written")
 }
+
+
+
+
+
 
 export const deleteDuplicateRowsWeaponTable = async (data) => {
   const url = "/deleteDuplicateRowsWeaponTable"

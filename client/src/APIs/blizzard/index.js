@@ -1,7 +1,5 @@
 /* eslint-disable space-before-function-paren */
 import axios from 'axios';
-require('dotenv').config()
-
 
 export const getClientAuthToken = async () => {
   const URL = "https://us.battle.net/oauth/token";

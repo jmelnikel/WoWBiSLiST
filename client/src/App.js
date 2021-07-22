@@ -18,18 +18,17 @@ import {
   playAlert,
   cleanBaseData,
 } from './helpers';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import ProgressBar from './components/ProgressBar';
 import MainArmorSlotsList from './components/SlotListGroups/MainArmorSlotsList';
 import OtherArmorSlotsList from './components/SlotListGroups/OtherArmorSlotsList';
 import WeaponSlotsList from './components/SlotListGroups/WeaponSlotsList';
-import MoreInfo from './Modals/MoreInfo'
-import Login from './Modals/Login'
 import './styling/App.css';
-import logo from './assets/images/logo.png'
 import _ from 'lodash';
 
 const App = () => {
-  let [user, setUser] = useState(false)
+  const [user, setUser] = useState({})
   const [clientAuthToken, setClientAuthToken] = useState("");
   const [progressBar, setProgressBar] = useState("0");
   const [itemsBaseData, setItemsBaseData] = useState([])
@@ -38,8 +37,6 @@ const App = () => {
   let [armorDetailData, setArmorDetailData] = useState([]);
   let [weaponBaseData, setWeaponBaseData] = useState([]);
   let [weaponDetailData, setWeaponDetailData] = useState([]);
-  const [showMoreInfo, setShowMoreInfo] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
 
   useEffect(() => {
     getClientAuthToken()
@@ -134,44 +131,17 @@ const App = () => {
     playAlert();
   };
 
-  const handleShowMoreInfo = () => setShowMoreInfo(true);
-  const handleCloseMoreInfo = () => setShowMoreInfo(false);
-  const handleShowLogin = () => setShowLogin(true)
-  const handleCloseLogin = () => setShowLogin(false)
-
-  const handleLogout = () => setUser(false);
-
   return (
     <>
-      <header className="App--header">
-        <nav className="App--header__NavBar">
-          {user ?
-            <button
-              className="App--navBar__button"
-              type="button"
-              onClick={handleLogout}
-            >Logout
-            </button>
-            :
-            <button
-              className="App--navBar__button"
-              type="button"
-              onClick={handleShowLogin}
-            >Login
-            </button>
-          }
-        </nav>
-        <img
-          className="App--titleImage"
-          src={logo}
-          alt="WoW BiS LiST logo"
-        />
-      </header>
+      <Header
+        user={user}
+        setUser={setUser}
+      />
       <main>
         {user.data?.admin
           ?
           <section>
-            <h2>Last items table reset: June 08, 2012 (Patch 2.5.1)</h2>
+            <h2>Last items table reset: July 22, 2021 (Patch 2.5.1)</h2>
             <div style={{ display: "flex", flexDirection: "column", width: "30%" }}>
               <button onClick={handleGetItemsBaseData}>
                 Get Items Base Data
@@ -236,26 +206,7 @@ const App = () => {
           </section>
         }
       </main>
-      <footer className="App--footer__container">
-        <p style={{ color: "white" }}>Version 1.0.0</p>
-        <button
-          className="App--footer__button"
-          type="button"
-          onClick={handleShowMoreInfo}
-        >More Info
-        </button>
-
-      </footer>
-
-      <MoreInfo
-        showMoreInfo={showMoreInfo}
-        handleCloseMoreInfo={handleCloseMoreInfo}
-      />
-      <Login
-        showLogin={showLogin}
-        handleCloseLogin={handleCloseLogin}
-        setUser={setUser}
-      />
+      <Footer />
     </>
   );
 };
@@ -263,9 +214,5 @@ const App = () => {
 export default App;
 
 // --Todo--
-// Proptypes
-// Admin login
 // refactor functions
-// testing
-// instructions: a lot of gear is being loaded. 15 seconds
 // hash passwords

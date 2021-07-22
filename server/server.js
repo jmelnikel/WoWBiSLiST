@@ -3,26 +3,12 @@ const cors = require('cors');
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3001;
-// const bodyParser = require('body-parser')
 const pool = require('./db')
 
 
 // Middleware
 app.use(cors());
 app.use(express.json({ limit: '50mb', extended: true }));
-
-// app.use((req, res, next) => {
-//   console.log("this is middleware", req.body)
-//   next()
-// })
-
-
-
-
-
-// app.use(bodyParser.json({ limit: '50mb', extended: true }))
-// app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
-
 
 
 // Get user login data
@@ -40,15 +26,9 @@ app.get("/api/user/:email", async (req, res) => {
 
 
 
-
-
-
-
-
-
-
 // Clear and Initialize armor Table
-app.get("/api/clearArmorTable", (req, res) => {
+app.get(`/api/${process.env.CLEAR_ARMOR_TABLE}`, (req, res) => {
+  // app.get("/api/clearArmorTable", (req, res) => {
   try {
     pool.query("DROP TABLE IF EXISTS armor; CREATE TABLE armor(item_key SERIAL PRIMARY KEY, id INT NOT NULL, show BOOLEAN, level INT, preview_item JSON);");
     console.log("Table: armor - Cleared and initialized");
@@ -58,7 +38,8 @@ app.get("/api/clearArmorTable", (req, res) => {
 })
 
 // Write armor Table
-app.post("/api/writeDetailDataArmorTable", async (req, res) => {
+app.post(`/api/${process.env.WRITE_DETAIL_DATA_ARMOR_TABLE}`, async (req, res) => {
+  // app.post("/api/writeDetailDataArmorTable", async (req, res) => {
   try {
     const array = req.body;
     for (let itemObject of array) {
@@ -74,6 +55,11 @@ app.post("/api/writeDetailDataArmorTable", async (req, res) => {
   }
 });
 
+
+
+
+
+
 // Delete Duplicate Rows from armor Table
 app.get("/api/deleteDuplicateRowsArmorTable", (req, res) => {
   try {
@@ -84,8 +70,14 @@ app.get("/api/deleteDuplicateRowsArmorTable", (req, res) => {
   }
 })
 
+
+
+
+
+
 // Clear and Initialize weapon Table
-app.get("/api/clearWeaponTable", (req, res) => {
+app.get(`/api/${process.env.CLEAR_WEAPON_TABLE}`, (req, res) => {
+  // app.get("/api/clearWeaponTable", (req, res) => {
   try {
     pool.query("DROP TABLE IF EXISTS weapon; CREATE TABLE weapon(item_key SERIAL PRIMARY KEY, id INT NOT NULL, show BOOLEAN, level INT, preview_item JSON);");
     console.log("weapon Table Cleared and Initialized");
@@ -95,7 +87,8 @@ app.get("/api/clearWeaponTable", (req, res) => {
 })
 
 // Write weapon Table
-app.post("/api/writeDetailDataWeaponTable", async (req, res) => {
+app.post(`/api/${process.env.WRITE_DETAIL_DATA_WEAPON_TABLE}`, async (req, res) => {
+  // app.post("/api/writeDetailDataWeaponTable", async (req, res) => {
   try {
     const array = req.body;
     for (let itemObject of array) {
@@ -111,6 +104,11 @@ app.post("/api/writeDetailDataWeaponTable", async (req, res) => {
   }
 });
 
+
+
+
+
+
 // Delete Duplicate Rows from weapon Table
 app.get("/api/deleteDuplicateRowsWeaponTable", (req, res) => {
   try {
@@ -120,11 +118,6 @@ app.get("/api/deleteDuplicateRowsWeaponTable", (req, res) => {
     throw new Error(error.message);
   }
 })
-
-
-
-
-
 
 // Get all armor items
 app.get("/api/getArmorItems", async (req, res) => {
@@ -145,68 +138,6 @@ app.get("/api/getWeaponItems", async (req, res) => {
     throw new Error(error.message);
   }
 });
-
-
-
-
-
-
-
-
-
-// Create
-// app.post("/items", async (req, res) => {
-//   try {
-
-//     // res.json(newItem.rows[0]);
-//   } catch (error) {
-//     throw new Error(error.message);
-//   }
-// });
-
-// Get all
-// app.get("/items", async (req, res) => {
-//   try {
-//     const allItems = await pool.query("SELECT * FROM items");
-//     res.json(allItems.rows);
-//   } catch (error) {
-//     throw new Error(error.message);
-//   }
-// });
-
-// Get one
-// app.get("/items/:id", async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const item = await pool.query("SELECT * FROM items WHERE id = $1", [id]);
-//     res.json(item.rows[0]);
-//   } catch (error) {
-//     throw new Error(error.message);
-//   }
-// });
-
-// Update
-// app.put("/items/:id", async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const { item_class } = req.body;
-//     await pool.query("UPDATE items SET item_class = $1 WHERE id = $2", [item_class, id]);
-//     res.json("Item was updated.")
-//   } catch (error) {
-//     throw new Error(error.message);
-//   }
-// });
-
-// Delete
-// app.delete("/items/:id", async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     await pool.query("DELETE FROM items WHERE id = $1", [id]);
-//     res.json("Item was deleted.")
-//   } catch (error) {
-//     throw new Error(error.message);
-//   }
-// });
 
 
 // Listening
