@@ -12,9 +12,6 @@ export const getUserLoginData = async (email) => {
   return response;
 }
 
-
-
-
 export const clearArmorTable = async () => {
   const url = `/${process.env.REACT_APP_CLEAR_ARMOR_TABLE}`
   // const url = "/clearArmorTable"
@@ -36,11 +33,6 @@ export const writeDetailDataArmorTable = async (data) => {
   console.log("Table: armor - Data sent to be written")
 }
 
-
-
-
-
-
 export const deleteDuplicateRowsArmorTable = async () => {
   const url = "/deleteDuplicateRowsArmorTable"
   const deleteDuplicateRowsArmorTableAxios = axios.create({ baseURL });
@@ -48,11 +40,6 @@ export const deleteDuplicateRowsArmorTable = async () => {
   deleteDuplicateRowsArmorTableAxios.get(url)
   console.log("Table: armor - Duplicate data deleted")
 }
-
-
-
-
-
 
 export const clearWeaponTable = async () => {
   const url = `/${process.env.REACT_APP_CLEAR_WEAPON_TABLE}`
@@ -74,11 +61,6 @@ export const writeDetailDataWeaponTable = async (data) => {
   await writeDetailDataWeaponTableAxios.post(url, data)
   console.log("Table: weapon - Data sent to be written")
 }
-
-
-
-
-
 
 export const deleteDuplicateRowsWeaponTable = async (data) => {
   const url = "/deleteDuplicateRowsWeaponTable"

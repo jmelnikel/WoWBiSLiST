@@ -22,10 +22,6 @@ app.get("/api/user/:email", async (req, res) => {
   }
 });
 
-
-
-
-
 // Clear and Initialize armor Table
 app.get(`/api/${process.env.CLEAR_ARMOR_TABLE}`, (req, res) => {
   // app.get("/api/clearArmorTable", (req, res) => {
@@ -55,11 +51,6 @@ app.post(`/api/${process.env.WRITE_DETAIL_DATA_ARMOR_TABLE}`, async (req, res) =
   }
 });
 
-
-
-
-
-
 // Delete Duplicate Rows from armor Table
 app.get("/api/deleteDuplicateRowsArmorTable", (req, res) => {
   try {
@@ -69,11 +60,6 @@ app.get("/api/deleteDuplicateRowsArmorTable", (req, res) => {
     throw new Error(error.message);
   }
 })
-
-
-
-
-
 
 // Clear and Initialize weapon Table
 app.get(`/api/${process.env.CLEAR_WEAPON_TABLE}`, (req, res) => {
@@ -103,11 +89,6 @@ app.post(`/api/${process.env.WRITE_DETAIL_DATA_WEAPON_TABLE}`, async (req, res) 
     throw new Error(error.message);
   }
 });
-
-
-
-
-
 
 // Delete Duplicate Rows from weapon Table
 app.get("/api/deleteDuplicateRowsWeaponTable", (req, res) => {

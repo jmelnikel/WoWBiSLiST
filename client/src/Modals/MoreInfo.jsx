@@ -24,14 +24,24 @@ const MoreInfo = (props) => {
           borderBottom: "solid #FFEC1C 4px"
         }}>
         <div className="moreInfo--container">
-          <p>Q: How do I contact you?</p>
-          <p>A: I can't make the site better without you. Your constructive feedback and ideas are always welcome. I can be reached at: wowbislisttest@gmail.com</p>
-          <br></br>
-          <p>Q: What new things are to come?</p>
-          <p>A: The next phase is for you to be able to create a shopping list of your items that will tell you where to get them; all nicely organized by drop location. The final phase will allow you to upload your character so that your current items will show at the beginning of each slot and you can better compare and plan your BiS list.</p>
-          <br></br>
           <p>Q: Why does it take so long for the items to show after applying the filters?</p>
           <p>A: There are over 6000 items coming to you. It takes a split second to get them to your computer, but a while for your browser to process and layout all those items on and off your screen. Thank you for your patience!</p>
+
+          <br></br>
+
+          <p>Q: Why are gem sockets not shown on the items?</p>
+          <p>A: I can only use the data that Blizzard gives me through their API. Unfortunately, gem sockets are not listed.</p>
+
+          <br></br>
+
+          <p>Q: What new things are to come?</p>
+          <p>A: The next phase is for you to be able to create a shopping list of your items that will tell you where to get them; all nicely organized by drop location. The final phase will allow you to upload your character so that your current items will show at the beginning of each slot and you can better compare and plan your BiS list.</p>
+
+          <br></br>
+
+          <p>Q: How do I contact you?</p>
+          <p>A: I can't make the site better without you. Your constructive feedback and ideas are always welcome. I can be reached at: wowbislisttest@gmail.com</p>
+
         </div>
       </Modal.Body>
     </Modal >
